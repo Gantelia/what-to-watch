@@ -1,9 +1,14 @@
-import FilmCard from '../film-card-screen/film-card-screen';
-
+import MovieCard from '../movie-card/movie-card';
 
 type Genre = {
   href: string;
   name: string;
+}
+
+type FilmCard = {
+  src: string;
+  alt: string;
+  title: string;
 }
 
 type MainScreenProps = {
@@ -11,9 +16,11 @@ type MainScreenProps = {
     promoFilmGenre: string;
     promoFilmYear: number;
     catalogGenres: Genre[];
+    filmCards: FilmCard[];
+    activeGenre: Genre;
 }
 
-function MainScreen({promoFilmTitle, promoFilmGenre, promoFilmYear, catalogGenres}: MainScreenProps): JSX.Element {
+function MainScreen({promoFilmTitle, promoFilmGenre, promoFilmYear, catalogGenres, filmCards, activeGenre}: MainScreenProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -81,34 +88,24 @@ function MainScreen({promoFilmTitle, promoFilmGenre, promoFilmYear, catalogGenre
 
           <ul className="catalog__genres-list">
             {
-              catalogGenres.map((genre) => (
-                <li key={genre.href} className="catalog__genres-item catalog__genres-item--active">
+              catalogGenres.map((genre, index) => (
+                <li key={`genre-${index}`} className={`catalog__genres-item ${genre === activeGenre ? 'catalog__genres-item--active': ''}`}>
                   <a href={genre.href} className="catalog__genres-link">{genre.name}</a>
-                </li>)).join('')
+                </li>))
             }
           </ul>
 
           <div className="catalog__films-list">
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
+            {
+              filmCards.map((card, index) =>(
+                <MovieCard
+                  key = {`card-${index}`}
+                  src = {card.src}
+                  alt = {card.alt}
+                  title = {card.title}
+                />),
+              )
+            }
           </div>
 
           <div className="catalog__more">

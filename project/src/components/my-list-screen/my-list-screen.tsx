@@ -1,6 +1,16 @@
-import MovieCard from '../film-card-screen/film-card-screen';
+import MovieCard from '../movie-card/movie-card';
 
-function MyListScreen(): JSX.Element {
+type FilmCard = {
+  src: string;
+  alt: string;
+  title: string;
+}
+
+type MyListScreenProps = {
+  filmCards: FilmCard[];
+}
+
+function MyListScreen({filmCards}: MyListScreenProps): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -30,15 +40,16 @@ function MyListScreen(): JSX.Element {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
+          {
+            filmCards.map((card) =>(
+              <MovieCard
+                key = {card.title}
+                src = {card.src}
+                alt = {card.alt}
+                title = {card.title}
+              />),
+            )
+          }
         </div>
       </section>
 
