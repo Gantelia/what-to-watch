@@ -12,15 +12,15 @@ type FilmCard = {
 }
 
 type MainScreenProps = {
-    promoFilmTitle: string;
-    promoFilmGenre: string;
-    promoFilmYear: number;
+    mainFilmTitle: string;
+    mainFilmGenre: string;
+    mainFilmYear: number;
     catalogGenres: Genre[];
     filmCards: FilmCard[];
     activeGenre: Genre;
 }
 
-function MainScreen({promoFilmTitle, promoFilmGenre, promoFilmYear, catalogGenres, filmCards, activeGenre}: MainScreenProps): JSX.Element {
+function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCards, activeGenre}: MainScreenProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -58,10 +58,10 @@ function MainScreen({promoFilmTitle, promoFilmGenre, promoFilmYear, catalogGenre
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{promoFilmTitle}</h2>
+              <h2 className="film-card__title">{mainFilmTitle}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{promoFilmGenre}</span>
-                <span className="film-card__year">{promoFilmYear}</span>
+                <span className="film-card__genre">{mainFilmGenre}</span>
+                <span className="film-card__year">{mainFilmYear}</span>
               </p>
 
               <div className="film-card__buttons">

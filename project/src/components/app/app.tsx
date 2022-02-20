@@ -12,20 +12,20 @@ type FilmCard = {
 }
 
 type AppScreenProps = {
-  promoFilmTitle: string;
-  promoFilmGenre: string;
-  promoFilmYear: number;
+  mainFilmTitle: string;
+  mainFilmGenre: string;
+  mainFilmYear: number;
   catalogGenres: Genre[];
   filmCards: FilmCard[];
   activeGenre: Genre;
 }
 
-function App({promoFilmTitle, promoFilmGenre, promoFilmYear, catalogGenres, filmCards, activeGenre}: AppScreenProps): JSX.Element {
+function App({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCards, activeGenre}: AppScreenProps): JSX.Element {
   return (
     <MainScreen
-      promoFilmTitle = {promoFilmTitle}
-      promoFilmGenre = {promoFilmGenre}
-      promoFilmYear = {promoFilmYear}
+      mainFilmTitle = {mainFilmTitle}
+      mainFilmGenre = {mainFilmGenre}
+      mainFilmYear = {mainFilmYear}
       catalogGenres = {catalogGenres}
       filmCards = {filmCards}
       activeGenre = {activeGenre}

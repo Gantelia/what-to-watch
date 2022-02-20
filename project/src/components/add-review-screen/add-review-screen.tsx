@@ -1,4 +1,4 @@
-const RATING_VALUES: string[] = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
+const RATINGS: string[] = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
 
 type AddReviewScreenProps = {
   checkedRating: string;
@@ -56,7 +56,7 @@ function AddReviewScreen({checkedRating}: AddReviewScreenProps): JSX.Element {
           <div className="rating">
             <div className="rating__stars">
               {
-                RATING_VALUES.map((rating) => (
+                RATINGS.map((rating) => (
                   <>
                     <input className="rating__input" id={`star-${rating}`} type="radio" name="rating" value={rating} {...rating === checkedRating ? 'checked' : ''}/>
                     <label className="rating__label" htmlFor={`star-${rating}`}>Rating {rating}</label>
