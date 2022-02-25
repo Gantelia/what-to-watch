@@ -1,6 +1,7 @@
 import MovieCard from '../../components/movie-card/movie-card';
 import Logo from '../../components/logo/logo';
 import SignOut from '../../components/sign-out/sign-out';
+import { Link } from 'react-router-dom';
 
 type Genre = {
   href: string;
@@ -77,7 +78,7 @@ function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, 
             {
               catalogGenres.map((genre, index) => (
                 <li key={`genre-${index}`} className={`catalog__genres-item ${genre === activeGenre ? 'catalog__genres-item--active': ''}`}>
-                  <a href={genre.href} className="catalog__genres-link">{genre.name}</a>
+                  <Link to={genre.href} className="catalog__genres-link">{genre.name}</Link>
                 </li>))
             }
           </ul>

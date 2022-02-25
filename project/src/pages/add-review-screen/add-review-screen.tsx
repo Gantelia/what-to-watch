@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import SignOut from '../../components/sign-out/sign-out';
 
@@ -23,10 +24,10 @@ function AddReviewScreen({checkedRating}: AddReviewScreenProps): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                <Link to="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
+                <Link to="#todo" className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>

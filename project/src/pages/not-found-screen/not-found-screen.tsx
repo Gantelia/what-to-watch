@@ -6,7 +6,7 @@ function NotFoundScreen(): JSX.Element {
       <header className="page-header user-page__head">
         <Logo />
 
-        <h1 className="page-title user-page__title">404. Page was not found</h1>
+        <h1 className="page-title user-page__title">404<br /><small>Page was not found</small></h1>
       </header>
     </div>);
 }

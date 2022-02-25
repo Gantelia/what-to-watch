@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 type MovieCardProps = {
   src: string;
   alt: string;
@@ -12,7 +14,7 @@ function MovieCard({src, alt, title}: MovieCardProps): JSX.Element {
         <img src={src} alt={alt} width="280" height="175" />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">{title}</a>
+        <Link className="small-film-card__link" to="film-page.html">{title}</Link>
       </h3>
     </article>
   );
