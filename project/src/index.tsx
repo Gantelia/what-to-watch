@@ -18,12 +18,14 @@ type FilmCard = {
   src: string;
   alt: string;
   title: string;
+  id: number;
 }
 
 const filmCard = {
   src: 'img/seven-years-in-tibet.jpg',
   alt: 'Seven Years in Tibet',
   title: 'Seven Years in Tibet',
+  number: 5,
 };
 
 const filmCards: FilmCard[] = Array(20).fill(filmCard);

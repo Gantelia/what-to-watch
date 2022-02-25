@@ -6,6 +6,7 @@ type FilmCard = {
   src: string;
   alt: string;
   title: string;
+  id: number;
 }
 
 type MyListScreenProps = {
@@ -34,6 +35,7 @@ function MyListScreen({filmCards}: MyListScreenProps): JSX.Element {
                 src = {card.src}
                 alt = {card.alt}
                 title = {card.title}
+                id = {card.id}
               />),
             )
           }

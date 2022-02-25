@@ -12,6 +12,7 @@ type FilmCard = {
   src: string;
   alt: string;
   title: string;
+  id: number;
 }
 
 type MainScreenProps = {
@@ -85,12 +86,13 @@ function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, 
 
           <div className="catalog__films-list">
             {
-              filmCards.map((card, index) =>(
+              filmCards.map((card) =>(
                 <MovieCard
-                  key = {`card-${index}`}
+                  key = {card.id}
                   src = {card.src}
                   alt = {card.alt}
                   title = {card.title}
+                  id = {card.id}
                 />),
               )
             }

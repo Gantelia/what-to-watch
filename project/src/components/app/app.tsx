@@ -18,6 +18,7 @@ type FilmCard = {
   src: string;
   alt: string;
   title: string;
+  id: number;
 }
 
 type AppScreenProps = {
