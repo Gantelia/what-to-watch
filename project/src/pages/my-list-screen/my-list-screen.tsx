@@ -31,7 +31,7 @@ function MyListScreen({filmCards}: MyListScreenProps): JSX.Element {
           {
             filmCards.map((card) =>(
               <MovieCard
-                key = {card.title}
+                key = {card.id}
                 src = {card.src}
                 alt = {card.alt}
                 title = {card.title}

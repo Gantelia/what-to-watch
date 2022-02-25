@@ -77,8 +77,8 @@ function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, 
 
           <ul className="catalog__genres-list">
             {
-              catalogGenres.map((genre, index) => (
-                <li key={`genre-${index}`} className={`catalog__genres-item ${genre === activeGenre ? 'catalog__genres-item--active': ''}`}>
+              catalogGenres.map((genre) => (
+                <li key={genre.name} className={`catalog__genres-item ${genre === activeGenre ? 'catalog__genres-item--active': ''}`}>
                   <Link to={genre.href} className="catalog__genres-link">{genre.name}</Link>
                 </li>))
             }
