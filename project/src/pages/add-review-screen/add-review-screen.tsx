@@ -1,4 +1,5 @@
 import Logo from '../../components/logo/logo';
+import SignOut from '../../components/sign-out/sign-out';
 
 const RATINGS: string[] = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
 
@@ -30,16 +31,7 @@ function AddReviewScreen({checkedRating}: AddReviewScreenProps): JSX.Element {
             </ul>
           </nav>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <SignOut />
         </header>
 
         <div className="film-card__poster film-card__poster--small">

@@ -6,6 +6,7 @@ import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import MovieScreen from '../../pages/movie-screen/movie-screen';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
+import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 
 type Genre = {
   href: string;
@@ -67,6 +68,10 @@ function App({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCar
         <Route
           path={AppRoute.Player}
           element={<PlayerScreen />}
+        />
+        <Route
+          path='*'
+          element={<NotFoundScreen />}
         />
       </Routes>
     </BrowserRouter>
