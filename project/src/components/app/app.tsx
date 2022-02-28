@@ -10,14 +10,13 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../privateRoute/private-route';
 
 type Genre = {
-  href: string;
+  id: number;
   name: string;
 }
 
 type FilmCard = {
-  src: string;
-  alt: string;
-  title: string;
+  previewImage: string;
+  name: string;
   id: number;
 }
 
@@ -27,10 +26,9 @@ type AppScreenProps = {
   mainFilmYear: number;
   catalogGenres: Genre[];
   filmCards: FilmCard[];
-  activeGenre: Genre;
 }
 
-function App({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCards, activeGenre}: AppScreenProps): JSX.Element {
+function App({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCards}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -43,7 +41,6 @@ function App({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCar
               mainFilmYear = {mainFilmYear}
               catalogGenres = {catalogGenres}
               filmCards = {filmCards}
-              activeGenre = {activeGenre}
             />
           }
         />

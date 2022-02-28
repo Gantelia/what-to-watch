@@ -4,14 +4,13 @@ import SignOut from '../../components/sign-out/sign-out';
 import { Link } from 'react-router-dom';
 
 type Genre = {
-  href: string;
+  id: number;
   name: string;
 }
 
 type FilmCard = {
-  src: string;
-  alt: string;
-  title: string;
+  previewImage: string;
+  name: string;
   id: number;
 }
 
@@ -21,10 +20,9 @@ type MainScreenProps = {
     mainFilmYear: number;
     catalogGenres: Genre[];
     filmCards: FilmCard[];
-    activeGenre: Genre;
 }
 
-function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCards, activeGenre}: MainScreenProps): JSX.Element {
+function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCards}: MainScreenProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -78,8 +76,8 @@ function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, 
           <ul className="catalog__genres-list">
             {
               catalogGenres.map((genre) => (
-                <li key={genre.name} className={`catalog__genres-item ${genre === activeGenre ? 'catalog__genres-item--active': ''}`}>
-                  <Link to={genre.href} className="catalog__genres-link">{genre.name}</Link>
+                <li key={genre.id} className="catalog__genres-item">
+                  <Link to={genre.name} className="catalog__genres-link">{genre.name}</Link>
                 </li>))
             }
           </ul>
@@ -89,9 +87,8 @@ function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, 
               filmCards.map((card) =>(
                 <MovieCard
                   key = {card.id}
-                  src = {card.src}
-                  alt = {card.alt}
-                  title = {card.title}
+                  previewImage = {card.previewImage}
+                  name = {card.name}
                   id = {card.id}
                 />),
               )

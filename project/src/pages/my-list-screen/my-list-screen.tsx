@@ -3,9 +3,8 @@ import Logo from '../../components/logo/logo';
 import SignOut from '../../components/sign-out/sign-out';
 
 type FilmCard = {
-  src: string;
-  alt: string;
-  title: string;
+  previewImage: string;
+  name: string;
   id: number;
 }
 
@@ -32,9 +31,8 @@ function MyListScreen({filmCards}: MyListScreenProps): JSX.Element {
             filmCards.map((card) =>(
               <MovieCard
                 key = {card.id}
-                src = {card.src}
-                alt = {card.alt}
-                title = {card.title}
+                previewImage = {card.previewImage}
+                name = {card.name}
                 id = {card.id}
               />),
             )
