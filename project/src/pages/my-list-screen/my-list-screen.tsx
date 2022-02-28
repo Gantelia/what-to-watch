@@ -1,12 +1,7 @@
 import MovieCard from '../../components/movie-card/movie-card';
 import Logo from '../../components/logo/logo';
 import SignOut from '../../components/sign-out/sign-out';
-
-type FilmCard = {
-  previewImage: string;
-  name: string;
-  id: number;
-}
+import {FilmCard} from '../../types/types';
 
 type MyListScreenProps = {
   filmCards: FilmCard[];

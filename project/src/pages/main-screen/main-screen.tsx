@@ -1,18 +1,8 @@
-import MovieCard from '../../components/movie-card/movie-card';
 import Logo from '../../components/logo/logo';
 import SignOut from '../../components/sign-out/sign-out';
 import { Link } from 'react-router-dom';
-
-type Genre = {
-  id: number;
-  name: string;
-}
-
-type FilmCard = {
-  previewImage: string;
-  name: string;
-  id: number;
-}
+import {Genre, FilmCard} from '../../types/types';
+import FilmList from '../../components/film-list/film-list';
 
 type MainScreenProps = {
     mainFilmTitle: string;
@@ -82,18 +72,7 @@ function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, 
             }
           </ul>
 
-          <div className="catalog__films-list">
-            {
-              filmCards.map((card) =>(
-                <MovieCard
-                  key = {card.id}
-                  previewImage = {card.previewImage}
-                  name = {card.name}
-                  id = {card.id}
-                />),
-              )
-            }
-          </div>
+          {<FilmList filmCards={filmCards}/>}
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
