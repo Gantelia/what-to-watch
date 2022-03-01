@@ -1,19 +1,23 @@
-import { Link } from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import SignOut from '../../components/sign-out/sign-out';
 import {RATINGS} from '../../const';
-import {FilmCard} from '../../types/types';
+import {FilmInfo} from '../../types/types';
+
 
 type AddReviewScreenProps = {
-  filmCards: FilmCard[];
+  filmCards: FilmInfo[];
 }
 
 function AddReviewScreen({filmCards}: AddReviewScreenProps): JSX.Element {
+  const {id} = useParams();
+  const filmCard = filmCards.find((film: FilmInfo) => `:${film.id}` === id);
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={filmCard?.backgroundImage} alt={filmCard?.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -24,7 +28,7 @@ function AddReviewScreen({filmCards}: AddReviewScreenProps): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</Link>
+                <Link to="film-page.html" className="breadcrumbs__link">{filmCard?.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <Link to="#todo" className="breadcrumbs__link">Add review</Link>
@@ -36,7 +40,7 @@ function AddReviewScreen({filmCards}: AddReviewScreenProps): JSX.Element {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+          <img src={filmCard?.posterImage} alt={filmCard?.name} width="218" height="327" />
         </div>
       </div>
 
@@ -47,8 +51,8 @@ function AddReviewScreen({filmCards}: AddReviewScreenProps): JSX.Element {
               {
                 RATINGS.map((rating) => (
                   <>
-                    <input className="rating__input" id={`star-${rating}`} type="radio" name="rating" value={rating} />
-                    <label className="rating__label" htmlFor={`star-${rating}`}>Rating {rating}</label>
+                    <input key={`rating${rating}`} className="rating__input" id={`star-${rating}`} type="radio" name="rating" value={rating} />
+                    <label key={rating} className="rating__label" htmlFor={`star-${rating}`}>Rating {rating}</label>
                   </>
                 ))
               }

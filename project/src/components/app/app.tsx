@@ -8,14 +8,14 @@ import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../privateRoute/private-route';
-import {FilmCard, Genre} from '../../types/types';
+import {FilmInfo, Genre} from '../../types/types';
 
 type AppScreenProps = {
   mainFilmTitle: string;
   mainFilmGenre: string;
   mainFilmYear: number;
   catalogGenres: Genre[];
-  filmCards: FilmCard[];
+  filmCards: FilmInfo[];
 }
 
 function App({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCards}: AppScreenProps): JSX.Element {
