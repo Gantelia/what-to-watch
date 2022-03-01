@@ -56,7 +56,14 @@ function App({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCar
         />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReviewScreen filmCards = {filmCards}/>}
+          element={
+            <AddReviewScreen
+              filmCards = {filmCards}
+              onFormSubmit = {() => {
+                throw new Error('Function \'onFormSubmit\' isn\'t implemented.');
+              }}
+            />
+          }
         />
         <Route
           path={AppRoute.Player}

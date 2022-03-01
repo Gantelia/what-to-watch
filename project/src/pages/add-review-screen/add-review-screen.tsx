@@ -1,15 +1,16 @@
 import {Link, useParams} from 'react-router-dom';
+import AddReviewForm from '../../components/add-review-form/add-review-form';
 import Logo from '../../components/logo/logo';
 import SignOut from '../../components/sign-out/sign-out';
-import {RATINGS} from '../../const';
-import {FilmInfo} from '../../types/types';
+import {FilmInfo, UserReview} from '../../types/types';
 
 
 type AddReviewScreenProps = {
   filmCards: FilmInfo[];
+  onFormSubmit: (formData:UserReview) => void;
 }
 
-function AddReviewScreen({filmCards}: AddReviewScreenProps): JSX.Element {
+function AddReviewScreen({filmCards, onFormSubmit}: AddReviewScreenProps): JSX.Element {
   const {id} = useParams();
   const filmCard = filmCards.find((film: FilmInfo) => `:${film.id}` === id);
 
@@ -45,28 +46,7 @@ function AddReviewScreen({filmCards}: AddReviewScreenProps): JSX.Element {
       </div>
 
       <div className="add-review">
-        <form action="#" className="add-review__form">
-          <div className="rating">
-            <div className="rating__stars">
-              {
-                RATINGS.map((rating) => (
-                  <>
-                    <input key={`rating${rating}`} className="rating__input" id={`star-${rating}`} type="radio" name="rating" value={rating} />
-                    <label key={rating} className="rating__label" htmlFor={`star-${rating}`}>Rating {rating}</label>
-                  </>
-                ))
-              }
-            </div>
-          </div>
-
-          <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
-            <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
-            </div>
-
-          </div>
-        </form>
+        <AddReviewForm onFormSubmit={onFormSubmit}/>
       </div>
 
     </section>

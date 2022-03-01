@@ -22,3 +22,8 @@ genre: string;
 released: number;
 isFavorite: boolean;
 }
+
+export type UserReview = {
+  comment: string;
+  rating: number | null;
+}
