@@ -66,7 +66,7 @@ export const FILMS = [
   },
   {
     id: 4,
-    name: 'Martin Scorsese',
+    name: 'Moonrise Kingdom',
     posterImage: 'https://external-preview.redd.it/F1tHvU9b80RJ71yWwds3XMCe8nD4zkYdbKqE90GLhTY.jpg?auto=webp&s=67f95bd97ea0c0c2de558642cd29c59fe546ced0',
     previewImage: 'img/moonrise-kingdom.jpg',
     backgroundImage: 'img/bg-the-grand-budapest-hotel.jpg',
