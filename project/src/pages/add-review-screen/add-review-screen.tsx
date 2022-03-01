@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import SignOut from '../../components/sign-out/sign-out';
 import {RATINGS} from '../../const';
+import {FilmCard} from '../../types/types';
 
 type AddReviewScreenProps = {
-  checkedRating: string;
+  filmCards: FilmCard[];
 }
 
-function AddReviewScreen({checkedRating}: AddReviewScreenProps): JSX.Element {
+function AddReviewScreen({filmCards}: AddReviewScreenProps): JSX.Element {
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
@@ -46,7 +47,7 @@ function AddReviewScreen({checkedRating}: AddReviewScreenProps): JSX.Element {
               {
                 RATINGS.map((rating) => (
                   <>
-                    <input className="rating__input" id={`star-${rating}`} type="radio" name="rating" value={rating} {...rating === checkedRating ? 'checked' : ''}/>
+                    <input className="rating__input" id={`star-${rating}`} type="radio" name="rating" value={rating} />
                     <label className="rating__label" htmlFor={`star-${rating}`}>Rating {rating}</label>
                   </>
                 ))

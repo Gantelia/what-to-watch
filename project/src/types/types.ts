@@ -1,7 +1,7 @@
 export type FilmCard = {
     previewImage: string;
     name: string;
-    id: number;
+    id: string;
   }
 
 export type Genre = {

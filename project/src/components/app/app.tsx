@@ -8,17 +8,7 @@ import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../privateRoute/private-route';
-
-type Genre = {
-  id: number;
-  name: string;
-}
-
-type FilmCard = {
-  previewImage: string;
-  name: string;
-  id: number;
-}
+import {FilmCard, Genre} from '../../types/types';
 
 type AppScreenProps = {
   mainFilmTitle: string;
@@ -54,7 +44,7 @@ function App({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCar
           path={AppRoute.MyList}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthorizationStatus.Auth}
             >
               <MyListScreen filmCards = {filmCards} />
             </PrivateRoute>
@@ -66,11 +56,11 @@ function App({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCar
         />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReviewScreen checkedRating='5'/>}
+          element={<AddReviewScreen filmCards = {filmCards}/>}
         />
         <Route
           path={AppRoute.Player}
-          element={<PlayerScreen />}
+          element={<PlayerScreen filmCards = {filmCards}/>}
         />
         <Route
           path={AppRoute.NotFound}

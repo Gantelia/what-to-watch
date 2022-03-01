@@ -1,6 +1,6 @@
 export const FILMS = [
   {
-    id: 1,
+    id: '1',
     name: 'The Revenant',
     posterImage: 'img/the-grand-budapest-hotel-poster.jpg',
     previewImage: 'img/revenant.jpg',
@@ -21,7 +21,7 @@ export const FILMS = [
     isFavorite: false,
   },
   {
-    id: 2,
+    id: '2',
     name: 'Fantastic Beasts: The Crimes of Grindelwald',
     posterImage: 'https://speckyboy.com/wp-content/uploads/2009/08/movieposter29.jpg',
     previewImage: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',
@@ -43,7 +43,7 @@ export const FILMS = [
     isFavorite: false,
   },
   {
-    id: 3,
+    id: '3',
     name: 'What We Do in the Shadows',
     posterImage: 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/adventure-movie-poster-template-design-7b13ea2ab6f64c1ec9e1bb473f345547_screen.jpg?ts=1636999411',
     previewImage: 'img/what-we-do-in-the-shadows.jpg',
@@ -65,7 +65,7 @@ export const FILMS = [
     isFavorite: true,
   },
   {
-    id: 4,
+    id: '4',
     name: 'Martin Scorsese',
     posterImage: 'https://external-preview.redd.it/F1tHvU9b80RJ71yWwds3XMCe8nD4zkYdbKqE90GLhTY.jpg?auto=webp&s=67f95bd97ea0c0c2de558642cd29c59fe546ced0',
     previewImage: 'img/moonrise-kingdom.jpg',
@@ -88,7 +88,7 @@ export const FILMS = [
     isFavorite: false,
   },
   {
-    id: 5,
+    id: '5',
     name: 'Seven Years in Tibet',
     posterImage: 'https://i.pinimg.com/564x/b5/89/18/b5891893452ec94db03449be30086be8--alternative-movie-posters-action-movies.jpg',
     previewImage: 'img/seven-years-in-tibet.jpg',
@@ -109,7 +109,7 @@ export const FILMS = [
     isFavorite: true,
   },
   {
-    id: 6,
+    id: '6',
     name: 'Orlando',
     posterImage: 'https://i.pinimg.com/736x/c6/7a/80/c67a80c57a3d0cf7b7ade0d5e336f108.jpg',
     previewImage: 'img/orlando.jpg',
@@ -132,7 +132,7 @@ export const FILMS = [
     isFavorite: false,
   },
   {
-    id: 7,
+    id: '7',
     name: 'Midnight Special',
     posterImage: 'https://i.pinimg.com/736x/c0/fd/c3/c0fdc33073ad5dceff7286529454e49a.jpg',
     previewImage: 'img/midnight-special.jpg',
@@ -157,7 +157,7 @@ export const FILMS = [
     isFavorite: true,
   },
   {
-    id: 8,
+    id: '8',
     name: 'War of the Worlds',
     posterImage: 'https://pbs.twimg.com/media/Dj6SUUSU4AAzrW8.jpg',
     previewImage: 'img/war-of-the-worlds.jpg',

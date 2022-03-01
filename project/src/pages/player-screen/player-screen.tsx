@@ -1,4 +1,10 @@
-function PlayerScreen(): JSX.Element {
+import {FilmCard} from '../../types/types';
+
+type PlayerScreenProps = {
+  filmCards: FilmCard[];
+}
+
+function PlayerScreen({filmCards}: PlayerScreenProps): JSX.Element {
   return (
     <div className="player">
       <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
