@@ -1,10 +1,10 @@
 import MovieCard from '../../components/movie-card/movie-card';
 import Logo from '../../components/logo/logo';
 import SignOut from '../../components/sign-out/sign-out';
-import {FilmCard} from '../../types/types';
+import {FilmInfo} from '../../types/types';
 
 type MyListScreenProps = {
-  filmCards: FilmCard[];
+  filmCards: FilmInfo[];
 }
 
 function MyListScreen({filmCards}: MyListScreenProps): JSX.Element {

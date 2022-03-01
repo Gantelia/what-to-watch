@@ -1,7 +1,7 @@
-import {FilmCard} from '../../types/types';
+import {FilmInfo} from '../../types/types';
 
 type PlayerScreenProps = {
-  filmCards: FilmCard[];
+  filmCards: FilmInfo[];
 }
 
 function PlayerScreen({filmCards}: PlayerScreenProps): JSX.Element {

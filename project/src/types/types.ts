@@ -1,9 +1,3 @@
-export type FilmCard = {
-    previewImage: string;
-    name: string;
-    id: number;
-  }
-
 export type Genre = {
     id: number;
     name: string;
@@ -28,4 +22,3 @@ genre: string;
 released: number;
 isFavorite: boolean;
 }
-

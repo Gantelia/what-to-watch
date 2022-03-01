@@ -1,7 +1,7 @@
 import Logo from '../../components/logo/logo';
 import SignOut from '../../components/sign-out/sign-out';
 import { Link } from 'react-router-dom';
-import {Genre, FilmCard} from '../../types/types';
+import {Genre, FilmInfo} from '../../types/types';
 import FilmList from '../../components/film-list/film-list';
 
 type MainScreenProps = {
@@ -9,7 +9,7 @@ type MainScreenProps = {
     mainFilmGenre: string;
     mainFilmYear: number;
     catalogGenres: Genre[];
-    filmCards: FilmCard[];
+    filmCards: FilmInfo[];
 }
 
 function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCards}: MainScreenProps): JSX.Element {
