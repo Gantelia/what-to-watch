@@ -1,15 +1,28 @@
 import MovieCard from '../../components/movie-card/movie-card';
 import {FilmInfo} from '../../types/types';
+import { getActiveGenre } from '../../utils';
+
 
 type FilmListProps = {
     filmCards: FilmInfo[];
+    activeGenre: string;
 }
 
-function FilmList({filmCards}: FilmListProps): JSX.Element {
+function FilmList({filmCards, activeGenre}: FilmListProps): JSX.Element {
+  const filmsOfGenre: FilmInfo[] = [];
+  filmCards.map((film) => {
+    if (film.genre === getActiveGenre(activeGenre)) {
+      filmsOfGenre.push(film);
+    }
+    return filmsOfGenre;
+  });
+
+  const films = activeGenre === 'All genres'? filmCards : filmsOfGenre;
+
   return (
     <div className="catalog__films-list">
       {
-        filmCards.map((card) =>(
+        films.map((card) =>(
           <MovieCard
             key={card.id}
             film={card}

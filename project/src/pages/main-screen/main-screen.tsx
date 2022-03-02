@@ -3,6 +3,8 @@ import Sign from '../../components/sign/sign';
 import { Link } from 'react-router-dom';
 import {Genre, FilmInfo} from '../../types/types';
 import FilmList from '../../components/film-list/film-list';
+import { useState } from 'react';
+import { AppRoute } from '../../const';
 
 type MainScreenProps = {
     promoFilm: FilmInfo;
@@ -12,6 +14,8 @@ type MainScreenProps = {
 
 function MainScreen({promoFilm, catalogGenres, filmCards}: MainScreenProps): JSX.Element {
   const {name, genre, released} = promoFilm;
+  const [userGenre, setUserGenre] = useState('All genres');
+
   return (
     <>
       <section className="film-card">
@@ -64,14 +68,23 @@ function MainScreen({promoFilm, catalogGenres, filmCards}: MainScreenProps): JSX
 
           <ul className="catalog__genres-list">
             {
-              catalogGenres.map((catalogGenre) => (
-                <li key={catalogGenre.id} className="catalog__genres-item">
-                  <Link to={catalogGenre.name} className="catalog__genres-link">{catalogGenre.name}</Link>
-                </li>))
+              catalogGenres.map((catalogGenre) =>(
+                <li key={catalogGenre.name} className={`catalog__genres-item ${catalogGenre.name === userGenre ? 'catalog__genres-item--active': ''}`}>
+                  <Link to={AppRoute.Main} className="catalog__genres-link"
+                    onClick={() => setUserGenre(catalogGenre.name)}
+                  >{catalogGenre.name}
+                  </Link>
+                </li>),
+              )
             }
           </ul>
 
-          {<FilmList filmCards={filmCards}/>}
+          {
+            <FilmList
+              filmCards={filmCards}
+              activeGenre={userGenre}
+            />
+          }
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
