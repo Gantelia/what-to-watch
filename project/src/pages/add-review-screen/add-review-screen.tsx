@@ -1,7 +1,7 @@
 import {Link, useParams} from 'react-router-dom';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import Logo from '../../components/logo/logo';
-import SignOut from '../../components/sign-out/sign-out';
+import Sign from '../../components/sign/sign';
 import {FilmInfo, UserReview} from '../../types/types';
 
 
@@ -37,7 +37,7 @@ function AddReviewScreen({filmCards, onFormSubmit}: AddReviewScreenProps): JSX.E
             </ul>
           </nav>
 
-          <SignOut />
+          <Sign />
         </header>
 
         <div className="film-card__poster film-card__poster--small">

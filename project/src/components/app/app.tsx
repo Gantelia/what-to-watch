@@ -11,14 +11,12 @@ import PrivateRoute from '../privateRoute/private-route';
 import {FilmInfo, Genre} from '../../types/types';
 
 type AppScreenProps = {
-  mainFilmTitle: string;
-  mainFilmGenre: string;
-  mainFilmYear: number;
+  promoFilm: FilmInfo;
   catalogGenres: Genre[];
   filmCards: FilmInfo[];
 }
 
-function App({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCards}: AppScreenProps): JSX.Element {
+function App({promoFilm, catalogGenres, filmCards}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -26,9 +24,7 @@ function App({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCar
           path={AppRoute.Main}
           element={
             <MainScreen
-              mainFilmTitle = {mainFilmTitle}
-              mainFilmGenre = {mainFilmGenre}
-              mainFilmYear = {mainFilmYear}
+              promoFilm = {promoFilm}
               catalogGenres = {catalogGenres}
               filmCards = {filmCards}
             />

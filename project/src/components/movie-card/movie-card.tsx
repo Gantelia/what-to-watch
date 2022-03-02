@@ -1,14 +1,16 @@
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
+import { FilmInfo } from '../../types/types';
+
 
 type MovieCardProps = {
-  previewImage: string;
-  name: string;
-  id: number;
+  film: FilmInfo;
 }
 
 
-function MovieCard({previewImage, name, id}: MovieCardProps): JSX.Element {
+function MovieCard({film}: MovieCardProps): JSX.Element {
+  const {id, previewImage, name} = film;
+
   const [, setIsHovered] = useState<null | number>(null);
 
   const handleMouseEnter = () => {

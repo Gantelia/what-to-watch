@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
-import SignOut from '../../components/sign-out/sign-out';
+import Sign from '../../components/sign/sign';
 
 function MovieScreen(): JSX.Element {
   return (
@@ -16,7 +16,7 @@ function MovieScreen(): JSX.Element {
           <header className="page-header film-card__head">
             <Logo />
 
-            <SignOut />
+            <Sign />
           </header>
 
           <div className="film-card__wrap">

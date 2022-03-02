@@ -1,18 +1,17 @@
 import Logo from '../../components/logo/logo';
-import SignOut from '../../components/sign-out/sign-out';
+import Sign from '../../components/sign/sign';
 import { Link } from 'react-router-dom';
 import {Genre, FilmInfo} from '../../types/types';
 import FilmList from '../../components/film-list/film-list';
 
 type MainScreenProps = {
-    mainFilmTitle: string;
-    mainFilmGenre: string;
-    mainFilmYear: number;
+    promoFilm: FilmInfo;
     catalogGenres: Genre[];
     filmCards: FilmInfo[];
 }
 
-function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCards}: MainScreenProps): JSX.Element {
+function MainScreen({promoFilm, catalogGenres, filmCards}: MainScreenProps): JSX.Element {
+  const {name, genre, released} = promoFilm;
   return (
     <>
       <section className="film-card">
@@ -25,7 +24,7 @@ function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, 
         <header className="page-header film-card__head">
           <Logo />
 
-          <SignOut />
+          <Sign />
         </header>
 
         <div className="film-card__wrap">
@@ -35,10 +34,10 @@ function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, 
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{mainFilmTitle}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{mainFilmGenre}</span>
-                <span className="film-card__year">{mainFilmYear}</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -65,9 +64,9 @@ function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, 
 
           <ul className="catalog__genres-list">
             {
-              catalogGenres.map((genre) => (
-                <li key={genre.id} className="catalog__genres-item">
-                  <Link to={genre.name} className="catalog__genres-link">{genre.name}</Link>
+              catalogGenres.map((catalogGenre) => (
+                <li key={catalogGenre.id} className="catalog__genres-item">
+                  <Link to={catalogGenre.name} className="catalog__genres-link">{catalogGenre.name}</Link>
                 </li>))
             }
           </ul>
