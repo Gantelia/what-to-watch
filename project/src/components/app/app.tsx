@@ -48,7 +48,7 @@ function App({promoFilm, catalogGenres, filmCards}: AppScreenProps): JSX.Element
         />
         <Route
           path={AppRoute.Film}
-          element={<MovieScreen />}
+          element={<MovieScreen films = {filmCards}/>}
         />
         <Route
           path={AppRoute.AddReview}
