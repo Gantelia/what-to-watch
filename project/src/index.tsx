@@ -18,12 +18,14 @@ type FilmCard = {
   src: string;
   alt: string;
   title: string;
+  id: number;
 }
 
 const filmCard = {
   src: 'img/seven-years-in-tibet.jpg',
   alt: 'Seven Years in Tibet',
   title: 'Seven Years in Tibet',
+  number: 5,
 };
 
 const filmCards: FilmCard[] = Array(20).fill(filmCard);
@@ -31,7 +33,7 @@ const filmCards: FilmCard[] = Array(20).fill(filmCard);
 const Setting = {
   TITLE: 'The Grand Budapest Hotel',
   GENRE: 'Drama',
-  DATE: 2014,
+  YEAR: 2014,
   CATALOG_GENRES: catalogGenres,
   FILM_CARDS: filmCards,
   ACTIVE_GENRE: catalogGenre,
@@ -40,9 +42,9 @@ const Setting = {
 ReactDOM.render(
   <React.StrictMode>
     <App
-      promoFilmTitle = {Setting.TITLE}
-      promoFilmGenre = {Setting.GENRE}
-      promoFilmYear = {Setting.DATE}
+      mainFilmTitle = {Setting.TITLE}
+      mainFilmGenre = {Setting.GENRE}
+      mainFilmYear = {Setting.YEAR}
       catalogGenres = {Setting.CATALOG_GENRES}
       filmCards = {Setting.FILM_CARDS}
       activeGenre = {Setting.ACTIVE_GENRE}

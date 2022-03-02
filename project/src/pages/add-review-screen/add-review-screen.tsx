@@ -1,4 +1,8 @@
-const RATING_VALUES: string[] = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
+import { Link } from 'react-router-dom';
+import Logo from '../../components/logo/logo';
+import SignOut from '../../components/sign-out/sign-out';
+
+const RATINGS: string[] = ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
 
 type AddReviewScreenProps = {
   checkedRating: string;
@@ -15,35 +19,20 @@ function AddReviewScreen({checkedRating}: AddReviewScreenProps): JSX.Element {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header">
-          <div className="logo">
-            <a href="main.html" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo />
 
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                <Link to="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
+                <Link to="#todo" className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <SignOut />
         </header>
 
         <div className="film-card__poster film-card__poster--small">
@@ -56,7 +45,7 @@ function AddReviewScreen({checkedRating}: AddReviewScreenProps): JSX.Element {
           <div className="rating">
             <div className="rating__stars">
               {
-                RATING_VALUES.map((rating) => (
+                RATINGS.map((rating) => (
                   <>
                     <input className="rating__input" id={`star-${rating}`} type="radio" name="rating" value={rating} {...rating === checkedRating ? 'checked' : ''}/>
                     <label className="rating__label" htmlFor={`star-${rating}`}>Rating {rating}</label>
