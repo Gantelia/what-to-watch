@@ -38,11 +38,16 @@ export const convertRating: ConvertRating = (rating) => {
 
 export const getFormattedRating = (rating: number) => {
   const filmRating = rating.toString();
-  let formattedRating = '';
   if (!filmRating.includes('.')) {
-    return formattedRating;
+    return `${filmRating},0`;
   }
-  return formattedRating = filmRating.replace('.', ',');
+  return filmRating.replace('.', ',');
 };
 
-export const getDescription = (filmDescription: string) => filmDescription.split('.');
+export const getDescription = (filmDescription: string) => {
+  const sentences = filmDescription.match(/[^.?!]+[.!?]+[\])'"`’”]*|.+/g);
+  if (!sentences) {
+    return [];
+  }
+  return sentences;
+};
