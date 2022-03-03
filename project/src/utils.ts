@@ -44,3 +44,5 @@ export const getFormattedRating = (rating: number) => {
   }
   return formattedRating = filmRating.replace('.', ',');
 };
+
+export const getDescription = (filmDescription: string) => filmDescription.split('.');

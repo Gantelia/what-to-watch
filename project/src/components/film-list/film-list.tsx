@@ -10,11 +10,10 @@ type FilmListProps = {
 
 function FilmList({filmCards, activeGenre}: FilmListProps): JSX.Element {
   const filmsOfGenre: FilmInfo[] = [];
-  filmCards.map((film) => {
+  filmCards.forEach((film) => {
     if (film.genre === getActiveGenre(activeGenre)) {
       filmsOfGenre.push(film);
     }
-    return filmsOfGenre;
   });
 
   const films = activeGenre === 'All genres'? filmCards : filmsOfGenre;
