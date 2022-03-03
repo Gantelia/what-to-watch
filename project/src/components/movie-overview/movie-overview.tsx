@@ -25,8 +25,8 @@ function MovieOverview ({film}: MovieOverviewProps): JSX.Element {
 
         <p className="film-card__starring">
           <strong>Starring:
-            {starring.slice(0, starring.length-1).map((star) => ` ${star}, `)}
-            {starring[starring.length-1]} and other
+            {starring.slice(0, starring.length-1).map((star) => ` ${star},`)}
+            {` ${starring[starring.length-1]}`} and other
           </strong>
         </p>
       </div>

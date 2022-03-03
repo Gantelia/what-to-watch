@@ -28,4 +28,13 @@ export type UserReview = {
   rating: number | null;
 }
 
+export type UserComment = {
+  id: number,
+  author: string,
+  data: string,
+  rating: string,
+  text: string,
+  userId: number,
+}
+
 export type ConvertRating = (param: number) => string;

@@ -5,15 +5,24 @@ import { FilmInfo } from '../../types/types';
 import { AppRoute } from '../../const';
 import MovieCard from '../../components/movie-card/movie-card';
 import MovieOverview from '../../components/movie-overview/movie-overview';
+import { useState } from 'react';
+import MovieDetails from '../../components/movie-details/movie-details';
+import MovieReviews from '../../components/movie-reviews/movie-reviews';
+import { REVIEWS } from '../../mocks/reviews';
 
 
-type MovieScreenProps ={
+type MovieScreenProps = {
   films: FilmInfo[];
 }
 
 function MovieScreen({films}: MovieScreenProps): JSX.Element {
   const {id} = useParams();
   const movie = films.find((film: FilmInfo) => `:${film.id}` === id);
+  const [navigation, setNavigation] = useState('Overview');
+
+  const overviewClass = navigation === 'Overview' ? 'film-nav__item--active' : '';
+  const detailsClass = navigation === 'Details' ? 'film-nav__item--active' : '';
+  const reviewsClass = navigation === 'Reviews' ? 'film-nav__item--active' : '';
 
   if (!movie) {
     return <Navigate to={AppRoute.NotFound}/>;
@@ -73,19 +82,30 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <Link to="#todo" className="film-nav__link">Overview</Link>
+                  <li className={`film-nav__item ${overviewClass}`}>
+                    <Link to={`/films/${id}`} className="film-nav__link"
+                      onClick={() => setNavigation('Overview')}
+                    >Overview
+                    </Link>
                   </li>
-                  <li className="film-nav__item">
-                    <Link to="#todo" className="film-nav__link">Details</Link>
+                  <li className={`film-nav__item film-nav__item ${detailsClass}`}>
+                    <Link to={`/films/${id}`} className="film-nav__link"
+                      onClick={() => setNavigation('Details')}
+                    >Details
+                    </Link>
                   </li>
-                  <li className="film-nav__item">
-                    <Link to="#todo" className="film-nav__link">Reviews</Link>
+                  <li className={`film-nav__item film-nav__item ${reviewsClass}`}>
+                    <Link to={`/films/${id}`} className="film-nav__link"
+                      onClick={() => setNavigation('Reviews')}
+                    >Reviews
+                    </Link>
                   </li>
                 </ul>
               </nav>
 
-              <MovieOverview film = {movie}/>
+              {navigation === 'Overview' && <MovieOverview film = {movie}/>}
+              {navigation === 'Details' && <MovieDetails film = {movie}/>}
+              {navigation === 'Reviews' && <MovieReviews movieId = {movie.id} reviews = {REVIEWS}/>}
             </div>
           </div>
         </div>
