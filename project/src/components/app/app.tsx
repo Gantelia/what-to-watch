@@ -8,29 +8,15 @@ import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../privateRoute/private-route';
-
-type Genre = {
-  href: string;
-  name: string;
-}
-
-type FilmCard = {
-  src: string;
-  alt: string;
-  title: string;
-  id: number;
-}
+import {FilmInfo, Genre} from '../../types/types';
 
 type AppScreenProps = {
-  mainFilmTitle: string;
-  mainFilmGenre: string;
-  mainFilmYear: number;
+  promoFilm: FilmInfo;
   catalogGenres: Genre[];
-  filmCards: FilmCard[];
-  activeGenre: Genre;
+  filmCards: FilmInfo[];
 }
 
-function App({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCards, activeGenre}: AppScreenProps): JSX.Element {
+function App({promoFilm, catalogGenres, filmCards}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -38,12 +24,9 @@ function App({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCar
           path={AppRoute.Main}
           element={
             <MainScreen
-              mainFilmTitle = {mainFilmTitle}
-              mainFilmGenre = {mainFilmGenre}
-              mainFilmYear = {mainFilmYear}
+              promoFilm = {promoFilm}
               catalogGenres = {catalogGenres}
               filmCards = {filmCards}
-              activeGenre = {activeGenre}
             />
           }
         />
@@ -57,7 +40,7 @@ function App({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCar
           path={AppRoute.MyList}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthorizationStatus.Auth}
             >
               <MyListScreen filmCards = {filmCards} />
             </PrivateRoute>
@@ -65,15 +48,22 @@ function App({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCar
         />
         <Route
           path={AppRoute.Film}
-          element={<MovieScreen />}
+          element={<MovieScreen films = {filmCards}/>}
         />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReviewScreen checkedRating='5'/>}
+          element={
+            <AddReviewScreen
+              filmCards = {filmCards}
+              onFormSubmit = {() => {
+                throw new Error('Function \'onFormSubmit\' isn\'t implemented.');
+              }}
+            />
+          }
         />
         <Route
           path={AppRoute.Player}
-          element={<PlayerScreen />}
+          element={<PlayerScreen filmCards = {filmCards}/>}
         />
         <Route
           path={AppRoute.NotFound}

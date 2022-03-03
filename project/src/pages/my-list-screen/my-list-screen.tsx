@@ -1,16 +1,10 @@
 import MovieCard from '../../components/movie-card/movie-card';
 import Logo from '../../components/logo/logo';
-import SignOut from '../../components/sign-out/sign-out';
-
-type FilmCard = {
-  src: string;
-  alt: string;
-  title: string;
-  id: number;
-}
+import Sign from '../../components/sign/sign';
+import {FilmInfo} from '../../types/types';
 
 type MyListScreenProps = {
-  filmCards: FilmCard[];
+  filmCards: FilmInfo[];
 }
 
 function MyListScreen({filmCards}: MyListScreenProps): JSX.Element {
@@ -21,7 +15,7 @@ function MyListScreen({filmCards}: MyListScreenProps): JSX.Element {
 
         <h1 className="page-title user-page__title">My list</h1>
 
-        <SignOut />
+        <Sign />
       </header>
 
       <section className="catalog">
@@ -32,10 +26,7 @@ function MyListScreen({filmCards}: MyListScreenProps): JSX.Element {
             filmCards.map((card) =>(
               <MovieCard
                 key = {card.id}
-                src = {card.src}
-                alt = {card.alt}
-                title = {card.title}
-                id = {card.id}
+                film = {card}
               />),
             )
           }

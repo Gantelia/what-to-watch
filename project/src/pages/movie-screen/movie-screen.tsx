@@ -1,14 +1,42 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
-import SignOut from '../../components/sign-out/sign-out';
+import Sign from '../../components/sign/sign';
+import { FilmInfo } from '../../types/types';
+import { AppRoute } from '../../const';
+import MovieCard from '../../components/movie-card/movie-card';
+import MovieOverview from '../../components/movie-overview/movie-overview';
+import { useState } from 'react';
+import MovieDetails from '../../components/movie-details/movie-details';
+import MovieReviews from '../../components/movie-reviews/movie-reviews';
+import { REVIEWS } from '../../mocks/reviews';
 
-function MovieScreen(): JSX.Element {
+
+type MovieScreenProps = {
+  films: FilmInfo[];
+}
+
+function MovieScreen({films}: MovieScreenProps): JSX.Element {
+  const {id} = useParams();
+  const movie = films.find((film: FilmInfo) => `:${film.id}` === id);
+  const [navigation, setNavigation] = useState('Overview');
+  const navigate = useNavigate();
+
+  const overviewClass = navigation === 'Overview' ? 'film-nav__item--active' : '';
+  const detailsClass = navigation === 'Details' ? 'film-nav__item--active' : '';
+  const reviewsClass = navigation === 'Reviews' ? 'film-nav__item--active' : '';
+
+  if (!movie) {
+    return <Navigate to={AppRoute.NotFound}/>;
+  }
+
+  const {backgroundImage, name, genre, released, posterImage} = movie;
+
   return (
     <>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={backgroundImage} alt={name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -16,19 +44,21 @@ function MovieScreen(): JSX.Element {
           <header className="page-header film-card__head">
             <Logo />
 
-            <SignOut />
+            <Sign />
           </header>
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button"
+                  onClick={() => navigate (`/player/${id}`)}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -40,7 +70,7 @@ function MovieScreen(): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to="add-review.html" className="btn film-card__button">Add review</Link>
+                <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -49,64 +79,36 @@ function MovieScreen(): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <Link to="#todo" className="film-nav__link">Overview</Link>
+                  <li className={`film-nav__item ${overviewClass}`}>
+                    <Link to={`/films/${id}`} className="film-nav__link"
+                      onClick={() => setNavigation('Overview')}
+                    >Overview
+                    </Link>
                   </li>
-                  <li className="film-nav__item">
-                    <Link to="#todo" className="film-nav__link">Details</Link>
+                  <li className={`film-nav__item film-nav__item ${detailsClass}`}>
+                    <Link to={`/films/${id}`} className="film-nav__link"
+                      onClick={() => setNavigation('Details')}
+                    >Details
+                    </Link>
                   </li>
-                  <li className="film-nav__item">
-                    <Link to="#todo" className="film-nav__link">Reviews</Link>
+                  <li className={`film-nav__item film-nav__item ${reviewsClass}`}>
+                    <Link to={`/films/${id}`} className="film-nav__link"
+                      onClick={() => setNavigation('Reviews')}
+                    >Reviews
+                    </Link>
                   </li>
                 </ul>
               </nav>
 
-              <div className="film-card__text film-card__row">
-                <div className="film-card__text-col">
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Director</strong>
-                    <span className="film-card__details-value">Wes Anderson</span>
-                  </p>
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Starring</strong>
-                    <span className="film-card__details-value">
-                      Bill Murray, <br />
-                      Edward Norton, <br />
-                      Jude Law, <br />
-                      Willem Dafoe, <br />
-                      Saoirse Ronan, <br />
-                      Tony Revoloru, <br />
-                      Tilda Swinton, <br />
-                      Tom Wilkinson, <br />
-                      Owen Wilkinson, <br />
-                      Adrien Brody, <br />
-                      Ralph Fiennes, <br />
-                      Jeff Goldblum
-                    </span>
-                  </p>
-                </div>
-
-                <div className="film-card__text-col">
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Run Time</strong>
-                    <span className="film-card__details-value">1h 39m</span>
-                  </p>
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Genre</strong>
-                    <span className="film-card__details-value">Comedy</span>
-                  </p>
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Released</strong>
-                    <span className="film-card__details-value">2014</span>
-                  </p>
-                </div>
-              </div>
+              {navigation === 'Overview' && <MovieOverview film = {movie}/>}
+              {navigation === 'Details' && <MovieDetails film = {movie}/>}
+              {navigation === 'Reviews' && <MovieReviews movieId = {movie.id} reviews = {REVIEWS}/>}
             </div>
           </div>
         </div>
@@ -117,41 +119,9 @@ function MovieScreen(): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <Link className="small-film-card__link" to="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</Link>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <Link className="small-film-card__link" to="film-page.html">Bohemian Rhapsody</Link>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <Link className="small-film-card__link" to="film-page.html">Macbeth</Link>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <Link className="small-film-card__link" to="film-page.html">Aviator</Link>
-              </h3>
-            </article>
+            {
+              films.slice(0, 4).map((card) => <MovieCard key={card.id} film={card}/>)
+            }
           </div>
         </section>
 

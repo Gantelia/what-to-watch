@@ -1,30 +1,21 @@
-import MovieCard from '../../components/movie-card/movie-card';
 import Logo from '../../components/logo/logo';
-import SignOut from '../../components/sign-out/sign-out';
+import Sign from '../../components/sign/sign';
 import { Link } from 'react-router-dom';
-
-type Genre = {
-  href: string;
-  name: string;
-}
-
-type FilmCard = {
-  src: string;
-  alt: string;
-  title: string;
-  id: number;
-}
+import {Genre, FilmInfo} from '../../types/types';
+import FilmList from '../../components/film-list/film-list';
+import { useState } from 'react';
+import { AppRoute } from '../../const';
 
 type MainScreenProps = {
-    mainFilmTitle: string;
-    mainFilmGenre: string;
-    mainFilmYear: number;
+    promoFilm: FilmInfo;
     catalogGenres: Genre[];
-    filmCards: FilmCard[];
-    activeGenre: Genre;
+    filmCards: FilmInfo[];
 }
 
-function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, filmCards, activeGenre}: MainScreenProps): JSX.Element {
+function MainScreen({promoFilm, catalogGenres, filmCards}: MainScreenProps): JSX.Element {
+  const {name, genre, released} = promoFilm;
+  const [userGenre, setUserGenre] = useState('All genres');
+
   return (
     <>
       <section className="film-card">
@@ -37,7 +28,7 @@ function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, 
         <header className="page-header film-card__head">
           <Logo />
 
-          <SignOut />
+          <Sign />
         </header>
 
         <div className="film-card__wrap">
@@ -47,10 +38,10 @@ function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, 
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{mainFilmTitle}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{mainFilmGenre}</span>
-                <span className="film-card__year">{mainFilmYear}</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -77,26 +68,23 @@ function MainScreen({mainFilmTitle, mainFilmGenre, mainFilmYear, catalogGenres, 
 
           <ul className="catalog__genres-list">
             {
-              catalogGenres.map((genre) => (
-                <li key={genre.name} className={`catalog__genres-item ${genre === activeGenre ? 'catalog__genres-item--active': ''}`}>
-                  <Link to={genre.href} className="catalog__genres-link">{genre.name}</Link>
-                </li>))
+              catalogGenres.map((catalogGenre) =>(
+                <li key={catalogGenre.name} className={`catalog__genres-item ${catalogGenre.name === userGenre ? 'catalog__genres-item--active': ''}`}>
+                  <Link to={AppRoute.Main} className="catalog__genres-link"
+                    onClick={() => setUserGenre(catalogGenre.name)}
+                  >{catalogGenre.name}
+                  </Link>
+                </li>),
+              )
             }
           </ul>
 
-          <div className="catalog__films-list">
-            {
-              filmCards.map((card) =>(
-                <MovieCard
-                  key = {card.id}
-                  src = {card.src}
-                  alt = {card.alt}
-                  title = {card.title}
-                  id = {card.id}
-                />),
-              )
-            }
-          </div>
+          {
+            <FilmList
+              filmCards={filmCards}
+              activeGenre={userGenre}
+            />
+          }
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
