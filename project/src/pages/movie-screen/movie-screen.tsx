@@ -1,4 +1,4 @@
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import Sign from '../../components/sign/sign';
 import { FilmInfo } from '../../types/types';
@@ -19,6 +19,7 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
   const {id} = useParams();
   const movie = films.find((film: FilmInfo) => `:${film.id}` === id);
   const [navigation, setNavigation] = useState('Overview');
+  const navigate = useNavigate();
 
   const overviewClass = navigation === 'Overview' ? 'film-nav__item--active' : '';
   const detailsClass = navigation === 'Details' ? 'film-nav__item--active' : '';
@@ -55,7 +56,9 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button"
+                  onClick={() => navigate (`/player/${id}`)}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
