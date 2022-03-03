@@ -3,8 +3,8 @@ import Logo from '../../components/logo/logo';
 import Sign from '../../components/sign/sign';
 import { FilmInfo } from '../../types/types';
 import { AppRoute } from '../../const';
-import {convertMinutes} from '../../utils';
 import MovieCard from '../../components/movie-card/movie-card';
+import MovieOverview from '../../components/movie-overview/movie-overview';
 
 
 type MovieScreenProps ={
@@ -19,7 +19,7 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
     return <Navigate to={AppRoute.NotFound}/>;
   }
 
-  const {backgroundImage, name, genre, released, director, starring, runTime} = movie;
+  const {backgroundImage, name, genre, released, posterImage} = movie;
 
   return (
     <>
@@ -67,7 +67,7 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={movie?.posterImage} alt={`${name} poster`} width="218" height="327" />
+              <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -85,36 +85,7 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
                 </ul>
               </nav>
 
-              <div className="film-card__text film-card__row">
-                <div className="film-card__text-col">
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Director</strong>
-                    <span className="film-card__details-value">{director}</span>
-                  </p>
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Starring</strong>
-                    <span className="film-card__details-value">
-                      {starring.slice(0, starring.length-1).map((star) => `${star} `, <br />)}
-                      {starring[starring.length-1]}
-                    </span>
-                  </p>
-                </div>
-
-                <div className="film-card__text-col">
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Run Time</strong>
-                    <span className="film-card__details-value">{convertMinutes(runTime)}</span>
-                  </p>
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Genre</strong>
-                    <span className="film-card__details-value">{genre}</span>
-                  </p>
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Released</strong>
-                    <span className="film-card__details-value">{released}</span>
-                  </p>
-                </div>
-              </div>
+              <MovieOverview film = {movie}/>
             </div>
           </div>
         </div>

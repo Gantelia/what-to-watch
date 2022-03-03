@@ -27,3 +27,5 @@ export type UserReview = {
   comment: string;
   rating: number | null;
 }
+
+export type ConvertRating = (param: number) => string;
