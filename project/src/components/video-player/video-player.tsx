@@ -10,13 +10,16 @@ type VideoPlayerProps = {
 }
 
 function VideoPlayer({film, activePlayer, onMouseEnter, onMouseLeave}: VideoPlayerProps): JSX.Element {
-  const [/*isLoading*/, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const {previewVideoLink, previewImage, id, name} = film;
 
   useEffect(() => {
+    if (videoRef.current === null) {
+      setIsLoading(true);
+    }
     if (videoRef.current !== null) {
       videoRef.current.onloadeddata = () => setIsLoading(false);
     }
@@ -48,9 +51,9 @@ function VideoPlayer({film, activePlayer, onMouseEnter, onMouseLeave}: VideoPlay
     };
   },[id, activePlayer]);
 
-  // if (isLoading) {
-  //   return <div>Loading</div>;
-  // }
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
 
   return (
     <>

@@ -13,10 +13,13 @@ function MovieReviews ({movieId, reviews}: MovieReviewsProps): JSX.Element {
     }
   });
 
+  // let renderedReviewsCount = 0;
+
   return (
     <div className="film-card__reviews film-card__row">
+
       <div className="film-card__reviews-col">
-        {movieReviews.map((review) =>(
+        {movieReviews.slice().map((review) =>(
           <Review
             key = {review.id}
             review = {review}
