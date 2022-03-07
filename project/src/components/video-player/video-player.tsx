@@ -1,18 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FilmInfo } from '../../types/types';
 
 type VideoPlayerProps = {
-    src: string;
-    poster: string;
+    film: FilmInfo
+    activePlayer: number | null;
+    onMouseEnter: () => void;
+    onMouseLeave: () => void;
 }
 
-function VideoPlayer({src, poster}: VideoPlayerProps): JSX.Element {
-  const [, setIsLoading] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
-
-  const handleToggleMute = () => setIsMuted((current) => !current);
+function VideoPlayer({film, activePlayer, onMouseEnter, onMouseLeave}: VideoPlayerProps): JSX.Element {
+  const [isLoading, setIsLoading] = useState(true);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const {previewVideoLink, previewImage, id, name} = film;
 
   useEffect(() => {
     if (videoRef.current !== null) {
@@ -25,32 +27,44 @@ function VideoPlayer({src, poster}: VideoPlayerProps): JSX.Element {
         videoRef.current = null;
       }
     };
-  }, [src]);
+  }, [previewVideoLink]);
 
   useEffect(() => {
     if (videoRef.current === null) {
       return;
     }
 
-    if (isPlaying) {
-      setTimeout(() => videoRef.current?.play(), 1000);
+    let videoTimer: NodeJS.Timeout;
+
+    if (id === activePlayer) {
+      videoTimer = setTimeout(() => videoRef.current?.play(), 1000);
       return;
     }
-
     videoRef.current.pause();
-  },[isPlaying]);
+    videoRef.current.load();
 
+    return () => {
+      clearTimeout(videoTimer);
+    };
+  },[id, activePlayer]);
+
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
   return (
     <>
-      <i
-        className={`fa fa-volume-${isMuted ? 'up' : 'mute'}`}
-        onClick={handleToggleMute}
+      <video ref={videoRef} src={previewVideoLink} poster={previewImage} muted
+        width="280" height="175"
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
       />
-      <video ref={videoRef} src={src} poster={poster} muted={isMuted}
-        onClick={() => setIsPlaying(!isPlaying)}
-      />
+      <h3 className="small-film-card__title">
+        <Link className="small-film-card__link" to={`/films/:${id}`}>{name}
+        </Link>
+      </h3>
     </>
   );
 }
 
 export default VideoPlayer;
+
