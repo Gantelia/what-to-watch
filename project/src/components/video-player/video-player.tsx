@@ -10,7 +10,7 @@ type VideoPlayerProps = {
 }
 
 function VideoPlayer({film, activePlayer, onMouseEnter, onMouseLeave}: VideoPlayerProps): JSX.Element {
-  const [isLoading, setIsLoading] = useState(true);
+  const [/*isLoading*/, setIsLoading] = useState(true);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -48,9 +48,10 @@ function VideoPlayer({film, activePlayer, onMouseEnter, onMouseLeave}: VideoPlay
     };
   },[id, activePlayer]);
 
-  if (isLoading) {
-    return <div>Loading</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Loading</div>;
+  // }
+
   return (
     <>
       <video ref={videoRef} src={previewVideoLink} poster={previewImage} muted
