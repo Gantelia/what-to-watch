@@ -31,3 +31,5 @@ export enum FilmsCount {
   MovieScreen = 4,
   MyListScreen = 4,
 }
+
+export const REVIEWS_RENDER_STEP = 3;

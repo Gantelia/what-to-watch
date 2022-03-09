@@ -1,3 +1,5 @@
+
+import { REVIEWS_RENDER_STEP } from '../../const';
 import { UserComment } from '../../types/types';
 import Review from '../review/review';
 
@@ -13,18 +15,23 @@ function MovieReviews ({movieId, reviews}: MovieReviewsProps): JSX.Element {
     }
   });
 
-  // let renderedReviewsCount = 0;
+  const reviewBlocks = Array(Math.ceil(movieReviews.length/REVIEWS_RENDER_STEP)).fill('review');
+
+  let renderedReviewsCount = 0;
 
   return (
     <div className="film-card__reviews film-card__row">
-
-      <div className="film-card__reviews-col">
-        {movieReviews.slice().map((review) =>(
-          <Review
-            key = {review.id}
-            review = {review}
-          />))}
-      </div>
+      { reviewBlocks.map(() =>(
+        <div className="film-card__reviews-col" key = {renderedReviewsCount}>
+          {movieReviews.slice(renderedReviewsCount, renderedReviewsCount + Math.min(REVIEWS_RENDER_STEP, movieReviews.length)).map((review) => {
+            renderedReviewsCount += 1;
+            return (
+              <Review
+                key = {review.id}
+                review = {review}
+              />);})}
+        </div>),
+      )}
     </div>
   );
 }

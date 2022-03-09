@@ -37,17 +37,19 @@ function VideoPlayer({film, activePlayer, onMouseEnter, onMouseLeave}: VideoPlay
       return;
     }
 
-    let videoTimer: NodeJS.Timeout;
+    let videoTimer: NodeJS.Timeout | null = null;
 
     if (id === activePlayer) {
       videoTimer = setTimeout(() => videoRef.current?.play(), 1000);
+    } else if (videoTimer && id !== activePlayer) {
+      clearTimeout(videoTimer);
+      videoRef.current.load();
       return;
     }
-    videoRef.current.pause();
     videoRef.current.load();
 
     return () => {
-      clearTimeout(videoTimer);
+      videoTimer && clearTimeout(videoTimer);
     };
   },[id, activePlayer]);
 

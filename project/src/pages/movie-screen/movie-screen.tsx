@@ -9,16 +9,14 @@ import MovieDetails from '../../components/movie-details/movie-details';
 import MovieReviews from '../../components/movie-reviews/movie-reviews';
 import { REVIEWS } from '../../mocks/reviews';
 import FilmList from '../../components/film-list/film-list';
-/*eslint-disable*/
 
 type MovieScreenProps = {
   films: FilmInfo[];
 }
 
 function MovieScreen({films}: MovieScreenProps): JSX.Element {
-  const {id, info} = useParams();
-  console.log(info);
-  
+  const {id} = useParams();
+
   const movie = films.find((film: FilmInfo) => `:${film.id}` === id);
   const [navigation, setNavigation] = useState('Overview');
   const navigate = useNavigate();
@@ -94,7 +92,7 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
                     </Link>
                   </li>
                   <li className={`film-nav__item film-nav__item ${detailsClass}`}>
-                    <Link to={`/films/${id}/details`} className="film-nav__link"
+                    <Link to={`/films/${id}`} className="film-nav__link"
                       onClick={() => setNavigation('Details')}
                     >Details
                     </Link>
@@ -119,13 +117,13 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-            {
-              <FilmList
-                filmCards={films}
-                activeGenre={genre}
-                filmsCount={FilmsCount.MovieScreen}
-              />
-            }
+          {
+            <FilmList
+              filmCards={films}
+              activeGenre={genre}
+              filmsCount={FilmsCount.MovieScreen}
+            />
+          }
         </section>
 
         <footer className="page-footer">
