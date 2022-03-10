@@ -1,6 +1,8 @@
-import MovieCard from '../../components/movie-card/movie-card';
+
+import FilmList from '../../components/film-list/film-list';
 import Logo from '../../components/logo/logo';
 import Sign from '../../components/sign/sign';
+import { FilmsCount } from '../../const';
 import {FilmInfo} from '../../types/types';
 
 type MyListScreenProps = {
@@ -20,17 +22,13 @@ function MyListScreen({filmCards}: MyListScreenProps): JSX.Element {
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-        <div className="catalog__films-list">
-          {
-            filmCards.map((card) =>(
-              <MovieCard
-                key = {card.id}
-                film = {card}
-              />),
-            )
-          }
-        </div>
+        {
+          <FilmList
+            filmCards={filmCards}
+            activeGenre={'All genres'}
+            filmsCount={FilmsCount.MyListScreen}
+          />
+        }
       </section>
 
       <footer className="page-footer">

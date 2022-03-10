@@ -20,8 +20,16 @@ export const HOUR_IN_MINUTES = 60;
 
 export enum Rating {
   Bad = 'Bad',
-  NORMAL = 'Normal',
-  GOOD = 'Good',
-  VERY_GOOD = 'Very Good',
-  AWESOME = 'Awesome',
+  Normal = 'Normal',
+  Good = 'Good',
+  VeryGood = 'Very Good',
+  Awesome = 'Awesome',
 }
+
+export enum FilmsCount {
+  MainScreen = 8,
+  MovieScreen = 4,
+  MyListScreen = 4,
+}
+
+export const REVIEWS_RENDER_STEP = 3;

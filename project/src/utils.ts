@@ -25,22 +25,29 @@ export const convertRating: ConvertRating = (rating) => {
   if (rating >= 0 && rating < 3) {
     convertedRating = Rating.Bad;
   } else if (rating >= 3 && rating < 5) {
-    convertedRating = Rating.NORMAL;
+    convertedRating = Rating.Normal;
   } else if (rating >= 5 && rating < 8) {
-    convertedRating = Rating.GOOD;
+    convertedRating = Rating.Good;
   } else if (rating >= 8 && rating < 10) {
-    convertedRating = Rating.VERY_GOOD;
+    convertedRating = Rating.VeryGood;
   } else if (rating === 10) {
-    convertedRating = Rating.AWESOME;
+    convertedRating = Rating.Awesome;
   }
   return convertedRating;
 };
 
 export const getFormattedRating = (rating: number) => {
   const filmRating = rating.toString();
-  let formattedRating = '';
   if (!filmRating.includes('.')) {
-    return formattedRating;
+    return `${filmRating},0`;
   }
-  return formattedRating = filmRating.replace('.', ',');
+  return filmRating.replace('.', ',');
+};
+
+export const getDescription = (filmDescription: string) => {
+  const sentences = filmDescription.match(/[^.?!]+[.!?]+[\])'"`’”]*|.+/g);
+  if (!sentences) {
+    return [];
+  }
+  return sentences;
 };

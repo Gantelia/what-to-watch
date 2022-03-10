@@ -1,5 +1,5 @@
 import { FilmInfo } from '../../types/types';
-import { convertRating, getFormattedRating } from '../../utils';
+import { convertRating, getDescription, getFormattedRating } from '../../utils';
 
 type MovieOverviewProps = {
   film: FilmInfo;
@@ -19,14 +19,15 @@ function MovieOverview ({film}: MovieOverviewProps): JSX.Element {
       </div>
 
       <div className="film-card__text">
-        <p>{description}</p>
+        {
+          getDescription(description).map((sentence) => <p key={sentence}>{sentence}</p>)
+        }
 
         <p className="film-card__director"><strong>Director: {director}</strong></p>
 
         <p className="film-card__starring">
           <strong>Starring:
-            {starring.slice(0, starring.length-1).map((star) => ` ${star},`)}
-            {` ${starring[starring.length-1]}`} and other
+            {starring.join(',')} and other
           </strong>
         </p>
       </div>

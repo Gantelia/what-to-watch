@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import {Genre, FilmInfo} from '../../types/types';
 import FilmList from '../../components/film-list/film-list';
 import { useState } from 'react';
-import { AppRoute } from '../../const';
+import { AppRoute, FilmsCount } from '../../const';
 
 type MainScreenProps = {
     promoFilm: FilmInfo;
@@ -83,6 +83,7 @@ function MainScreen({promoFilm, catalogGenres, filmCards}: MainScreenProps): JSX
             <FilmList
               filmCards={filmCards}
               activeGenre={userGenre}
+              filmsCount={FilmsCount.MainScreen}
             />
           }
 

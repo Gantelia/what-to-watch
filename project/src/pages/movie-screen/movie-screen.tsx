@@ -2,14 +2,13 @@ import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import Sign from '../../components/sign/sign';
 import { FilmInfo } from '../../types/types';
-import { AppRoute } from '../../const';
-import MovieCard from '../../components/movie-card/movie-card';
+import { AppRoute, FilmsCount } from '../../const';
 import MovieOverview from '../../components/movie-overview/movie-overview';
 import { useState } from 'react';
 import MovieDetails from '../../components/movie-details/movie-details';
 import MovieReviews from '../../components/movie-reviews/movie-reviews';
 import { REVIEWS } from '../../mocks/reviews';
-
+import FilmList from '../../components/film-list/film-list';
 
 type MovieScreenProps = {
   films: FilmInfo[];
@@ -17,6 +16,7 @@ type MovieScreenProps = {
 
 function MovieScreen({films}: MovieScreenProps): JSX.Element {
   const {id} = useParams();
+
   const movie = films.find((film: FilmInfo) => `:${film.id}` === id);
   const [navigation, setNavigation] = useState('Overview');
   const navigate = useNavigate();
@@ -117,12 +117,13 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-
-          <div className="catalog__films-list">
-            {
-              films.slice(0, 4).map((card) => <MovieCard key={card.id} film={card}/>)
-            }
-          </div>
+          {
+            <FilmList
+              filmCards={films}
+              activeGenre={genre}
+              filmsCount={FilmsCount.MovieScreen}
+            />
+          }
         </section>
 
         <footer className="page-footer">
