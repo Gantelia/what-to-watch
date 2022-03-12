@@ -2,9 +2,9 @@ import Logo from '../../components/logo/logo';
 import Sign from '../../components/sign/sign';
 import {FilmInfo} from '../../types/types';
 import FilmList from '../../components/film-list/film-list';
-import { useState } from 'react';
 import { FilmsCount } from '../../const';
 import GenreList from '../../components/genre-list/genre-list';
+import { useAppSelector } from '../../hooks';
 
 type MainScreenProps = {
     promoFilm: FilmInfo;
@@ -13,7 +13,8 @@ type MainScreenProps = {
 
 function MainScreen({promoFilm, filmCards}: MainScreenProps): JSX.Element {
   const {name, genre, released} = promoFilm;
-  const [userGenre] = useState('All genres');
+
+  const {activeGenre} = useAppSelector((state) => state);
 
   return (
     <>
@@ -65,12 +66,12 @@ function MainScreen({promoFilm, filmCards}: MainScreenProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList films = {filmCards} />
+          <GenreList films = {filmCards} activeGenre = {activeGenre}/>
 
           {
             <FilmList
               filmCards={filmCards}
-              activeGenre={userGenre}
+              activeGenre={activeGenre}
               filmsCount={FilmsCount.MainScreen}
             />
           }

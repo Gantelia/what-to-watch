@@ -1,5 +1,5 @@
 import { HOUR_IN_MINUTES, Rating } from './const';
-import { ConvertRating } from './types/types';
+import { ConvertRating, FilmInfo, Genre } from './types/types';
 
 export   const convertMinutes = (num: number) => {
   const hours = Math.floor(num / HOUR_IN_MINUTES);
@@ -31,6 +31,17 @@ export const getCatalogGenre = (genre:string) => {
     default:
       return genre;
   }
+};
+
+export const getGenreList = (films: FilmInfo[]) => {
+  const collectedGenres: string[] = [];
+  films.forEach((film) => collectedGenres.push(film.genre));
+  const uniqueGenres = ['All genres',...new Set(collectedGenres)];
+  const catalogGenres: Genre[] = [];
+  uniqueGenres.map((genre, index) =>
+    catalogGenres.push({id: index, name: getCatalogGenre(genre)},
+    ));
+  return catalogGenres;
 };
 
 export const convertRating: ConvertRating = (rating) => {
