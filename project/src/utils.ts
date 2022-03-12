@@ -75,3 +75,4 @@ export const getDescription = (filmDescription: string) => {
   }
   return sentences;
 };
+
