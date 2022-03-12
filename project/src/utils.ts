@@ -20,6 +20,19 @@ export const getActiveGenre = (genre: string) => {
   }
 };
 
+export const getCatalogGenre = (genre:string) => {
+  switch (genre) {
+    case 'Comedy':
+      return 'Comedies';
+    case 'Drama':
+      return 'Dramas';
+    case 'Thriller':
+      return 'Thrillers';
+    default:
+      return genre;
+  }
+};
+
 export const convertRating: ConvertRating = (rating) => {
   let convertedRating = '';
   if (rating >= 0 && rating < 3) {
