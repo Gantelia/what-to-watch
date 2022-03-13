@@ -24,9 +24,9 @@ function App({promoFilm, catalogGenres, filmCards}: AppScreenProps): JSX.Element
           path={AppRoute.Main}
           element={
             <MainScreen
-              promoFilm = {promoFilm}
-              catalogGenres = {catalogGenres}
-              filmCards = {filmCards}
+              promoFilm={promoFilm}
+              catalogGenres={catalogGenres}
+              filmCards={filmCards}
             />
           }
         />
@@ -42,20 +42,20 @@ function App({promoFilm, catalogGenres, filmCards}: AppScreenProps): JSX.Element
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <MyListScreen filmCards = {filmCards} />
+              <MyListScreen filmCards={filmCards} />
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Film}
-          element={<MovieScreen films = {filmCards}/>}
+          element={<MovieScreen films={filmCards}/>}
         />
         <Route
           path={AppRoute.AddReview}
           element={
             <AddReviewScreen
-              filmCards = {filmCards}
-              onFormSubmit = {() => {
+              filmCards={filmCards}
+              onFormSubmit={() => {
                 throw new Error('Function \'onFormSubmit\' isn\'t implemented.');
               }}
             />
@@ -63,7 +63,7 @@ function App({promoFilm, catalogGenres, filmCards}: AppScreenProps): JSX.Element
         />
         <Route
           path={AppRoute.Player}
-          element={<PlayerScreen filmCards = {filmCards}/>}
+          element={<PlayerScreen filmCards={filmCards}/>}
         />
         <Route
           path={AppRoute.NotFound}
