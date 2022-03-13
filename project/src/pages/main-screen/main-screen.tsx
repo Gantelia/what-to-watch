@@ -1,20 +1,20 @@
 import Logo from '../../components/logo/logo';
 import Sign from '../../components/sign/sign';
-import { Link } from 'react-router-dom';
-import {Genre, FilmInfo} from '../../types/types';
+import {FilmInfo} from '../../types/types';
 import FilmList from '../../components/film-list/film-list';
-import { useState } from 'react';
-import { AppRoute, FilmsCount } from '../../const';
+import { FilmsCount } from '../../const';
+import GenreList from '../../components/genre-list/genre-list';
+import { useAppSelector } from '../../hooks';
 
 type MainScreenProps = {
     promoFilm: FilmInfo;
-    catalogGenres: Genre[];
     filmCards: FilmInfo[];
 }
 
-function MainScreen({promoFilm, catalogGenres, filmCards}: MainScreenProps): JSX.Element {
+function MainScreen({promoFilm, filmCards}: MainScreenProps): JSX.Element {
   const {name, genre, released} = promoFilm;
-  const [userGenre, setUserGenre] = useState('All genres');
+
+  const {activeGenre} = useAppSelector((state) => state);
 
   return (
     <>
@@ -66,23 +66,12 @@ function MainScreen({promoFilm, catalogGenres, filmCards}: MainScreenProps): JSX
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            {
-              catalogGenres.map((catalogGenre) =>(
-                <li key={catalogGenre.name} className={`catalog__genres-item ${catalogGenre.name === userGenre ? 'catalog__genres-item--active': ''}`}>
-                  <Link to={AppRoute.Main} className="catalog__genres-link"
-                    onClick={() => setUserGenre(catalogGenre.name)}
-                  >{catalogGenre.name}
-                  </Link>
-                </li>),
-              )
-            }
-          </ul>
+          <GenreList films = {filmCards} activeGenre = {activeGenre}/>
 
           {
             <FilmList
               filmCards={filmCards}
-              activeGenre={userGenre}
+              activeGenre={activeGenre}
               filmsCount={FilmsCount.MainScreen}
             />
           }
