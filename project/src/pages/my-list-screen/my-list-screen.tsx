@@ -22,13 +22,15 @@ function MyListScreen({filmCards}: MyListScreenProps): JSX.Element {
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        {
-          <FilmList
-            filmCards={filmCards}
-            activeGenre={'All genres'}
-            filmsCount={FilmsCount.MyListScreen}
-          />
-        }
+        <div className="catalog__films-list">
+          {
+            <FilmList
+              filmCards={filmCards}
+              activeGenre={'All genres'}
+              filmsCount={FilmsCount.MyListScreen}
+            />
+          }
+        </div>
       </section>
 
       <footer className="page-footer">

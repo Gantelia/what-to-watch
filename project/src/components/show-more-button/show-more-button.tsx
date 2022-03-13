@@ -1,13 +1,14 @@
-import { FilmInfo } from '../../types/types';
-
 type ShowMoreButtonProps = {
-    otherFilms: FilmInfo[];
+    handleButtonClick: () => void;
 }
 
-function ShowMoreButton(otherFilms: ShowMoreButtonProps): JSX.Element {
+function ShowMoreButton({handleButtonClick}: ShowMoreButtonProps): JSX.Element {
   return (
     <div className="catalog__more">
-      <button className="catalog__button" type="button">Show more</button>
+      <button className="catalog__button" type="button"
+        onClick={handleButtonClick}
+      >Show more
+      </button>
     </div>);
 }
 

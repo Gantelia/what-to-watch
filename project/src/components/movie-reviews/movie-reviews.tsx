@@ -8,12 +8,7 @@ type MovieReviewsProps = {
     reviews: UserComment[];
 }
 function MovieReviews ({movieId, reviews}: MovieReviewsProps): JSX.Element {
-  const movieReviews: UserComment[] = [];
-  reviews.forEach((review) => {
-    if (Math.trunc(review.id) === movieId) {
-      movieReviews.push(review);
-    }
-  });
+  const movieReviews = reviews.filter((review) => Math.trunc(review.id) === movieId);
 
   const reviewBlocks = Array(Math.ceil(movieReviews.length/REVIEWS_RENDER_STEP)).fill('review');
 
