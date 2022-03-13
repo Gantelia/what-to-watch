@@ -174,7 +174,7 @@ export const FILMS = [
       ' Bette Davis',
     ],
     runTime: 115,
-    genre: 'Documentary',
+    genre: 'Comedy',
     released: 1998,
     isFavorite: true,
   },

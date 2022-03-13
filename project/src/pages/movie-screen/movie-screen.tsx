@@ -31,6 +31,9 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
 
   const {backgroundImage, name, genre, released, posterImage} = movie;
 
+  const similarFilms = films.slice();
+  similarFilms.splice(films.findIndex((film) => film === movie), 1);
+
   return (
     <>
       <section className="film-card film-card--full">
@@ -119,7 +122,7 @@ function MovieScreen({films}: MovieScreenProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
           {
             <FilmList
-              filmCards={films}
+              filmCards={similarFilms}
               activeGenre={genre}
               filmsCount={FilmsCount.MovieScreen}
             />

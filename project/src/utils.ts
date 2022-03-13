@@ -76,3 +76,8 @@ export const getDescription = (filmDescription: string) => {
   return sentences;
 };
 
+export const filterFilms = (filmCards: FilmInfo[], activeGenre: string) => {
+  const filteredFilms = filmCards.filter((film) => film.genre === getActiveGenre(activeGenre));
+
+  return activeGenre === 'All genres'? filmCards : filteredFilms;
+};
