@@ -38,7 +38,7 @@ export const getGenreList = (films: FilmInfo[]) => {
   films.forEach((film) => collectedGenres.push(film.genre));
   const uniqueGenres = ['All genres',...new Set(collectedGenres)];
   const catalogGenres: Genre[] = [];
-  uniqueGenres.map((genre, index) =>
+  uniqueGenres.forEach((genre, index) =>
     catalogGenres.push({id: index, name: getCatalogGenre(genre)},
     ));
   return catalogGenres;
