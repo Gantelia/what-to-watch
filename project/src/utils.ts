@@ -1,7 +1,7 @@
 import { HOUR_IN_MINUTES, Rating } from './const';
 import { Films } from './types/films';
 import { Genres } from './types/genres';
-import { ConvertRating } from './types/util-types';
+import { ConvertRating } from './types/types';
 
 export   const convertMinutes = (num: number) => {
   const hours = Math.floor(num / HOUR_IN_MINUTES);
