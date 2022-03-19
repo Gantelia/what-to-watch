@@ -3,10 +3,10 @@ import FilmList from '../../components/film-list/film-list';
 import Logo from '../../components/logo/logo';
 import Sign from '../../components/sign/sign';
 import { FilmsCount } from '../../const';
-import {FilmInfo} from '../../types/types';
+import { Films } from '../../types/films';
 
 type MyListScreenProps = {
-  filmCards: FilmInfo[];
+  filmCards: Films;
 }
 
 function MyListScreen({filmCards}: MyListScreenProps): JSX.Element {

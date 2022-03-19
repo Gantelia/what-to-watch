@@ -1,4 +1,4 @@
-import { FilmInfo } from '../../types/types';
+import { FilmInfo } from '../../types/films';
 import VideoPlayer from '../video-player/video-player';
 
 

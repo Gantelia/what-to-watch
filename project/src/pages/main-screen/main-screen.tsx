@@ -1,6 +1,5 @@
 import Logo from '../../components/logo/logo';
 import Sign from '../../components/sign/sign';
-import {FilmInfo} from '../../types/types';
 import FilmList from '../../components/film-list/film-list';
 import { FilmsCount, FILMS_RENDER_STEP } from '../../const';
 import GenreList from '../../components/genre-list/genre-list';
@@ -10,10 +9,11 @@ import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import ExtraFilms from '../../components/extra-films/extra-films';
 import { useState } from 'react';
 import { changeGenre } from '../../store/action';
+import { FilmInfo, Films } from '../../types/films';
 
 type MainScreenProps = {
     promoFilm: FilmInfo;
-    filmCards: FilmInfo[];
+    filmCards: Films;
 }
 
 function MainScreen({promoFilm, filmCards}: MainScreenProps): JSX.Element {

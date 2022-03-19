@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FilmInfo } from '../../types/types';
+import { FilmInfo } from '../../types/films';
 
 type VideoPlayerProps = {
     film: FilmInfo

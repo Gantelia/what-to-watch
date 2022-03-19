@@ -1,9 +1,9 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import {FilmInfo} from '../../types/types';
+import { FilmInfo, Films } from '../../types/films';
 
 type PlayerScreenProps = {
-  filmCards: FilmInfo[];
+  filmCards: Films;
 }
 
 function PlayerScreen({filmCards}: PlayerScreenProps): JSX.Element {

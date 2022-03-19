@@ -8,11 +8,11 @@ import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../privateRoute/private-route';
-import {FilmInfo} from '../../types/types';
+import { FilmInfo, Films } from '../../types/films';
 
 type AppScreenProps = {
   promoFilm: FilmInfo;
-  filmCards: FilmInfo[];
+  filmCards: Films;
 }
 
 function App({promoFilm, filmCards}: AppScreenProps): JSX.Element {

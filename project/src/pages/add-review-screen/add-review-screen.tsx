@@ -3,11 +3,11 @@ import AddReviewForm from '../../components/add-review-form/add-review-form';
 import Logo from '../../components/logo/logo';
 import Sign from '../../components/sign/sign';
 import { AppRoute } from '../../const';
-import {FilmInfo, UserReview} from '../../types/types';
-
+import { FilmInfo, Films } from '../../types/films';
+import { UserReview } from '../../types/reviews';
 
 type AddReviewScreenProps = {
-  filmCards: FilmInfo[];
+  filmCards: Films;
   onFormSubmit: (formData:UserReview) => void;
 }
 

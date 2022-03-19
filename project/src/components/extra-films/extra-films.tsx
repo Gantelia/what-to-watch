@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { FilmInfo } from '../../types/types';
+import { Films } from '../../types/films';
 import MovieCard from '../movie-card/movie-card';
 
 type ExtraFilmsProps = {
-    extraFilms: FilmInfo[];
+    extraFilms: Films;
 }
 
 function ExtraFilms({extraFilms}: ExtraFilmsProps) {

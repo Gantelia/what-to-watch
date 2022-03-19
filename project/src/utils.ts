@@ -1,5 +1,7 @@
 import { HOUR_IN_MINUTES, Rating } from './const';
-import { ConvertRating, FilmInfo, Genre } from './types/types';
+import { Films } from './types/films';
+import { Genres } from './types/genres';
+import { ConvertRating } from './types/util-types';
 
 export   const convertMinutes = (num: number) => {
   const hours = Math.floor(num / HOUR_IN_MINUTES);
@@ -33,11 +35,11 @@ export const getCatalogGenre = (genre:string) => {
   }
 };
 
-export const getGenreList = (films: FilmInfo[]) => {
+export const getGenreList = (films: Films) => {
   const collectedGenres: string[] = [];
   films.forEach((film) => collectedGenres.push(film.genre));
   const uniqueGenres = ['All genres',...new Set(collectedGenres)];
-  const catalogGenres: Genre[] = [];
+  const catalogGenres: Genres = [];
   uniqueGenres.forEach((genre, index) =>
     catalogGenres.push({id: index, name: getCatalogGenre(genre)},
     ));
@@ -76,7 +78,7 @@ export const getDescription = (filmDescription: string) => {
   return sentences;
 };
 
-export const filterFilms = (filmCards: FilmInfo[], activeGenre: string) => {
+export const filterFilms = (filmCards: Films, activeGenre: string) => {
   const filteredFilms = filmCards.filter((film) => film.genre === getActiveGenre(activeGenre));
 
   return activeGenre === 'All genres'? filmCards : filteredFilms;

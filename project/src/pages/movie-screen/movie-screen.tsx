@@ -1,7 +1,6 @@
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import Sign from '../../components/sign/sign';
-import { FilmInfo } from '../../types/types';
 import { AppRoute, FilmsCount } from '../../const';
 import MovieOverview from '../../components/movie-overview/movie-overview';
 import { useState } from 'react';
@@ -9,9 +8,10 @@ import MovieDetails from '../../components/movie-details/movie-details';
 import MovieReviews from '../../components/movie-reviews/movie-reviews';
 import { REVIEWS } from '../../mocks/reviews';
 import FilmList from '../../components/film-list/film-list';
+import { FilmInfo, Films } from '../../types/films';
 
 type MovieScreenProps = {
-  films: FilmInfo[];
+  films: Films;
 }
 
 function MovieScreen({films}: MovieScreenProps): JSX.Element {

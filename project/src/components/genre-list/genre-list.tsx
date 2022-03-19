@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { FilmInfo} from '../../types/types';
+import { Films } from '../../types/films';
 import { getGenreList } from '../../utils';
 
 type GenreListProps = {
-    films: FilmInfo[];
+    films: Films;
     activeGenre: string;
     handleGenreChange: (chosenGenre: string) => void;
 }
