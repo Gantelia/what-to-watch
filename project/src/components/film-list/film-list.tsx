@@ -2,7 +2,7 @@ import { useState } from 'react';
 import MovieCard from '../../components/movie-card/movie-card';
 import { FilmsCount } from '../../const';
 import {FilmInfo} from '../../types/types';
-import { getActiveGenre } from '../../utils';
+import { filterFilms } from '../../utils';
 
 
 type FilmListProps = {
@@ -14,17 +14,10 @@ type FilmListProps = {
 function FilmList({filmCards, activeGenre, filmsCount}: FilmListProps): JSX.Element {
   const [activePlayer, setActivePlayer] = useState<null | number>(null);
 
-  const filmsOfGenre: FilmInfo[] = [];
-  filmCards.forEach((film) => {
-    if (film.genre === getActiveGenre(activeGenre)) {
-      filmsOfGenre.push(film);
-    }
-  });
-
-  const films = activeGenre === 'All genres'? filmCards : filmsOfGenre;
+  const films = filterFilms(filmCards, activeGenre);
 
   return (
-    <div className="catalog__films-list">
+    <>
       {
         films.slice(0, filmsCount).map((card) =>(
           <MovieCard
@@ -36,7 +29,7 @@ function FilmList({filmCards, activeGenre, filmsCount}: FilmListProps): JSX.Elem
           />),
         )
       }
-    </div>
+    </>
   );
 }
 

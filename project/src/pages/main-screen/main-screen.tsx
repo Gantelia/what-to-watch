@@ -2,9 +2,14 @@ import Logo from '../../components/logo/logo';
 import Sign from '../../components/sign/sign';
 import {FilmInfo} from '../../types/types';
 import FilmList from '../../components/film-list/film-list';
-import { FilmsCount } from '../../const';
+import { FilmsCount, FILMS_RENDER_STEP } from '../../const';
 import GenreList from '../../components/genre-list/genre-list';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { filterFilms } from '../../utils';
+import ShowMoreButton from '../../components/show-more-button/show-more-button';
+import ExtraFilms from '../../components/extra-films/extra-films';
+import { useState } from 'react';
+import { changeGenre } from '../../store/action';
 
 type MainScreenProps = {
     promoFilm: FilmInfo;
@@ -13,8 +18,26 @@ type MainScreenProps = {
 
 function MainScreen({promoFilm, filmCards}: MainScreenProps): JSX.Element {
   const {name, genre, released} = promoFilm;
+  const [extraCards, setExtraCards] = useState<FilmInfo[]>([]);
+  const [extraFilmsCount, setExtraFilmsCount] = useState(0);
 
+  const dispatch = useAppDispatch();
   const {activeGenre} = useAppSelector((state) => state);
+
+
+  const otherFilms = filterFilms(filmCards, activeGenre).slice(FilmsCount.MainScreen);
+
+  const handleButtonClick = () => {
+    setExtraCards(otherFilms.slice(extraFilmsCount, extraFilmsCount + Math.min(FILMS_RENDER_STEP, otherFilms.length)));
+    setExtraFilmsCount(extraFilmsCount + Math.min(FILMS_RENDER_STEP, otherFilms.length));
+  };
+
+  const handleGenreChange = (chosenGenre: string) => {
+    dispatch(changeGenre(chosenGenre));
+    setExtraCards([]);
+    setExtraFilmsCount(0);
+  };
+
 
   return (
     <>
@@ -66,19 +89,18 @@ function MainScreen({promoFilm, filmCards}: MainScreenProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList films = {filmCards} activeGenre = {activeGenre}/>
-
-          {
-            <FilmList
-              filmCards={filmCards}
-              activeGenre={activeGenre}
-              filmsCount={FilmsCount.MainScreen}
-            />
-          }
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
+          <GenreList films = {filmCards} activeGenre = {activeGenre} handleGenreChange = {handleGenreChange}/>
+          <div className="catalog__films-list">
+            {
+              <FilmList
+                filmCards={filmCards}
+                activeGenre={activeGenre}
+                filmsCount={FilmsCount.MainScreen}
+              />
+            }
+            {otherFilms.length ? <ExtraFilms extraFilms={extraCards}/> : ''}
           </div>
+          {otherFilms.length > extraFilmsCount ? <ShowMoreButton handleButtonClick={handleButtonClick} /> : ''}
         </section>
 
         <footer className="page-footer">
@@ -90,3 +112,4 @@ function MainScreen({promoFilm, filmCards}: MainScreenProps): JSX.Element {
 }
 
 export default MainScreen;
+

@@ -33,3 +33,5 @@ export enum FilmsCount {
 }
 
 export const REVIEWS_RENDER_STEP = 3;
+
+export const FILMS_RENDER_STEP = 8;
