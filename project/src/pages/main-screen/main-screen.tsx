@@ -28,7 +28,7 @@ function MainScreen({promoFilm, filmCards}: MainScreenProps): JSX.Element {
   const otherFilms = filterFilms(filmCards, activeGenre).slice(FilmsCount.MainScreen);
 
   const handleButtonClick = () => {
-    setExtraCards(otherFilms.slice(extraFilmsCount, extraFilmsCount + Math.min(FILMS_RENDER_STEP, otherFilms.length)));
+    setExtraCards(otherFilms.slice(0, extraFilmsCount + Math.min(FILMS_RENDER_STEP, otherFilms.length)));
     setExtraFilmsCount(extraFilmsCount + Math.min(FILMS_RENDER_STEP, otherFilms.length));
   };
 

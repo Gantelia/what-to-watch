@@ -8,14 +8,18 @@ import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../privateRoute/private-route';
-import { FilmInfo, Films } from '../../types/films';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../../pages/loading - screen/loading-screen';
 
-type AppScreenProps = {
-  promoFilm: FilmInfo;
-  filmCards: Films;
-}
+function App(): JSX.Element {
+  const {isDataLoaded, films} = useAppSelector((state) => state);
 
-function App({promoFilm, filmCards}: AppScreenProps): JSX.Element {
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -23,8 +27,8 @@ function App({promoFilm, filmCards}: AppScreenProps): JSX.Element {
           path={AppRoute.Main}
           element={
             <MainScreen
-              promoFilm = {promoFilm}
-              filmCards = {filmCards}
+              promoFilm = {films[0]}
+              filmCards = {films}
             />
           }
         />
@@ -40,19 +44,19 @@ function App({promoFilm, filmCards}: AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <MyListScreen filmCards={filmCards} />
+              <MyListScreen filmCards={films} />
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Film}
-          element={<MovieScreen films={filmCards}/>}
+          element={<MovieScreen films={films}/>}
         />
         <Route
           path={AppRoute.AddReview}
           element={
             <AddReviewScreen
-              filmCards={filmCards}
+              filmCards={films}
               onFormSubmit={() => {
                 throw new Error('Function \'onFormSubmit\' isn\'t implemented.');
               }}
@@ -61,7 +65,7 @@ function App({promoFilm, filmCards}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Player}
-          element={<PlayerScreen filmCards={filmCards}/>}
+          element={<PlayerScreen filmCards={films}/>}
         />
         <Route
           path={AppRoute.NotFound}

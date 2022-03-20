@@ -1,14 +1,23 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { State } from '../types/state';
+import { FilmInfo, Films } from '../types/films';
 import { changeGenre, getFilm, getFilms, getPromo, getSimilarFilms } from './action';
 
+type InitialState = {
+  activeGenre: string;
+  films: Films;
+  promo: FilmInfo | null;
+  film: FilmInfo | null;
+  similarFilms: Films;
+  isDataLoaded: boolean;
+}
 
-const initialState: State = {
+const initialState: InitialState = {
   activeGenre: 'All genres',
   films: [],
-  promo: {},
-  film: {},
+  promo: null,
+  film: null,
   similarFilms: [],
+  isDataLoaded: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -18,6 +27,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getFilms, (state, action) => {
       state.films = action.payload;
+      state.isDataLoaded = true;
     })
     .addCase(getPromo, (state, action) => {
       state.promo = action.payload;

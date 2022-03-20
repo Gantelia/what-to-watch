@@ -24,7 +24,7 @@ export const fetchFilmAction = (id: number) => createAsyncThunk(
   'data/fetchFilm',
   async () => {
     const {data} = await api.get<FilmInfo>(`${APIRoute.Films}/${id}`);
-    store.dipatch(getFilm(data));
+    store.dispatch(getFilm(data));
   },
 );
 
@@ -32,6 +32,6 @@ export const fetchSimilarAction = (id: number) => createAsyncThunk(
   'data/fetchSimilarFilms',
   async () => {
     const {data} = await api.get<Films>(`${APIRoute.Films}/${id}/similar`);
-    store.dipatch(getSimilarFilms(data));
+    store.dispatch(getSimilarFilms(data));
   },
 );
