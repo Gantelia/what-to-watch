@@ -8,7 +8,7 @@ import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import { useState } from 'react';
 import { changeGenre } from '../../store/action';
 import LoadingScreen from '../loading - screen/loading-screen';
-
+import { filterFilms } from '../../utils';
 
 function MainScreen(): JSX.Element {
   const [filmsCount, setFilmsCount] = useState<FilmsCount | number>(FilmsCount.MainScreen);
@@ -21,9 +21,10 @@ function MainScreen(): JSX.Element {
   }
 
   const {name, genre, released} = promo;
+  const filmsOfGenre = filterFilms(films, activeGenre);
 
   const handleButtonClick = () => {
-    setFilmsCount(filmsCount + Math.min(FILMS_RENDER_STEP, films.length));
+    setFilmsCount(filmsCount + Math.min(FILMS_RENDER_STEP, filmsOfGenre.length));
   };
 
   const handleGenreChange = (chosenGenre: string) => {
@@ -90,7 +91,7 @@ function MainScreen(): JSX.Element {
               filmsCount={filmsCount}
             />
           }
-          {films.length > filmsCount ? <ShowMoreButton handleButtonClick={handleButtonClick} /> : ''}
+          {filmsOfGenre.length > filmsCount ? <ShowMoreButton handleButtonClick={handleButtonClick} /> : ''}
         </section>
 
         <footer className="page-footer">
