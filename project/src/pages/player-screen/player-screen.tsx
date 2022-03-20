@@ -1,14 +1,12 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { FilmInfo, Films } from '../../types/films';
+import { useAppSelector } from '../../hooks';
+import { FilmInfo } from '../../types/films';
 
-type PlayerScreenProps = {
-  filmCards: Films;
-}
-
-function PlayerScreen({filmCards}: PlayerScreenProps): JSX.Element {
+function PlayerScreen(): JSX.Element {
   const {id} = useParams();
-  const movie = filmCards.find((film: FilmInfo) => `:${film.id}` === id);
+  const films = useAppSelector((state) => state.films);
+  const movie = films.find((film: FilmInfo) => `:${film.id}` === id);
 
   if (!movie) {
     return <Navigate to={AppRoute.NotFound}/>;

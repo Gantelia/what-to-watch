@@ -12,7 +12,7 @@ import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading - screen/loading-screen';
 
 function App(): JSX.Element {
-  const {isDataLoaded, films, promo} = useAppSelector((state) => state);
+  const {isDataLoaded, promo} = useAppSelector((state) => state);
 
   if (!isDataLoaded && !promo) {
     return (
@@ -26,10 +26,7 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.Main}
           element={
-            <MainScreen
-              promoFilm = {promo}
-              filmCards = {films}
-            />
+            <MainScreen />
           }
         />
         <Route
@@ -44,19 +41,18 @@ function App(): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <MyListScreen filmCards={films} />
+              <MyListScreen />
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Film}
-          element={<MovieScreen films={films}/>}
+          element={<MovieScreen />}
         />
         <Route
           path={AppRoute.AddReview}
           element={
             <AddReviewScreen
-              filmCards={films}
               onFormSubmit={() => {
                 throw new Error('Function \'onFormSubmit\' isn\'t implemented.');
               }}
@@ -65,7 +61,7 @@ function App(): JSX.Element {
         />
         <Route
           path={AppRoute.Player}
-          element={<PlayerScreen filmCards={films}/>}
+          element={<PlayerScreen />}
         />
         <Route
           path={AppRoute.NotFound}

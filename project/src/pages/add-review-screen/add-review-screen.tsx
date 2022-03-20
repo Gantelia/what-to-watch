@@ -3,17 +3,19 @@ import AddReviewForm from '../../components/add-review-form/add-review-form';
 import Logo from '../../components/logo/logo';
 import Sign from '../../components/sign/sign';
 import { AppRoute } from '../../const';
-import { FilmInfo, Films } from '../../types/films';
+import { useAppSelector } from '../../hooks';
+import { FilmInfo } from '../../types/films';
 import { UserReview } from '../../types/reviews';
 
 type AddReviewScreenProps = {
-  filmCards: Films;
   onFormSubmit: (formData:UserReview) => void;
 }
 
-function AddReviewScreen({filmCards, onFormSubmit}: AddReviewScreenProps): JSX.Element {
+function AddReviewScreen({onFormSubmit}: AddReviewScreenProps): JSX.Element {
   const {id} = useParams();
-  const filmCard = filmCards.find((film: FilmInfo) => `:${film.id}` === id);
+  const films = useAppSelector((state) => state.films);
+
+  const filmCard = films.find((film: FilmInfo) => `:${film.id}` === id);
 
   if (!filmCard) {
     return <Navigate to={AppRoute.NotFound}/>;

@@ -7,28 +7,23 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import { useState } from 'react';
 import { changeGenre } from '../../store/action';
-import { FilmInfo, Films } from '../../types/films';
 import LoadingScreen from '../loading - screen/loading-screen';
 
-type MainScreenProps = {
-    promoFilm: FilmInfo | null;
-    filmCards: Films;
-}
 
-function MainScreen({promoFilm, filmCards}: MainScreenProps): JSX.Element {
+function MainScreen(): JSX.Element {
   const [filmsCount, setFilmsCount] = useState<FilmsCount | number>(FilmsCount.MainScreen);
 
   const dispatch = useAppDispatch();
-  const {activeGenre} = useAppSelector((state) => state);
+  const {activeGenre, films, promo} = useAppSelector((state) => state);
 
-  if (!promoFilm) {
+  if (!promo) {
     return <LoadingScreen />;
   }
 
-  const {name, genre, released} = promoFilm;
+  const {name, genre, released} = promo;
 
   const handleButtonClick = () => {
-    setFilmsCount(filmsCount + Math.min(FILMS_RENDER_STEP, filmCards.length));
+    setFilmsCount(filmsCount + Math.min(FILMS_RENDER_STEP, films.length));
   };
 
   const handleGenreChange = (chosenGenre: string) => {
@@ -87,15 +82,15 @@ function MainScreen({promoFilm, filmCards}: MainScreenProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList films = {filmCards} activeGenre = {activeGenre} handleGenreChange = {handleGenreChange}/>
+          <GenreList films = {films} activeGenre = {activeGenre} handleGenreChange = {handleGenreChange}/>
           {
             <FilmList
-              filmCards={filmCards}
+              filmCards={films}
               activeGenre={activeGenre}
               filmsCount={filmsCount}
             />
           }
-          {filmCards.length > filmsCount ? <ShowMoreButton handleButtonClick={handleButtonClick} /> : ''}
+          {films.length > filmsCount ? <ShowMoreButton handleButtonClick={handleButtonClick} /> : ''}
         </section>
 
         <footer className="page-footer">

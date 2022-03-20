@@ -8,18 +8,17 @@ import MovieDetails from '../../components/movie-details/movie-details';
 import MovieReviews from '../../components/movie-reviews/movie-reviews';
 import { REVIEWS } from '../../mocks/reviews';
 import FilmList from '../../components/film-list/film-list';
-import { FilmInfo, Films } from '../../types/films';
+import { FilmInfo } from '../../types/films';
+import { useAppSelector } from '../../hooks';
 
-type MovieScreenProps = {
-  films: Films;
-}
 
-function MovieScreen({films}: MovieScreenProps): JSX.Element {
+function MovieScreen(): JSX.Element {
+  const films = useAppSelector((state) => state.films);
   const {id} = useParams();
-
-  const movie = films.find((film: FilmInfo) => `:${film.id}` === id);
   const [navigation, setNavigation] = useState('Overview');
   const navigate = useNavigate();
+
+  const movie = films.find((film: FilmInfo) => `:${film.id}` === id);
 
   const overviewClass = navigation === 'Overview' ? 'film-nav__item--active' : '';
   const detailsClass = navigation === 'Details' ? 'film-nav__item--active' : '';
