@@ -12,9 +12,9 @@ import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading - screen/loading-screen';
 
 function App(): JSX.Element {
-  const {isDataLoaded, films} = useAppSelector((state) => state);
+  const {isDataLoaded, films, promo} = useAppSelector((state) => state);
 
-  if (!isDataLoaded) {
+  if (!isDataLoaded && !promo) {
     return (
       <LoadingScreen />
     );
@@ -27,7 +27,7 @@ function App(): JSX.Element {
           path={AppRoute.Main}
           element={
             <MainScreen
-              promoFilm = {films[0]}
+              promoFilm = {promo}
               filmCards = {films}
             />
           }

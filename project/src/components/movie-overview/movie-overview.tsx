@@ -27,7 +27,7 @@ function MovieOverview ({film}: MovieOverviewProps): JSX.Element {
 
         <p className="film-card__starring">
           <strong>Starring:
-            {starring.join(',')} and other
+            {` ${starring.join(', ')}`} and other
           </strong>
         </p>
       </div>

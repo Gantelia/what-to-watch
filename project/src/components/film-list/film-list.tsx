@@ -17,7 +17,7 @@ function FilmList({filmCards, activeGenre, filmsCount}: FilmListProps): JSX.Elem
   const films = filterFilms(filmCards, activeGenre);
 
   return (
-    <>
+    <div className="catalog__films-list">
       {
         films.slice(0, filmsCount).map((card) =>(
           <MovieCard
@@ -29,7 +29,7 @@ function FilmList({filmCards, activeGenre, filmsCount}: FilmListProps): JSX.Elem
           />),
         )
       }
-    </>
+    </div>
   );
 }
 
