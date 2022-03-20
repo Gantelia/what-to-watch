@@ -38,7 +38,7 @@ export const FILMS_RENDER_STEP = 8;
 
 export enum APIRoute {
   Films = '/films',
-  PromoFilm = '/promo',
+  Promo = '/promo',
   Favorite = '/favorite',
   Login = '/login',
   Logout = '/logout',
