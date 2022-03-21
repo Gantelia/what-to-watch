@@ -1,7 +1,7 @@
 import request from 'axios';
-import { HTTP_CODE } from '../const';
+import { AuthorizationStatus, HTTP_CODE } from '../const';
 import { store } from '../store';
-import { setError } from '../store/action';
+import { requireAuthorization, setError } from '../store/action';
 import { clearErrorAction } from '../store/api-actions/api-error-actions';
 import { ErrorType } from '../types/error';
 
@@ -24,6 +24,7 @@ export const errorHandle = (error: ErrorType): void => {
         break;
       case HTTP_CODE.UNAUTHORIZED:
         handleError(response.data.error);
+        store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
         break;
       case HTTP_CODE.NOT_FOUND:
         handleError(response.data.error);

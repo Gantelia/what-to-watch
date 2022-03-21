@@ -10,11 +10,12 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../privateRoute/private-route';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading - screen/loading-screen';
+import { isCheckedAuth } from '../../utils';
 
 function App(): JSX.Element {
-  const {isDataLoaded, promo} = useAppSelector((state) => state);
+  const {authorizationStatus, isDataLoaded, promo} = useAppSelector((state) => state);
 
-  if (!isDataLoaded && !promo) {
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded || !promo) {
     return (
       <LoadingScreen />
     );

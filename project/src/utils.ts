@@ -1,4 +1,4 @@
-import { HOUR_IN_MINUTES, Rating } from './const';
+import { AuthorizationStatus, HOUR_IN_MINUTES, Rating } from './const';
 import { Films } from './types/films';
 import { Genres } from './types/genres';
 import { ConvertRating } from './types/types';
@@ -83,3 +83,6 @@ export const filterFilms = (filmCards: Films, activeGenre: string) => {
 
   return activeGenre === 'All genres'? filmCards : filteredFilms;
 };
+
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus === AuthorizationStatus.Unknown;
