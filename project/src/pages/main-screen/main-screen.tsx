@@ -1,5 +1,5 @@
 import Logo from '../../components/logo/logo';
-import Sign from '../../components/sign/sign';
+import SignInOut from '../../components/sign-in-out/sign-in-out';
 import FilmList from '../../components/film-list/film-list';
 import { FilmsCount, FILMS_RENDER_STEP } from '../../const';
 import GenreList from '../../components/genre-list/genre-list';
@@ -45,7 +45,7 @@ function MainScreen(): JSX.Element {
         <header className="page-header film-card__head">
           <Logo />
 
-          <Sign />
+          <SignInOut />
         </header>
 
         <div className="film-card__wrap">

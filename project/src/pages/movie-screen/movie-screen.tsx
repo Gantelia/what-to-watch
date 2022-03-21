@@ -1,6 +1,6 @@
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
-import Sign from '../../components/sign/sign';
+import SignInOut from '../../components/sign-in-out/sign-in-out';
 import { AppRoute, FilmsCount } from '../../const';
 import MovieOverview from '../../components/movie-overview/movie-overview';
 import { useState } from 'react';
@@ -46,7 +46,7 @@ function MovieScreen(): JSX.Element {
           <header className="page-header film-card__head">
             <Logo />
 
-            <Sign />
+            <SignInOut />
           </header>
 
           <div className="film-card__wrap">

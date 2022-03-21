@@ -1,6 +1,6 @@
 import MainScreen from '../../pages/main-screen/main-screen';
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import MovieScreen from '../../pages/movie-screen/movie-screen';
@@ -39,9 +39,7 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
-            >
+            <PrivateRoute >
               <MyListScreen />
             </PrivateRoute>
           }
@@ -53,11 +51,13 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.AddReview}
           element={
-            <AddReviewScreen
-              onFormSubmit={() => {
-                throw new Error('Function \'onFormSubmit\' isn\'t implemented.');
-              }}
-            />
+            <PrivateRoute >
+              <AddReviewScreen
+                onFormSubmit={() => {
+                  throw new Error('Function \'onFormSubmit\' isn\'t implemented.');
+                }}
+              />
+            </PrivateRoute>
           }
         />
         <Route

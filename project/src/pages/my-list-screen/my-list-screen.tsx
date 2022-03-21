@@ -1,7 +1,7 @@
 
 import FilmList from '../../components/film-list/film-list';
 import Logo from '../../components/logo/logo';
-import Sign from '../../components/sign/sign';
+import SignInOut from '../../components/sign-in-out/sign-in-out';
 import { FilmsCount } from '../../const';
 import { useAppSelector } from '../../hooks';
 
@@ -15,7 +15,7 @@ function MyListScreen(): JSX.Element {
 
         <h1 className="page-title user-page__title">My list</h1>
 
-        <Sign />
+        <SignInOut />
       </header>
 
       <section className="catalog">
