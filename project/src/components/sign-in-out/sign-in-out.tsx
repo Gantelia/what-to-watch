@@ -1,11 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus} from '../../const';
-import { useAppSelector } from '../../hooks';
-
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { logoutAction } from '../../store/api-actions/api-auth-actions';
 
 function SignInOut(): JSX.Element {
   const navigate = useNavigate();
   const {authorizationStatus, userData} = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
 
   if (authorizationStatus === AuthorizationStatus.Auth) {
     return (
@@ -20,7 +21,10 @@ function SignInOut(): JSX.Element {
           </div>
         </li>
         <li className="user-block__item">
-          <Link className="user-block__link" to={AppRoute.Main}>Sign out</Link>
+          <Link className="user-block__link" to={AppRoute.Main}
+            onClick={() => dispatch(logoutAction())}
+          >Sign out
+          </Link>
         </li>
       </ul>
     );

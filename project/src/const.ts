@@ -6,16 +6,17 @@ export const REVIEWS_RENDER_STEP = 3;
 
 export const FILMS_RENDER_STEP = 8;
 
-export const TIMEOUT_SHOW_ERROR = 2000;
+export const TIMEOUT_SHOW_ERROR = 2500;
+
 
 export enum AppRoute {
-    Main = '/',
-    SignIn = '/login',
-    MyList = '/mylist',
-    Film = '/films/:id',
-    AddReview = '/films/:id/review',
-    Player = '/player/:id',
-    NotFound = '*',
+  Main = '/',
+  SignIn = '/login',
+  MyList = '/mylist',
+  Film = '/films/:id',
+  AddReview = '/films/:id/review',
+  Player = '/player/:id',
+  NotFound = '*',
 }
 
 export enum AuthorizationStatus {

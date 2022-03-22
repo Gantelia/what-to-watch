@@ -1,7 +1,7 @@
 import { AuthorizationStatus, HOUR_IN_MINUTES, Rating } from './const';
 import { Films } from './types/films';
 import { Genres } from './types/genres';
-import { ConvertRating } from './types/types';
+import { ConvertRating } from './types/util-types';
 
 export   const convertMinutes = (num: number) => {
   const hours = Math.floor(num / HOUR_IN_MINUTES);
@@ -86,3 +86,13 @@ export const filterFilms = (filmCards: Films, activeGenre: string) => {
 
 export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
+
+export const validateLogin = (loginData: string): boolean =>
+  !!loginData.match(/^[-._a-z0-9]+@(?:[a-z0-9][-a-z0-9]+\.)+[a-z]{2,6}$/);
+
+export const validatePassword = (passwordData: string): boolean => {
+  if (passwordData.length && passwordData.match(/^[a-zа-яё]+$/i)) {
+    return true;
+  }
+  return false;
+};
