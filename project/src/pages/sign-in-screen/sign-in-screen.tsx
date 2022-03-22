@@ -8,7 +8,6 @@ import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions/api-auth-actions';
 import { validateLogin, validatePassword } from '../../utils';
 
-/*eslint-disable*/
 function SignInScreen(): JSX.Element {
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -24,15 +23,12 @@ function SignInScreen(): JSX.Element {
     if (!loginValidation) {
       setLoginMessage(true);
       setPasswordMessage(false);
-      return;
     } else if (loginValidation && !passValidation) {
       setLoginMessage(false);
       setPasswordMessage(true);
-      return;
     } else if (loginValidation && passValidation) {
       dispatch(loginAction({login: login, password: password}));
       navigate(AppRoute.Main);
-      return;
     }
   };
 
