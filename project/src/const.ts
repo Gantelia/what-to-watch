@@ -1,11 +1,22 @@
+export const RATINGS = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+
+export const HOUR_IN_MINUTES = 60;
+
+export const REVIEWS_RENDER_STEP = 3;
+
+export const FILMS_RENDER_STEP = 8;
+
+export const TIMEOUT_SHOW_ERROR = 2500;
+
+
 export enum AppRoute {
-    Main = '/',
-    SignIn = '/login',
-    MyList = '/mylist',
-    Film = '/films/:id',
-    AddReview = '/films/:id/review',
-    Player = '/player/:id',
-    NotFound = '*',
+  Main = '/',
+  SignIn = '/login',
+  MyList = '/mylist',
+  Film = '/films/:id',
+  AddReview = '/films/:id/review',
+  Player = '/player/:id',
+  NotFound = '*',
 }
 
 export enum AuthorizationStatus {
@@ -13,10 +24,6 @@ export enum AuthorizationStatus {
     NoAuth = 'NO_AUTH',
     Unknown = 'UNKNOWN',
 }
-
-export const RATINGS = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
-
-export const HOUR_IN_MINUTES = 60;
 
 export enum Rating {
   Bad = 'Bad',
@@ -32,14 +39,16 @@ export enum FilmsCount {
   MyListScreen = 4,
 }
 
-export const REVIEWS_RENDER_STEP = 3;
-
-export const FILMS_RENDER_STEP = 8;
-
 export enum APIRoute {
   Films = '/films',
   Promo = '/promo',
   Favorite = '/favorite',
   Login = '/login',
   Logout = '/logout',
+}
+
+export enum HTTP_CODE {
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  NOT_FOUND = 404,
 }

@@ -1,6 +1,6 @@
 import MainScreen from '../../pages/main-screen/main-screen';
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import MovieScreen from '../../pages/movie-screen/movie-screen';
@@ -10,11 +10,12 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../privateRoute/private-route';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading - screen/loading-screen';
+import { isCheckedAuth } from '../../utils';
 
 function App(): JSX.Element {
-  const {isDataLoaded, promo} = useAppSelector((state) => state);
+  const {authorizationStatus, isDataLoaded, promo} = useAppSelector((state) => state);
 
-  if (!isDataLoaded && !promo) {
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded || !promo) {
     return (
       <LoadingScreen />
     );
@@ -38,9 +39,7 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
-            >
+            <PrivateRoute >
               <MyListScreen />
             </PrivateRoute>
           }
@@ -52,11 +51,13 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.AddReview}
           element={
-            <AddReviewScreen
-              onFormSubmit={() => {
-                throw new Error('Function \'onFormSubmit\' isn\'t implemented.');
-              }}
-            />
+            <PrivateRoute >
+              <AddReviewScreen
+                onFormSubmit={() => {
+                  throw new Error('Function \'onFormSubmit\' isn\'t implemented.');
+                }}
+              />
+            </PrivateRoute>
           }
         />
         <Route

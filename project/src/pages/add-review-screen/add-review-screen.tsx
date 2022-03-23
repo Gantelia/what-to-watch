@@ -1,7 +1,7 @@
 import {Link, Navigate, useParams} from 'react-router-dom';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import Logo from '../../components/logo/logo';
-import Sign from '../../components/sign/sign';
+import SignInOut from '../../components/sign-in-out/sign-in-out';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { FilmInfo } from '../../types/films';
@@ -46,7 +46,7 @@ function AddReviewScreen({onFormSubmit}: AddReviewScreenProps): JSX.Element {
             </ul>
           </nav>
 
-          <Sign />
+          <SignInOut />
         </header>
 
         <div className="film-card__poster film-card__poster--small">
