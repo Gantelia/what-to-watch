@@ -1,7 +1,6 @@
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import Sign from '../../components/sign/sign';
-import { FilmInfo } from '../../types/types';
 import { AppRoute, FilmsCount } from '../../const';
 import MovieOverview from '../../components/movie-overview/movie-overview';
 import { useState } from 'react';
@@ -9,17 +8,17 @@ import MovieDetails from '../../components/movie-details/movie-details';
 import MovieReviews from '../../components/movie-reviews/movie-reviews';
 import { REVIEWS } from '../../mocks/reviews';
 import FilmList from '../../components/film-list/film-list';
+import { FilmInfo } from '../../types/films';
+import { useAppSelector } from '../../hooks';
 
-type MovieScreenProps = {
-  films: FilmInfo[];
-}
 
-function MovieScreen({films}: MovieScreenProps): JSX.Element {
+function MovieScreen(): JSX.Element {
+  const films = useAppSelector((state) => state.films);
   const {id} = useParams();
-
-  const movie = films.find((film: FilmInfo) => `:${film.id}` === id);
   const [navigation, setNavigation] = useState('Overview');
   const navigate = useNavigate();
+
+  const movie = films.find((film: FilmInfo) => `:${film.id}` === id);
 
   const overviewClass = navigation === 'Overview' ? 'film-nav__item--active' : '';
   const detailsClass = navigation === 'Details' ? 'film-nav__item--active' : '';

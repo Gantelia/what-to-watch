@@ -1,6 +1,6 @@
 import {RATINGS} from '../../const';
 import {useState, ChangeEvent, FormEvent} from 'react';
-import { UserReview } from '../../types/types';
+import { UserReview } from '../../types/reviews';
 
 type AddReviewFormProps = {
     onFormSubmit: (formData:UserReview) => void;

@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
-import {FILMS} from '../../project/src/mocks/films';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { fetchFilmsAction, fetchPromoAction } from './store/api-actions/api-film-actions';
+
+store.dispatch(fetchFilmsAction());
+store.dispatch(fetchPromoAction());
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store= {store}>
-      <App
-        promoFilm = {FILMS[0]}
-        filmCards = {FILMS}
-      />
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

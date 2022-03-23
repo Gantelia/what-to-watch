@@ -1,41 +1,35 @@
 import Logo from '../../components/logo/logo';
 import Sign from '../../components/sign/sign';
-import {FilmInfo} from '../../types/types';
 import FilmList from '../../components/film-list/film-list';
 import { FilmsCount, FILMS_RENDER_STEP } from '../../const';
 import GenreList from '../../components/genre-list/genre-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { filterFilms } from '../../utils';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
-import ExtraFilms from '../../components/extra-films/extra-films';
 import { useState } from 'react';
 import { changeGenre } from '../../store/action';
+import LoadingScreen from '../loading - screen/loading-screen';
+import { filterFilms } from '../../utils';
 
-type MainScreenProps = {
-    promoFilm: FilmInfo;
-    filmCards: FilmInfo[];
-}
-
-function MainScreen({promoFilm, filmCards}: MainScreenProps): JSX.Element {
-  const {name, genre, released} = promoFilm;
-  const [extraCards, setExtraCards] = useState<FilmInfo[]>([]);
-  const [extraFilmsCount, setExtraFilmsCount] = useState(0);
+function MainScreen(): JSX.Element {
+  const [filmsCount, setFilmsCount] = useState<FilmsCount | number>(FilmsCount.MainScreen);
 
   const dispatch = useAppDispatch();
-  const {activeGenre} = useAppSelector((state) => state);
+  const {activeGenre, films, promo} = useAppSelector((state) => state);
 
+  if (!promo) {
+    return <LoadingScreen />;
+  }
 
-  const otherFilms = filterFilms(filmCards, activeGenre).slice(FilmsCount.MainScreen);
+  const {name, genre, released} = promo;
+  const filmsOfGenre = filterFilms(films, activeGenre);
 
   const handleButtonClick = () => {
-    setExtraCards(otherFilms.slice(extraFilmsCount, extraFilmsCount + Math.min(FILMS_RENDER_STEP, otherFilms.length)));
-    setExtraFilmsCount(extraFilmsCount + Math.min(FILMS_RENDER_STEP, otherFilms.length));
+    setFilmsCount(filmsCount + Math.min(FILMS_RENDER_STEP, filmsOfGenre.length));
   };
 
   const handleGenreChange = (chosenGenre: string) => {
     dispatch(changeGenre(chosenGenre));
-    setExtraCards([]);
-    setExtraFilmsCount(0);
+    setFilmsCount(FilmsCount.MainScreen);
   };
 
 
@@ -89,18 +83,15 @@ function MainScreen({promoFilm, filmCards}: MainScreenProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList films = {filmCards} activeGenre = {activeGenre} handleGenreChange = {handleGenreChange}/>
-          <div className="catalog__films-list">
-            {
-              <FilmList
-                filmCards={filmCards}
-                activeGenre={activeGenre}
-                filmsCount={FilmsCount.MainScreen}
-              />
-            }
-            {otherFilms.length ? <ExtraFilms extraFilms={extraCards}/> : ''}
-          </div>
-          {otherFilms.length > extraFilmsCount ? <ShowMoreButton handleButtonClick={handleButtonClick} /> : ''}
+          <GenreList films = {films} activeGenre = {activeGenre} handleGenreChange = {handleGenreChange}/>
+          {
+            <FilmList
+              filmCards={films}
+              activeGenre={activeGenre}
+              filmsCount={filmsCount}
+            />
+          }
+          {filmsOfGenre.length > filmsCount ? <ShowMoreButton handleButtonClick={handleButtonClick} /> : ''}
         </section>
 
         <footer className="page-footer">

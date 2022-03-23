@@ -8,24 +8,25 @@ import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../privateRoute/private-route';
-import {FilmInfo} from '../../types/types';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../../pages/loading - screen/loading-screen';
 
-type AppScreenProps = {
-  promoFilm: FilmInfo;
-  filmCards: FilmInfo[];
-}
+function App(): JSX.Element {
+  const {isDataLoaded, promo} = useAppSelector((state) => state);
 
-function App({promoFilm, filmCards}: AppScreenProps): JSX.Element {
+  if (!isDataLoaded && !promo) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
           element={
-            <MainScreen
-              promoFilm = {promoFilm}
-              filmCards = {filmCards}
-            />
+            <MainScreen />
           }
         />
         <Route
@@ -40,19 +41,18 @@ function App({promoFilm, filmCards}: AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <MyListScreen filmCards={filmCards} />
+              <MyListScreen />
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Film}
-          element={<MovieScreen films={filmCards}/>}
+          element={<MovieScreen />}
         />
         <Route
           path={AppRoute.AddReview}
           element={
             <AddReviewScreen
-              filmCards={filmCards}
               onFormSubmit={() => {
                 throw new Error('Function \'onFormSubmit\' isn\'t implemented.');
               }}
@@ -61,7 +61,7 @@ function App({promoFilm, filmCards}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Player}
-          element={<PlayerScreen filmCards={filmCards}/>}
+          element={<PlayerScreen />}
         />
         <Route
           path={AppRoute.NotFound}

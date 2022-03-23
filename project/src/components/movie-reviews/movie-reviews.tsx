@@ -1,11 +1,11 @@
 
 import { REVIEWS_RENDER_STEP } from '../../const';
-import { UserComment } from '../../types/types';
+import { Comments } from '../../types/reviews';
 import Review from '../review/review';
 
 type MovieReviewsProps = {
     movieId: number;
-    reviews: UserComment[];
+    reviews: Comments;
 }
 function MovieReviews ({movieId, reviews}: MovieReviewsProps): JSX.Element {
   const movieReviews = reviews.filter((review) => Math.trunc(review.id) === movieId);

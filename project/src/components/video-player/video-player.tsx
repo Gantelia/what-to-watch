@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FilmInfo } from '../../types/types';
+import { FilmInfo } from '../../types/films';
 
 type VideoPlayerProps = {
     film: FilmInfo
@@ -59,11 +59,13 @@ function VideoPlayer({film, activePlayer, onMouseEnter, onMouseLeave}: VideoPlay
 
   return (
     <>
-      <video ref={videoRef} src={previewVideoLink} poster={previewImage} muted
-        width="280" height="175"
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-      />
+      <Link to={`/films/:${film.id}`} >
+        <video ref={videoRef} src={previewVideoLink} poster={previewImage} muted
+          width="280" height="175"
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        />
+      </Link>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`/films/:${id}`}>{name}
         </Link>
@@ -73,4 +75,3 @@ function VideoPlayer({film, activePlayer, onMouseEnter, onMouseLeave}: VideoPlay
 }
 
 export default VideoPlayer;
-

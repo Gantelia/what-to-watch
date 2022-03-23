@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import MovieCard from '../../components/movie-card/movie-card';
 import { FilmsCount } from '../../const';
-import {FilmInfo} from '../../types/types';
+import { Films } from '../../types/films';
 import { filterFilms } from '../../utils';
 
 
 type FilmListProps = {
-    filmCards: FilmInfo[];
+    filmCards: Films;
     activeGenre: string;
     filmsCount: FilmsCount;
 }
@@ -17,7 +17,7 @@ function FilmList({filmCards, activeGenre, filmsCount}: FilmListProps): JSX.Elem
   const films = filterFilms(filmCards, activeGenre);
 
   return (
-    <>
+    <div className="catalog__films-list">
       {
         films.slice(0, filmsCount).map((card) =>(
           <MovieCard
@@ -29,7 +29,7 @@ function FilmList({filmCards, activeGenre, filmsCount}: FilmListProps): JSX.Elem
           />),
         )
       }
-    </>
+    </div>
   );
 }
 

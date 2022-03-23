@@ -1,4 +1,4 @@
-import { FilmInfo } from '../../types/types';
+import { FilmInfo } from '../../types/films';
 import { convertRating, getDescription, getFormattedRating } from '../../utils';
 
 type MovieOverviewProps = {
@@ -27,7 +27,7 @@ function MovieOverview ({film}: MovieOverviewProps): JSX.Element {
 
         <p className="film-card__starring">
           <strong>Starring:
-            {starring.join(',')} and other
+            {` ${starring.join(', ')}`} and other
           </strong>
         </p>
       </div>

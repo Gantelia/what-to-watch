@@ -1,4 +1,4 @@
-import { FilmInfo } from '../../types/types';
+import { FilmInfo } from '../../types/films';
 import { convertMinutes } from '../../utils';
 
 type MovieDetailsProps = {
@@ -17,7 +17,7 @@ function MovieDetails ({film}: MovieDetailsProps): JSX.Element {
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
-            {starring.join(',')}
+            {` ${starring.join(', ')}`}
           </span>
         </p>
       </div>

@@ -3,13 +3,11 @@ import FilmList from '../../components/film-list/film-list';
 import Logo from '../../components/logo/logo';
 import Sign from '../../components/sign/sign';
 import { FilmsCount } from '../../const';
-import {FilmInfo} from '../../types/types';
+import { useAppSelector } from '../../hooks';
 
-type MyListScreenProps = {
-  filmCards: FilmInfo[];
-}
+function MyListScreen(): JSX.Element {
+  const films = useAppSelector((state) => state.films);
 
-function MyListScreen({filmCards}: MyListScreenProps): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -25,7 +23,7 @@ function MyListScreen({filmCards}: MyListScreenProps): JSX.Element {
         <div className="catalog__films-list">
           {
             <FilmList
-              filmCards={filmCards}
+              filmCards={films}
               activeGenre={'All genres'}
               filmsCount={FilmsCount.MyListScreen}
             />
