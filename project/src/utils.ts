@@ -70,14 +70,6 @@ export const getFormattedRating = (rating: number) => {
   return filmRating.replace('.', ',');
 };
 
-export const getDescription = (filmDescription: string) => {
-  const sentences = filmDescription.match(/[^.?!]+[.!?]+[\])'"`’”]*|.+/g);
-  if (!sentences) {
-    return [];
-  }
-  return sentences;
-};
-
 export const filterFilms = (filmCards: Films, activeGenre: string) => {
   const filteredFilms = filmCards.filter((film) => film.genre === getActiveGenre(activeGenre));
 
