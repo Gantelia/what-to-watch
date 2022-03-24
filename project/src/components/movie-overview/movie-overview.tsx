@@ -19,7 +19,7 @@ function MovieOverview ({film}: MovieOverviewProps): JSX.Element {
       </div>
 
       <div className="film-card__text">
-        {description}
+        <p>{description}</p>
 
         <p className="film-card__director"><strong>Director: {director}</strong></p>
 
