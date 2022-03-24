@@ -59,7 +59,7 @@ function VideoPlayer({film, activePlayer, onMouseEnter, onMouseLeave}: VideoPlay
 
   return (
     <>
-      <Link to={`/films/:${film.id}`} >
+      <Link to={`/films/${film.id}`} >
         <video ref={videoRef} src={previewVideoLink} poster={previewImage} muted
           width="280" height="175"
           onMouseEnter={onMouseEnter}
@@ -67,7 +67,7 @@ function VideoPlayer({film, activePlayer, onMouseEnter, onMouseLeave}: VideoPlay
         />
       </Link>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/:${id}`}>{name}
+        <Link className="small-film-card__link" to={`/films/${id}`}>{name}
         </Link>
       </h3>
     </>

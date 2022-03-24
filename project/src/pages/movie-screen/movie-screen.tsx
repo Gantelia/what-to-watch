@@ -18,7 +18,8 @@ function MovieScreen(): JSX.Element {
   const [navigation, setNavigation] = useState('Overview');
   const navigate = useNavigate();
 
-  const movie = films.find((film: FilmInfo) => `:${film.id}` === id);
+  const filmId = Number(id);
+  const movie = films.find((film: FilmInfo) => film.id === filmId);
 
   const overviewClass = navigation === 'Overview' ? 'film-nav__item--active' : '';
   const detailsClass = navigation === 'Details' ? 'film-nav__item--active' : '';
@@ -59,7 +60,7 @@ function MovieScreen(): JSX.Element {
 
               <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button"
-                  onClick={() => navigate (`/player/${id}`)}
+                  onClick={() => navigate (`/player/${filmId}`)}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
@@ -72,7 +73,7 @@ function MovieScreen(): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
+                <Link to={`/films/${filmId}/review`} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -88,19 +89,19 @@ function MovieScreen(): JSX.Element {
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
                   <li className={`film-nav__item ${overviewClass}`}>
-                    <Link to={`/films/${id}`} className="film-nav__link"
+                    <Link to={`/films/${filmId}`} className="film-nav__link"
                       onClick={() => setNavigation('Overview')}
                     >Overview
                     </Link>
                   </li>
                   <li className={`film-nav__item film-nav__item ${detailsClass}`}>
-                    <Link to={`/films/${id}`} className="film-nav__link"
+                    <Link to={`/films/${filmId}`} className="film-nav__link"
                       onClick={() => setNavigation('Details')}
                     >Details
                     </Link>
                   </li>
                   <li className={`film-nav__item film-nav__item ${reviewsClass}`}>
-                    <Link to={`/films/${id}`} className="film-nav__link"
+                    <Link to={`/films/${filmId}`} className="film-nav__link"
                       onClick={() => setNavigation('Reviews')}
                     >Reviews
                     </Link>

@@ -15,7 +15,8 @@ function AddReviewScreen({onFormSubmit}: AddReviewScreenProps): JSX.Element {
   const {id} = useParams();
   const films = useAppSelector((state) => state.films);
 
-  const filmCard = films.find((film: FilmInfo) => `:${film.id}` === id);
+  const filmId = Number(id);
+  const filmCard = films.find((film: FilmInfo) => film.id === filmId);
 
   if (!filmCard) {
     return <Navigate to={AppRoute.NotFound}/>;
@@ -38,10 +39,10 @@ function AddReviewScreen({onFormSubmit}: AddReviewScreenProps): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`/films/${id}`} className="breadcrumbs__link">{name}</Link>
+                <Link to={`/films/${filmId}`} className="breadcrumbs__link">{name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <Link to={`/films/${id}/review`} className="breadcrumbs__link">Add review</Link>
+                <Link to={`/films/${filmId}/review`} className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>
