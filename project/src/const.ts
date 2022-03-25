@@ -45,6 +45,7 @@ export enum APIRoute {
   Favorite = '/favorite',
   Login = '/login',
   Logout = '/logout',
+  Comments = '/comments',
 }
 
 export enum HTTP_CODE {

@@ -6,33 +6,34 @@ import MovieOverview from '../../components/movie-overview/movie-overview';
 import { useState } from 'react';
 import MovieDetails from '../../components/movie-details/movie-details';
 import MovieReviews from '../../components/movie-reviews/movie-reviews';
-import { REVIEWS } from '../../mocks/reviews';
 import FilmList from '../../components/film-list/film-list';
-import { FilmInfo } from '../../types/films';
-import { useAppSelector } from '../../hooks';
-
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilmAction, fetchSimilarAction } from '../../store/api-actions/api-film-actions';
+import { fetchComments } from '../../store/api-actions/api-comments-action';
 
 function MovieScreen(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
   const {id} = useParams();
+  const filmId = Number(id);
+
+  const dispatch = useAppDispatch();
+  dispatch(fetchFilmAction(filmId));
+  dispatch(fetchSimilarAction(filmId));
+  dispatch(fetchComments(filmId));
+
   const [navigation, setNavigation] = useState('Overview');
   const navigate = useNavigate();
 
-  const filmId = Number(id);
-  const movie = films.find((film: FilmInfo) => film.id === filmId);
+  const {film, similarFilms, comments} = useAppSelector((state) => state);
 
   const overviewClass = navigation === 'Overview' ? 'film-nav__item--active' : '';
   const detailsClass = navigation === 'Details' ? 'film-nav__item--active' : '';
   const reviewsClass = navigation === 'Reviews' ? 'film-nav__item--active' : '';
 
-  if (!movie) {
+  if (!film) {
     return <Navigate to={AppRoute.NotFound}/>;
   }
 
-  const {backgroundImage, name, genre, released, posterImage} = movie;
-
-  const similarFilms = films.slice();
-  similarFilms.splice(films.findIndex((film) => film === movie), 1);
+  const {backgroundImage, name, genre, released, posterImage} = film;
 
   return (
     <>
@@ -109,9 +110,9 @@ function MovieScreen(): JSX.Element {
                 </ul>
               </nav>
 
-              {navigation === 'Overview' && <MovieOverview film = {movie}/>}
-              {navigation === 'Details' && <MovieDetails film = {movie}/>}
-              {navigation === 'Reviews' && <MovieReviews movieId = {movie.id} reviews = {REVIEWS}/>}
+              {navigation === 'Overview' && <MovieOverview film = {film}/>}
+              {navigation === 'Details' && <MovieDetails film = {film}/>}
+              {navigation === 'Reviews' && <MovieReviews movieId = {film.id} reviews = {comments}/>}
             </div>
           </div>
         </div>

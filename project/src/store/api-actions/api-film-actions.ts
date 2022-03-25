@@ -5,7 +5,7 @@ import { errorHandle } from '../../services/error-handle';
 import { FilmInfo, Films } from '../../types/films';
 import { getFilm, getFilms, getPromo, getSimilarFilms } from '../action';
 
-export const fetchFilmsAction = createAsyncThunk(
+export const fetchFilmsAction = () => createAsyncThunk(
   'data/fetchFilms',
   async () => {
     try {
@@ -17,7 +17,7 @@ export const fetchFilmsAction = createAsyncThunk(
   },
 );
 
-export const fetchPromoAction = createAsyncThunk(
+export const fetchPromoAction = () => createAsyncThunk(
   'data/fetchPromo',
   async () => {
     try {
@@ -52,3 +52,4 @@ export const fetchSimilarAction = (id: number) => createAsyncThunk(
     }
   },
 );
+

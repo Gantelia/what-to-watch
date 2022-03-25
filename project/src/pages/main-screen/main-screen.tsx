@@ -7,20 +7,25 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import { useState } from 'react';
 import { changeGenre } from '../../store/action';
-import LoadingScreen from '../loading - screen/loading-screen';
+// import LoadingScreen from '../loading - screen/loading-screen';
 import { filterFilms } from '../../utils';
+import { FILMS } from '../../mocks/films';
 
 function MainScreen(): JSX.Element {
   const [filmsCount, setFilmsCount] = useState<FilmsCount | number>(FilmsCount.MainScreen);
 
   const dispatch = useAppDispatch();
-  const {activeGenre, films, promo} = useAppSelector((state) => state);
 
-  if (!promo) {
-    return <LoadingScreen />;
-  }
+  const {activeGenre, films/*, promo*/} = useAppSelector((state) => state);
+
+  // if (!promo) {
+  //   return <LoadingScreen />;
+  // }
+
+  const promo = FILMS[0];
 
   const {name, genre, released} = promo;
+
   const filmsOfGenre = filterFilms(films, activeGenre);
 
   const handleButtonClick = () => {
