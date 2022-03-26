@@ -1,5 +1,5 @@
 import {RATINGS} from '../../const';
-import {useState, ChangeEvent, FormEvent} from 'react';
+import React, {useState, ChangeEvent, FormEvent} from 'react';
 import { UserReview } from '../../types/reviews';
 
 type AddReviewFormProps = {
@@ -21,13 +21,13 @@ function AddReviewForm({onFormSubmit}: AddReviewFormProps): JSX.Element {
         <div className="rating__stars">
           {
             RATINGS.map((rating) => (
-              <>
-                <input key={`rating-${rating}`} className="rating__input" id={`star-${rating}`} type="radio" name="rating" value={rating}
+              <React.Fragment  key={rating}>
+                <input className="rating__input" id={`star-${rating}`} type="radio" name="rating" value={rating}
                   checked={formData.rating === rating}
                   onChange={({target}: ChangeEvent<HTMLInputElement>) => setFormData({...formData, rating: +target.value})}
                 />
-                <label key={rating} className="rating__label" htmlFor={`star-${rating}`}>Rating {rating}</label>
-              </>
+                <label className="rating__label" htmlFor={`star-${rating}`}>Rating {rating}</label>
+              </React.Fragment>
             ))
           }
         </div>

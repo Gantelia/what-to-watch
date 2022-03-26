@@ -1,11 +1,13 @@
-import {Link, Navigate, useParams} from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import Logo from '../../components/logo/logo';
 import SignInOut from '../../components/sign-in-out/sign-in-out';
 import { AppRoute } from '../../const';
-import { useAppSelector } from '../../hooks';
-import { FilmInfo } from '../../types/films';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilmAction } from '../../store/api-actions/api-film-actions';
 import { UserReview } from '../../types/reviews';
+import LoadingScreen from '../loading - screen/loading-screen';
 
 type AddReviewScreenProps = {
   onFormSubmit: (formData:UserReview) => void;
@@ -13,16 +15,24 @@ type AddReviewScreenProps = {
 
 function AddReviewScreen({onFormSubmit}: AddReviewScreenProps): JSX.Element {
   const {id} = useParams();
-  const films = useAppSelector((state) => state.films);
-
   const filmId = Number(id);
-  const filmCard = films.find((film: FilmInfo) => film.id === filmId);
+  const dispatch = useAppDispatch();
 
-  if (!filmCard) {
+  useEffect(() => {
+    dispatch(fetchFilmAction(filmId));
+  }, [filmId, dispatch]);
+
+  const {film, error} = useAppSelector((state) => state);
+
+  if (error === 'Film id NaN does not exist') {
     return <Navigate to={AppRoute.NotFound}/>;
   }
 
-  const {backgroundImage, name, posterImage} = filmCard;
+  if (!film) {
+    return <LoadingScreen />;
+  }
+
+  const {backgroundImage, name, posterImage} = film;
 
   return (
     <section className="film-card film-card--full">
