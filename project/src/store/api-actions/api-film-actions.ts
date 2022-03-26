@@ -5,7 +5,7 @@ import { errorHandle } from '../../services/error-handle';
 import { FilmInfo, Films } from '../../types/films';
 import { getFilm, getFilms, getPromo, getSimilarFilms } from '../action';
 
-export const fetchFilmsAction = () => createAsyncThunk(
+export const fetchFilmsAction = createAsyncThunk(
   'data/fetchFilms',
   async () => {
     try {
@@ -17,7 +17,7 @@ export const fetchFilmsAction = () => createAsyncThunk(
   },
 );
 
-export const fetchPromoAction = () => createAsyncThunk(
+export const fetchPromoAction = createAsyncThunk(
   'data/fetchPromo',
   async () => {
     try {
@@ -29,9 +29,9 @@ export const fetchPromoAction = () => createAsyncThunk(
   },
 );
 
-export const fetchFilmAction = (id: number) => createAsyncThunk(
+export const fetchFilmAction = createAsyncThunk(
   'data/fetchFilm',
-  async () => {
+  async (id: number) => {
     try {
       const {data} = await api.get<FilmInfo>(`${APIRoute.Films}/${id}`);
       store.dispatch(getFilm(data));
@@ -41,9 +41,9 @@ export const fetchFilmAction = (id: number) => createAsyncThunk(
   },
 );
 
-export const fetchSimilarAction = (id: number) => createAsyncThunk(
+export const fetchSimilarAction = createAsyncThunk(
   'data/fetchSimilarFilms',
-  async () => {
+  async (id: number) => {
     try {
       const {data} = await api.get<Films>(`${APIRoute.Films}/${id}/similar`);
       store.dispatch(getSimilarFilms(data));

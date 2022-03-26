@@ -19,9 +19,9 @@ const adaptToClient = (comment: ServerReview): Comment => {
   return adaptedComment;
 };
 
-export const fetchComments = (id: number) => createAsyncThunk(
+export const fetchComments = createAsyncThunk(
   'data/fetchComments',
-  async () => {
+  async (id: number) => {
     try {
       const {data} = await api.get<ServerReviews>(`${APIRoute.Comments}/${id}`);
       const adaptedComments: Comments = data.map((comment: ServerReview) => adaptToClient(comment));

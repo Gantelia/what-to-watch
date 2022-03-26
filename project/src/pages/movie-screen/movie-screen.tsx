@@ -1,37 +1,44 @@
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import SignInOut from '../../components/sign-in-out/sign-in-out';
-import { AppRoute, FilmsCount } from '../../const';
+import { FilmsCount } from '../../const';
 import MovieOverview from '../../components/movie-overview/movie-overview';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MovieDetails from '../../components/movie-details/movie-details';
 import MovieReviews from '../../components/movie-reviews/movie-reviews';
 import FilmList from '../../components/film-list/film-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction, fetchSimilarAction } from '../../store/api-actions/api-film-actions';
 import { fetchComments } from '../../store/api-actions/api-comments-action';
+import LoadingScreen from '../loading - screen/loading-screen';
 
 function MovieScreen(): JSX.Element {
   const {id} = useParams();
   const filmId = Number(id);
 
   const dispatch = useAppDispatch();
-  dispatch(fetchFilmAction(filmId));
-  dispatch(fetchSimilarAction(filmId));
-  dispatch(fetchComments(filmId));
-
   const [navigation, setNavigation] = useState('Overview');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    dispatch(fetchFilmAction(filmId));
+    dispatch(fetchSimilarAction(filmId));
+    dispatch(fetchComments(filmId));
+  }, [dispatch, filmId]);
+
   const {film, similarFilms, comments} = useAppSelector((state) => state);
+
+  if (!film || !similarFilms || !comments) {
+    return <LoadingScreen />;
+  }
+
+  if (film?.id !== filmId) {
+    return <LoadingScreen />;
+  }
 
   const overviewClass = navigation === 'Overview' ? 'film-nav__item--active' : '';
   const detailsClass = navigation === 'Details' ? 'film-nav__item--active' : '';
   const reviewsClass = navigation === 'Reviews' ? 'film-nav__item--active' : '';
-
-  if (!film) {
-    return <Navigate to={AppRoute.NotFound}/>;
-  }
 
   const {backgroundImage, name, genre, released, posterImage} = film;
 
@@ -112,7 +119,7 @@ function MovieScreen(): JSX.Element {
 
               {navigation === 'Overview' && <MovieOverview film = {film}/>}
               {navigation === 'Details' && <MovieDetails film = {film}/>}
-              {navigation === 'Reviews' && <MovieReviews movieId = {film.id} reviews = {comments}/>}
+              {navigation === 'Reviews' && <MovieReviews reviews = {comments}/>}
             </div>
           </div>
         </div>
