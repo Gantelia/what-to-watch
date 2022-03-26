@@ -16,13 +16,16 @@ type AddReviewScreenProps = {
 function AddReviewScreen({onFormSubmit}: AddReviewScreenProps): JSX.Element {
   const {id} = useParams();
   const filmId = Number(id);
+
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(fetchFilmAction(filmId));
-  }, [filmId, dispatch]);
-
   const {film, error} = useAppSelector((state) => state);
+
+  useEffect(() => {
+    if (film === null || film.id !== filmId) {
+      dispatch(fetchFilmAction(filmId));
+    }
+  }, [filmId, film, dispatch]);
 
   if (error === 'Film id NaN does not exist') {
     return <Navigate to={AppRoute.NotFound}/>;

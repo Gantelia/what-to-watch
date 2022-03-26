@@ -17,25 +17,25 @@ function MovieScreen(): JSX.Element {
   const filmId = Number(id);
 
   const dispatch = useAppDispatch();
+
+  const {film, similarFilms, comments, authorizationStatus, error} = useAppSelector((state) => state);
+
   const [navigation, setNavigation] = useState('Overview');
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchFilmAction(filmId));
-    dispatch(fetchSimilarAction(filmId));
-    dispatch(fetchComments(filmId));
-  }, [filmId, dispatch]);
+    if (film === null || film?.id !== filmId) {
+      dispatch(fetchFilmAction(filmId));
+      dispatch(fetchSimilarAction(filmId));
+      dispatch(fetchComments(filmId));
+    }
+  }, [film, filmId, dispatch]);
 
-  const {film, similarFilms, comments, authorizationStatus, error} = useAppSelector((state) => state);
   if (error === 'Film id NaN does not exist') {
     navigate(AppRoute.NotFound);
   }
 
-  if (!film || !similarFilms || !comments) {
-    return <LoadingScreen />;
-  }
-
-  if (film?.id !== filmId) {
+  if (!film || !similarFilms || !comments || film?.id !== filmId) {
     return <LoadingScreen />;
   }
 

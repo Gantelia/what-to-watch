@@ -14,7 +14,6 @@ function AddReviewForm({onFormSubmit}: AddReviewFormProps): JSX.Element {
     },
   );
 
-
   return (
     <form action="#" className="add-review__form">
       <div className="rating">
