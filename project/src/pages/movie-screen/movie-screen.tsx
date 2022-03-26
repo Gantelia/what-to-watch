@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import SignInOut from '../../components/sign-in-out/sign-in-out';
-import { FilmsCount } from '../../const';
+import { AppRoute, AuthorizationStatus, FilmsCount } from '../../const';
 import MovieOverview from '../../components/movie-overview/movie-overview';
 import { useEffect, useState } from 'react';
 import MovieDetails from '../../components/movie-details/movie-details';
@@ -24,9 +24,12 @@ function MovieScreen(): JSX.Element {
     dispatch(fetchFilmAction(filmId));
     dispatch(fetchSimilarAction(filmId));
     dispatch(fetchComments(filmId));
-  }, [dispatch, filmId]);
+  }, [filmId, dispatch]);
 
-  const {film, similarFilms, comments} = useAppSelector((state) => state);
+  const {film, similarFilms, comments, authorizationStatus, error} = useAppSelector((state) => state);
+  if (error === 'Film id NaN does not exist') {
+    navigate(AppRoute.NotFound);
+  }
 
   if (!film || !similarFilms || !comments) {
     return <LoadingScreen />;
@@ -81,7 +84,7 @@ function MovieScreen(): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={`/films/${filmId}/review`} className="btn film-card__button">Add review</Link>
+                {authorizationStatus === AuthorizationStatus.Auth && <Link to={`/films/${filmId}/review`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>
           </div>
