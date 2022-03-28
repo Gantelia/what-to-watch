@@ -4,7 +4,7 @@ import { APIRoute } from '../../const';
 import { errorHandle } from '../../services/error-handle';
 import { AdaptingComment, Comment, Comments, ServerComment, ServerComments, UserReview } from '../../types/reviews';
 import { getComments } from '../action';
-/*eslint-disable*/
+
 type UserComment = {
   id: number;
   review: UserReview;
@@ -43,7 +43,7 @@ export const addReviewAction = createAsyncThunk<void, UserComment>(
   async ({id, review: {rating, comment}}: UserComment) => {
     try {
       const {data} = await api.post<ServerComments>(`${APIRoute.Comments}/${id}`, {rating, comment});
-      const adaptedComments: Comments = data.map((comment: ServerComment) => adaptToClient(comment));
+      const adaptedComments: Comments = data.map((review: ServerComment) => adaptToClient(review));
       store.dispatch(getComments(adaptedComments));
     } catch (error) {
       errorHandle (error);
