@@ -23,7 +23,7 @@ export const handleError = (error: ErrorType): void => {
         break;
       case HTTP_CODE.NOT_FOUND:
         toast.info(response.data.error);
-        redirectToRoute(AppRoute.NotFound);
+        store.dispatch(redirectToRoute(AppRoute.NotFound));
         break;
     }
   }
