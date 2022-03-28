@@ -1,4 +1,4 @@
-import { AuthorizationStatus, HOUR_IN_MINUTES, Rating } from './const';
+import { AuthorizationStatus, HOUR_IN_MINUTES, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH, Rating } from './const';
 import { Films } from './types/films';
 import { Genres } from './types/genres';
 import { ConvertRating } from './types/util-types';
@@ -84,3 +84,5 @@ export const validateLogin = (loginData: string): boolean =>
 
 export const validatePassword = (passwordData: string): boolean =>
   !!passwordData.trim().length && !!passwordData.match(/^(?:[0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*$/i);
+
+export const validateText = (text: string): boolean => text.length >= MIN_REVIEW_LENGTH && text.length <= MAX_REVIEW_LENGTH;

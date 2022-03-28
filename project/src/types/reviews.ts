@@ -1,6 +1,6 @@
 export type UserReview = {
+    rating: number;
     comment: string;
-    rating: number | null;
 }
 
 export type Comment = {
@@ -14,7 +14,7 @@ export type Comment = {
 
 export type Comments = Comment[];
 
-export type ServerReview = {
+export type ServerComment = {
     comment: string
     date: string
     id: number
@@ -25,7 +25,7 @@ export type ServerReview = {
     }
 };
 
-export type ServerReviews = ServerReview[];
+export type ServerComments = ServerComment[];
 
 export type AdaptingComment = {
     author: string;

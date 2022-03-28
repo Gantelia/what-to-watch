@@ -8,6 +8,9 @@ export const FILMS_RENDER_STEP = 8;
 
 export const TIMEOUT_SHOW_ERROR = 2500;
 
+export const MIN_REVIEW_LENGTH = 50;
+
+export const MAX_REVIEW_LENGTH = 400;
 
 export enum AppRoute {
   Main = '/',

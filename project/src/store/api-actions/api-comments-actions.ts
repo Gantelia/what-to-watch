@@ -2,8 +2,13 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, store } from '..';
 import { APIRoute } from '../../const';
 import { errorHandle } from '../../services/error-handle';
-import { AdaptingComment, Comment, Comments, ServerComment, ServerComments } from '../../types/reviews';
+import { AdaptingComment, Comment, Comments, ServerComment, ServerComments, UserReview } from '../../types/reviews';
 import { getComments } from '../action';
+/*eslint-disable*/
+type UserComment = {
+  id: number;
+  review: UserReview;
+}
 
 const adaptToClient = (comment: ServerComment): Comment => {
   const adaptedComment: AdaptingComment = {
@@ -19,7 +24,7 @@ const adaptToClient = (comment: ServerComment): Comment => {
   return adaptedComment;
 };
 
-export const fetchComments = createAsyncThunk(
+export const fetchCommentsAction = createAsyncThunk(
   'data/fetchComments',
   async (id: number) => {
     try {
@@ -32,3 +37,16 @@ export const fetchComments = createAsyncThunk(
   },
 );
 
+
+export const addReviewAction = createAsyncThunk<void, UserComment>(
+  'data/addReview',
+  async ({id, review: {rating, comment}}: UserComment) => {
+    try {
+      const {data} = await api.post<ServerComments>(`${APIRoute.Comments}/${id}`, {rating, comment});
+      const adaptedComments: Comments = data.map((comment: ServerComment) => adaptToClient(comment));
+      store.dispatch(getComments(adaptedComments));
+    } catch (error) {
+      errorHandle (error);
+    }
+  },
+);

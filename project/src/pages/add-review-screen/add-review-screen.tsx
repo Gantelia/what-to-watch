@@ -6,14 +6,10 @@ import SignInOut from '../../components/sign-in-out/sign-in-out';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction } from '../../store/api-actions/api-film-actions';
-import { UserReview } from '../../types/reviews';
+
 import LoadingScreen from '../loading - screen/loading-screen';
 
-type AddReviewScreenProps = {
-  onFormSubmit: (formData:UserReview) => void;
-}
-
-function AddReviewScreen({onFormSubmit}: AddReviewScreenProps): JSX.Element {
+function AddReviewScreen(): JSX.Element {
   const {id} = useParams();
   const filmId = Number(id);
 
@@ -69,7 +65,7 @@ function AddReviewScreen({onFormSubmit}: AddReviewScreenProps): JSX.Element {
       </div>
 
       <div className="add-review">
-        <AddReviewForm onFormSubmit={onFormSubmit}/>
+        <AddReviewForm />
       </div>
 
     </section>
