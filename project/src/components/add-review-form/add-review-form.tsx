@@ -1,13 +1,20 @@
 import {RATINGS} from '../../const';
 import React, {useState, ChangeEvent, FormEvent} from 'react';
 import { UserReview } from '../../types/reviews';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
 import { addReviewAction } from '../../store/api-actions/api-comments-actions';
 import { validateText } from '../../utils';
+import CSS from 'csstype';
+
+const errorTextStyle: CSS.Properties = {
+  color: 'darkred',
+};
 
 function AddReviewForm(): JSX.Element {
   const dispatch = useAppDispatch();
+  const error = useAppSelector((state) => state.error);
+
   const {id} = useParams();
   const [formData, setFormData] = useState<UserReview>(
     {
@@ -15,9 +22,16 @@ function AddReviewForm(): JSX.Element {
       rating: 0,
     },
   );
+
   const [isTextValid, setIsTextValid] = useState(true);
   const [isRating, setIsRating] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  if (error) {
+    setIsSubmitting(false);
+    setIsError(true);
+  }
 
   return (
     <form action="#" className="add-review__form"
@@ -71,8 +85,9 @@ function AddReviewForm(): JSX.Element {
           </button>
         </div>
       </div>
-      {!isRating && <p>Please choose rating</p>}
-      {!isTextValid && <p>Please enter min 50 and max 400 characters</p>}
+      {!isRating && <p style={errorTextStyle}>Please, choose rating</p>}
+      {!isTextValid && <p style={errorTextStyle}>Please, enter min 50 and max 400 characters</p>}
+      {isError && <p style={errorTextStyle}>Connection problems...Please, try again later!</p>}
     </form>
   );
 }

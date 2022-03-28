@@ -1,12 +1,13 @@
 import { useAppSelector } from '../../hooks';
 import CSS from 'csstype';
+import { HEX_COLOR } from '../../const';
 
 const errorStyle: CSS.Properties = {
   position: 'fixed',
   top: '30px',
   right: '30px',
   padding: '10px',
-  backgroundColor: '#d96666',
+  backgroundColor: HEX_COLOR,
   color: 'white',
   borderRadius: '5px',
 };
