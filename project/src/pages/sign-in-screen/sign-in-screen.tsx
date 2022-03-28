@@ -30,12 +30,13 @@ function SignInScreen(): JSX.Element {
     if (!loginValidation) {
       setLoginMessage(true);
       setPasswordMessage(false);
+      return;
     } else if (loginValidation && !passValidation) {
       setLoginMessage(false);
       setPasswordMessage(true);
-    } else if (loginValidation && passValidation) {
-      dispatch(loginAction({login: login, password: password}));
+      return;
     }
+    dispatch(loginAction({login: login, password: password}));
   };
 
   return (
