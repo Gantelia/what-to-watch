@@ -1,7 +1,7 @@
-import {RATINGS} from '../../const';
+import {RATINGS, REQUEST_TIMEOUT} from '../../const';
 import React, {useState, ChangeEvent, FormEvent} from 'react';
 import { UserReview } from '../../types/reviews';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { useParams } from 'react-router-dom';
 import { addReviewAction } from '../../store/api-actions/api-comments-actions';
 import { validateText } from '../../utils';
@@ -13,7 +13,6 @@ const errorTextStyle: CSS.Properties = {
 
 function AddReviewForm(): JSX.Element {
   const dispatch = useAppDispatch();
-  const error = useAppSelector((state) => state.error);
 
   const {id} = useParams();
   const [formData, setFormData] = useState<UserReview>(
@@ -26,12 +25,6 @@ function AddReviewForm(): JSX.Element {
   const [isTextValid, setIsTextValid] = useState(true);
   const [isRating, setIsRating] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isError, setIsError] = useState(false);
-
-  if (error) {
-    setIsSubmitting(false);
-    setIsError(true);
-  }
 
   return (
     <form action="#" className="add-review__form"
@@ -50,6 +43,7 @@ function AddReviewForm(): JSX.Element {
         setIsRating(true);
         setIsSubmitting(true);
         dispatch(addReviewAction({id: Number(id), review: formData}));
+        setTimeout(() => setIsSubmitting(false), REQUEST_TIMEOUT);
       }}
     >
       <div className="rating">
@@ -87,7 +81,6 @@ function AddReviewForm(): JSX.Element {
       </div>
       {!isRating && <p style={errorTextStyle}>Please, choose rating</p>}
       {!isTextValid && <p style={errorTextStyle}>Please, enter min 50 and max 400 characters</p>}
-      {isError && <p style={errorTextStyle}>Connection problems...Please, try again later!</p>}
     </form>
   );
 }

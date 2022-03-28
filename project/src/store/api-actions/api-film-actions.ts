@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, store } from '..';
 import { APIRoute } from '../../const';
-import { errorHandle } from '../../services/error-handle';
+import { handleError } from '../../services/handle-error';
 import { FilmInfo, Films } from '../../types/films';
 import { getFilm, getFilms, getPromo, getSimilarFilms } from '../action';
 
@@ -12,7 +12,7 @@ export const fetchFilmsAction = createAsyncThunk(
       const {data} = await api.get<Films>(APIRoute.Films);
       store.dispatch(getFilms(data));
     } catch (error) {
-      errorHandle(error);
+      handleError(error);
     }
   },
 );
@@ -24,7 +24,7 @@ export const fetchPromoAction = createAsyncThunk(
       const {data} = await api.get<FilmInfo>(APIRoute.Promo);
       store.dispatch(getPromo(data));
     } catch (error) {
-      errorHandle(error);
+      handleError(error);
     }
   },
 );
@@ -36,7 +36,7 @@ export const fetchFilmAction = createAsyncThunk(
       const {data} = await api.get<FilmInfo>(`${APIRoute.Films}/${id}`);
       store.dispatch(getFilm(data));
     } catch (error) {
-      errorHandle (error);
+      handleError (error);
     }
   },
 );
@@ -48,7 +48,7 @@ export const fetchSimilarAction = createAsyncThunk(
       const {data} = await api.get<Films>(`${APIRoute.Films}/${id}/similar`);
       store.dispatch(getSimilarFilms(data));
     } catch (error) {
-      errorHandle(error);
+      handleError(error);
     }
   },
 );

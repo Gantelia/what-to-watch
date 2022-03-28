@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "classnames": "^2.3.1",
-    "dayjs": "^1.11.0"
+    "dayjs": "^1.11.0",
+    "react-toastify": "^8.2.0"
   }
 }

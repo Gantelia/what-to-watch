@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import Logo from '../../components/logo/logo';
 import SignInOut from '../../components/sign-in-out/sign-in-out';
-import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction } from '../../store/api-actions/api-film-actions';
 
@@ -15,17 +14,13 @@ function AddReviewScreen(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const {film, error} = useAppSelector((state) => state);
+  const {film} = useAppSelector((state) => state);
 
   useEffect(() => {
     if (film === null || film.id !== filmId) {
       dispatch(fetchFilmAction(filmId));
     }
   }, [filmId, film, dispatch]);
-
-  if (error === 'Film id NaN does not exist') {
-    return <Navigate to={AppRoute.NotFound}/>;
-  }
 
   if (!film) {
     return <LoadingScreen />;

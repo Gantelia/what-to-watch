@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import SignInOut from '../../components/sign-in-out/sign-in-out';
-import { AppRoute, AuthorizationStatus, FilmsCount } from '../../const';
+import { AuthorizationStatus, FilmsCount } from '../../const';
 import MovieOverview from '../../components/movie-overview/movie-overview';
 import { useEffect, useState } from 'react';
 import MovieDetails from '../../components/movie-details/movie-details';
@@ -18,7 +18,7 @@ function MovieScreen(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const {film, similarFilms, comments, authorizationStatus, error} = useAppSelector((state) => state);
+  const {film, similarFilms, comments, authorizationStatus} = useAppSelector((state) => state);
 
   const [navigation, setNavigation] = useState('Overview');
   const navigate = useNavigate();
@@ -30,10 +30,6 @@ function MovieScreen(): JSX.Element {
       dispatch(fetchCommentsAction(filmId));
     }
   }, [film, filmId, dispatch]);
-
-  if (error === 'Film id NaN does not exist') {
-    navigate(AppRoute.NotFound);
-  }
 
   if (!film || !similarFilms || !comments || film?.id !== filmId) {
     return <LoadingScreen />;

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, store } from '..';
 import { APIRoute } from '../../const';
-import { errorHandle } from '../../services/error-handle';
+import { handleError } from '../../services/handle-error';
 import { AdaptingComment, Comment, Comments, ServerComment, ServerComments, UserReview } from '../../types/reviews';
 import { getComments, redirectToRoute } from '../action';
 
@@ -32,7 +32,7 @@ export const fetchCommentsAction = createAsyncThunk(
       const adaptedComments: Comments = data.map((comment: ServerComment) => adaptToClient(comment));
       store.dispatch(getComments(adaptedComments));
     } catch (error) {
-      errorHandle (error);
+      handleError (error);
     }
   },
 );
@@ -47,7 +47,7 @@ export const addReviewAction = createAsyncThunk<void, UserComment>(
       store.dispatch(getComments(adaptedComments));
       store.dispatch(redirectToRoute(`/films/${id}`));
     } catch (error) {
-      errorHandle (error);
+      handleError (error);
     }
   },
 );
