@@ -9,7 +9,7 @@ import MovieReviews from '../../components/movie-reviews/movie-reviews';
 import FilmList from '../../components/film-list/film-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction, fetchSimilarAction } from '../../store/api-actions/api-film-actions';
-import { fetchComments } from '../../store/api-actions/api-comments-action';
+import { fetchCommentsAction } from '../../store/api-actions/api-comments-actions';
 import LoadingScreen from '../loading - screen/loading-screen';
 
 function MovieScreen(): JSX.Element {
@@ -27,7 +27,7 @@ function MovieScreen(): JSX.Element {
     if (film === null || film?.id !== filmId) {
       dispatch(fetchFilmAction(filmId));
       dispatch(fetchSimilarAction(filmId));
-      dispatch(fetchComments(filmId));
+      dispatch(fetchCommentsAction(filmId));
     }
   }, [film, filmId, dispatch]);
 

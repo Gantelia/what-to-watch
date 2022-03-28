@@ -3,7 +3,7 @@ import { api, store } from '..';
 import { APIRoute } from '../../const';
 import { errorHandle } from '../../services/error-handle';
 import { AdaptingComment, Comment, Comments, ServerComment, ServerComments, UserReview } from '../../types/reviews';
-import { getComments } from '../action';
+import { getComments, redirectToRoute } from '../action';
 
 type UserComment = {
   id: number;
@@ -45,6 +45,7 @@ export const addReviewAction = createAsyncThunk<void, UserComment>(
       const {data} = await api.post<ServerComments>(`${APIRoute.Comments}/${id}`, {rating, comment});
       const adaptedComments: Comments = data.map((review: ServerComment) => adaptToClient(review));
       store.dispatch(getComments(adaptedComments));
+      store.dispatch(redirectToRoute(`/films/${id}`));
     } catch (error) {
       errorHandle (error);
     }
