@@ -4,8 +4,6 @@ import { FilmInfo, Films } from '../types/films';
 import { Comment, Comments } from '../types/reviews';
 import { UserData } from '../types/user-data';
 
-export const changeGenre = createAction<string>('catalog/genreChange');
-
 export const getFilms = createAction<Films>('catalog/getFilms');
 
 export const getPromo = createAction<FilmInfo>('catalog/getPromo');
