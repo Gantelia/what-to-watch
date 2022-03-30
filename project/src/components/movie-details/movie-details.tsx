@@ -1,3 +1,4 @@
+import React from 'react';
 import { FilmInfo } from '../../types/films';
 import { convertMinutes } from '../../utils';
 
@@ -17,7 +18,14 @@ function MovieDetails ({film}: MovieDetailsProps): JSX.Element {
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
-            {` ${starring.join(', ')}`}
+            {
+              starring.slice(0, -1).map((actor) => (
+                <React.Fragment key={actor}>
+                  {`${actor},`}<br />
+                </React.Fragment>
+              ))
+            }
+            {starring.slice(-1)}
           </span>
         </p>
       </div>

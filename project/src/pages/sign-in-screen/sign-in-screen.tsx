@@ -1,10 +1,10 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InvalidLogin from '../../components/invalid-login/invalid-login';
 import Logo from '../../components/logo/logo';
 import SignInError from '../../components/sign-in-error/sign-in-error';
-import { AppRoute } from '../../const';
-import { useAppDispatch } from '../../hooks';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions/api-auth-actions';
 import { validateLogin, validatePassword } from '../../utils';
 
@@ -15,6 +15,13 @@ function SignInScreen(): JSX.Element {
   const [passwordMessage, setPasswordMessage] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const authorization = useAppSelector((store) => store.authorizationStatus);
+
+  useEffect(() => {
+    if (authorization === AuthorizationStatus.Auth) {
+      navigate(AppRoute.Main);
+    }
+  },[authorization, navigate]);
 
   const handleSubmit = (evt: FormEvent<HTMLButtonElement>): void => {
     evt.preventDefault();
@@ -23,13 +30,13 @@ function SignInScreen(): JSX.Element {
     if (!loginValidation) {
       setLoginMessage(true);
       setPasswordMessage(false);
+      return;
     } else if (loginValidation && !passValidation) {
       setLoginMessage(false);
       setPasswordMessage(true);
-    } else if (loginValidation && passValidation) {
-      dispatch(loginAction({login: login, password: password}));
-      navigate(AppRoute.Main);
+      return;
     }
+    dispatch(loginAction({login: login, password: password}));
   };
 
   return (

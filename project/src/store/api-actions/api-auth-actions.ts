@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, store } from '..';
 import { APIRoute, AuthorizationStatus } from '../../const';
-import { errorHandle } from '../../services/error-handle';
+import { handleError } from '../../services/handle-error';
 import { dropToken, saveToken } from '../../services/token';
 import { AuthData } from '../../types/auth-data';
 import { UserData } from '../../types/user-data';
@@ -15,7 +15,7 @@ export const checkAuthAction = createAsyncThunk(
       store.dispatch(getUserData(data));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
-      errorHandle(error);
+      handleError(error);
     }
   },
 );
@@ -29,7 +29,7 @@ export const loginAction = createAsyncThunk(
       store.dispatch(getUserData(data));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
-      errorHandle(error);
+      handleError(error);
     }
   },
 );
@@ -42,7 +42,7 @@ export const logoutAction = createAsyncThunk(
       dropToken();
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     } catch (error) {
-      errorHandle(error);
+      handleError(error);
     }
   },
 );

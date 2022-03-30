@@ -14,6 +14,7 @@ function MainScreen(): JSX.Element {
   const [filmsCount, setFilmsCount] = useState<FilmsCount | number>(FilmsCount.MainScreen);
 
   const dispatch = useAppDispatch();
+
   const {activeGenre, films, promo} = useAppSelector((state) => state);
 
   if (!promo) {
@@ -21,6 +22,7 @@ function MainScreen(): JSX.Element {
   }
 
   const {name, genre, released} = promo;
+
   const filmsOfGenre = filterFilms(films, activeGenre);
 
   const handleButtonClick = () => {

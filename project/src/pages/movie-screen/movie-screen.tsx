@@ -1,37 +1,45 @@
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import SignInOut from '../../components/sign-in-out/sign-in-out';
-import { AppRoute, FilmsCount } from '../../const';
+import { AuthorizationStatus, FilmsCount } from '../../const';
 import MovieOverview from '../../components/movie-overview/movie-overview';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MovieDetails from '../../components/movie-details/movie-details';
 import MovieReviews from '../../components/movie-reviews/movie-reviews';
-import { REVIEWS } from '../../mocks/reviews';
 import FilmList from '../../components/film-list/film-list';
-import { FilmInfo } from '../../types/films';
-import { useAppSelector } from '../../hooks';
-
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilmAction, fetchSimilarAction } from '../../store/api-actions/api-film-actions';
+import { fetchCommentsAction } from '../../store/api-actions/api-comments-actions';
+import LoadingScreen from '../loading - screen/loading-screen';
 
 function MovieScreen(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
   const {id} = useParams();
+  const filmId = Number(id);
+
+  const dispatch = useAppDispatch();
+
+  const {film, similarFilms, comments, authorizationStatus} = useAppSelector((state) => state);
+
   const [navigation, setNavigation] = useState('Overview');
   const navigate = useNavigate();
 
-  const movie = films.find((film: FilmInfo) => `:${film.id}` === id);
+  useEffect(() => {
+    if (film === null || film?.id !== filmId) {
+      dispatch(fetchFilmAction(filmId));
+      dispatch(fetchSimilarAction(filmId));
+      dispatch(fetchCommentsAction(filmId));
+    }
+  }, [film, filmId, dispatch]);
+
+  if (!film || !similarFilms || !comments || film?.id !== filmId) {
+    return <LoadingScreen />;
+  }
 
   const overviewClass = navigation === 'Overview' ? 'film-nav__item--active' : '';
   const detailsClass = navigation === 'Details' ? 'film-nav__item--active' : '';
   const reviewsClass = navigation === 'Reviews' ? 'film-nav__item--active' : '';
 
-  if (!movie) {
-    return <Navigate to={AppRoute.NotFound}/>;
-  }
-
-  const {backgroundImage, name, genre, released, posterImage} = movie;
-
-  const similarFilms = films.slice();
-  similarFilms.splice(films.findIndex((film) => film === movie), 1);
+  const {backgroundImage, name, genre, released, posterImage} = film;
 
   return (
     <>
@@ -59,7 +67,7 @@ function MovieScreen(): JSX.Element {
 
               <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button"
-                  onClick={() => navigate (`/player/${id}`)}
+                  onClick={() => navigate (`/player/${filmId}`)}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
@@ -72,7 +80,7 @@ function MovieScreen(): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
+                {authorizationStatus === AuthorizationStatus.Auth && <Link to={`/films/${filmId}/review`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>
           </div>
@@ -88,19 +96,19 @@ function MovieScreen(): JSX.Element {
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
                   <li className={`film-nav__item ${overviewClass}`}>
-                    <Link to={`/films/${id}`} className="film-nav__link"
+                    <Link to={`/films/${filmId}`} className="film-nav__link"
                       onClick={() => setNavigation('Overview')}
                     >Overview
                     </Link>
                   </li>
                   <li className={`film-nav__item film-nav__item ${detailsClass}`}>
-                    <Link to={`/films/${id}`} className="film-nav__link"
+                    <Link to={`/films/${filmId}`} className="film-nav__link"
                       onClick={() => setNavigation('Details')}
                     >Details
                     </Link>
                   </li>
                   <li className={`film-nav__item film-nav__item ${reviewsClass}`}>
-                    <Link to={`/films/${id}`} className="film-nav__link"
+                    <Link to={`/films/${filmId}`} className="film-nav__link"
                       onClick={() => setNavigation('Reviews')}
                     >Reviews
                     </Link>
@@ -108,9 +116,9 @@ function MovieScreen(): JSX.Element {
                 </ul>
               </nav>
 
-              {navigation === 'Overview' && <MovieOverview film = {movie}/>}
-              {navigation === 'Details' && <MovieDetails film = {movie}/>}
-              {navigation === 'Reviews' && <MovieReviews movieId = {movie.id} reviews = {REVIEWS}/>}
+              {navigation === 'Overview' && <MovieOverview film = {film}/>}
+              {navigation === 'Details' && <MovieDetails film = {film}/>}
+              {navigation === 'Reviews' && <MovieReviews reviews = {comments}/>}
             </div>
           </div>
         </div>

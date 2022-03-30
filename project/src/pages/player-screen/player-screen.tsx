@@ -6,7 +6,9 @@ import { FilmInfo } from '../../types/films';
 function PlayerScreen(): JSX.Element {
   const {id} = useParams();
   const films = useAppSelector((state) => state.films);
-  const movie = films.find((film: FilmInfo) => `:${film.id}` === id);
+
+  const filmId = Number(id);
+  const movie = films.find((film: FilmInfo) => film.id === filmId);
 
   if (!movie) {
     return <Navigate to={AppRoute.NotFound}/>;

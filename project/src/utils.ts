@@ -1,4 +1,4 @@
-import { AuthorizationStatus, HOUR_IN_MINUTES, Rating } from './const';
+import { AuthorizationStatus, HOUR_IN_MINUTES, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH, Rating } from './const';
 import { Films } from './types/films';
 import { Genres } from './types/genres';
 import { ConvertRating } from './types/util-types';
@@ -70,14 +70,6 @@ export const getFormattedRating = (rating: number) => {
   return filmRating.replace('.', ',');
 };
 
-export const getDescription = (filmDescription: string) => {
-  const sentences = filmDescription.match(/[^.?!]+[.!?]+[\])'"`’”]*|.+/g);
-  if (!sentences) {
-    return [];
-  }
-  return sentences;
-};
-
 export const filterFilms = (filmCards: Films, activeGenre: string) => {
   const filteredFilms = filmCards.filter((film) => film.genre === getActiveGenre(activeGenre));
 
@@ -88,11 +80,9 @@ export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean
   authorizationStatus === AuthorizationStatus.Unknown;
 
 export const validateLogin = (loginData: string): boolean =>
-  !!loginData.match(/^[-._a-z0-9]+@(?:[a-z0-9][-a-z0-9]+\.)+[a-z]{2,6}$/);
+  !!loginData.trim().length && !!loginData.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
 
-export const validatePassword = (passwordData: string): boolean => {
-  if (passwordData.length && passwordData.match(/^[a-zа-яё]+$/i)) {
-    return true;
-  }
-  return false;
-};
+export const validatePassword = (passwordData: string): boolean =>
+  !!passwordData.trim().length && !!passwordData.match(/^(?:[0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*$/i);
+
+export const validateText = (text: string): boolean => text.length >= MIN_REVIEW_LENGTH && text.length <= MAX_REVIEW_LENGTH;
