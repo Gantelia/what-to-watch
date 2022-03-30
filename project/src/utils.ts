@@ -86,3 +86,7 @@ export const validatePassword = (passwordData: string): boolean =>
   !!passwordData.trim().length && !!passwordData.match(/^(?:[0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*$/i);
 
 export const validateText = (text: string): boolean => text.length >= MIN_REVIEW_LENGTH && text.length <= MAX_REVIEW_LENGTH;
+
+export const validateRating = (rating: number) => rating >= 1 && rating <= 10;
+
+export const isAuthorized = (authorization: AuthorizationStatus) => authorization === AuthorizationStatus.Auth;

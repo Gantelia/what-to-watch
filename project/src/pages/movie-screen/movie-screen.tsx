@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import SignInOut from '../../components/sign-in-out/sign-in-out';
-import { AuthorizationStatus, FilmsCount } from '../../const';
+import { FilmsCount } from '../../const';
 import MovieOverview from '../../components/movie-overview/movie-overview';
 import { useEffect, useState } from 'react';
 import MovieDetails from '../../components/movie-details/movie-details';
@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction, fetchSimilarAction } from '../../store/api-actions/api-film-actions';
 import { fetchCommentsAction } from '../../store/api-actions/api-comments-actions';
 import LoadingScreen from '../loading - screen/loading-screen';
+import { isAuthorized } from '../../utils';
 
 function MovieScreen(): JSX.Element {
   const {id} = useParams();
@@ -80,7 +81,7 @@ function MovieScreen(): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                {authorizationStatus === AuthorizationStatus.Auth && <Link to={`/films/${filmId}/review`} className="btn film-card__button">Add review</Link>}
+                {isAuthorized(authorizationStatus) && <Link to={`/films/${filmId}/review`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>
           </div>

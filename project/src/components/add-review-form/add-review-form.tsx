@@ -4,7 +4,7 @@ import { UserReview } from '../../types/reviews';
 import { useAppDispatch } from '../../hooks';
 import { useParams } from 'react-router-dom';
 import { addReviewAction } from '../../store/api-actions/api-comments-actions';
-import { validateText } from '../../utils';
+import { validateRating, validateText } from '../../utils';
 import CSS from 'csstype';
 
 const errorTextStyle: CSS.Properties = {
@@ -30,20 +30,25 @@ function AddReviewForm(): JSX.Element {
     <form action="#" className="add-review__form"
       onSubmit={(evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
-        if (formData.rating < 1) {
+        const isRatingValid = validateRating(formData.rating);
+        const isCommentValid = validateText(formData.comment);
+        if (!isRatingValid) {
           setIsRating(false);
           setIsTextValid(true);
           return;
-        } else if (!validateText(formData.comment)) {
+        }
+        if (!isCommentValid) {
           setIsRating(true);
           setIsTextValid(false);
           return;
         }
-        setIsTextValid(true);
-        setIsRating(true);
-        setIsSubmitting(true);
-        dispatch(addReviewAction({id: Number(id), review: formData}));
-        setTimeout(() => setIsSubmitting(false), REQUEST_TIMEOUT);
+        if (isRatingValid && isCommentValid) {
+          setIsTextValid(true);
+          setIsRating(true);
+          setIsSubmitting(true);
+          dispatch(addReviewAction({id: Number(id), review: formData}));
+          setTimeout(() => setIsSubmitting(false), REQUEST_TIMEOUT);
+        }
       }}
     >
       <div className="rating">
@@ -57,7 +62,7 @@ function AddReviewForm(): JSX.Element {
                   name="rating"
                   value={rating}
                   checked={formData.rating === rating}
-                  onChange={({target}: ChangeEvent<HTMLInputElement>) => setFormData({...formData, rating: +target.value})}
+                  onChange={({target}: ChangeEvent<HTMLInputElement>) => setFormData({...formData, rating: Number(target.value)})}
                   disabled={isSubmitting}
                 />
                 <label className="rating__label" htmlFor={`star-${rating}`}>Rating {rating}</label>
