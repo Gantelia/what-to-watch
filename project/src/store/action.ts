@@ -8,7 +8,7 @@ export const getFilm = createAction<FilmInfo>('film/getFilm');
 
 export const getSimilarFilms = createAction<Films>('film/getSimilarFilms');
 
-export const requireAuthorization = createAction<AuthorizationStatus>('user/requreAuthorization');
+export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
 export const getUserData = createAction<UserData>('user/getUserData');
 
