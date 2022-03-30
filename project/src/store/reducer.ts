@@ -3,7 +3,7 @@ import { AuthorizationStatus } from '../const';
 import { FilmInfo, Films } from '../types/films';
 import { Comments } from '../types/reviews';
 import { UserData } from '../types/user-data';
-import { addReview, changeGenre, getComments, getFilm, getFilms, getPromo, getSimilarFilms, getUserData, requireAuthorization } from './action';
+import { addReview, changeGenre, getComments, getFilm, getFilms, getPromo, getSimilarFilms, getUserData, requireAuthorization, setError } from './action';
 
 type InitialState = {
   activeGenre: string;
@@ -15,6 +15,7 @@ type InitialState = {
   authorizationStatus: AuthorizationStatus;
   userData: UserData | null;
   comments: Comments;
+  error: string;
 }
 
 const initialState: InitialState = {
@@ -27,6 +28,7 @@ const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   userData: null,
   comments: [],
+  error: '',
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -58,6 +60,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(addReview, (state,action) => {
       state.comments.push(action.payload);
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 });
 

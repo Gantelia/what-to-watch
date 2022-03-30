@@ -16,8 +16,6 @@ export const getSimilarFilms = createAction<Films>('film/getSimilarFilms');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requreAuthorization');
 
-export const setError = createAction<string>('error/setError');
-
 export const getUserData = createAction<UserData>('user/getUserData');
 
 export const getComments = createAction<Comments>('film/getComments');
@@ -25,3 +23,5 @@ export const getComments = createAction<Comments>('film/getComments');
 export const addReview = createAction<Comment>('film/addReview');
 
 export const redirectToRoute = createAction<AppRoute | string>('routing/redirectToRoute');
+
+export const setError = createAction<string>('error/setError');

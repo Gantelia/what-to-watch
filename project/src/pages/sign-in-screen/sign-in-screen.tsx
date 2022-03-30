@@ -13,15 +13,18 @@ function SignInScreen(): JSX.Element {
   const [password, setPassword] = useState<string>('');
   const [loginMessage, setLoginMessage] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
-  const authorization = useAppSelector((store) => store.authorizationStatus);
+  const {authorizationStatus, error} = useAppSelector((store) => store);
 
   useEffect(() => {
-    if (isAuthorized(authorization)) {
+    if (isAuthorized(authorizationStatus)) {
       navigate(AppRoute.Main);
     }
-  },[authorization, navigate]);
+  },[authorizationStatus, navigate]);
 
   const handleSubmit = (evt: FormEvent<HTMLButtonElement>): void => {
     evt.preventDefault();
@@ -39,8 +42,13 @@ function SignInScreen(): JSX.Element {
     }
     if (isLoginValid && isPasswordValid) {
       dispatch(loginAction({login: login, password: password}));
+      setIsSubmitting(true);
     }
   };
+
+  if (error) {
+    setIsSubmitting(false);
+  }
 
   return (
     <div className="user-page">
@@ -65,6 +73,7 @@ function SignInScreen(): JSX.Element {
                 name="user-email"
                 id="user-email"
                 value={login}
+                disabled={isSubmitting}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
@@ -79,6 +88,7 @@ function SignInScreen(): JSX.Element {
                 name="user-password"
                 id="user-password"
                 value={password}
+                disabled={isSubmitting}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>

@@ -1,7 +1,7 @@
-import {RATINGS, REQUEST_TIMEOUT} from '../../const';
+import {RATINGS} from '../../const';
 import React, {useState, ChangeEvent, FormEvent} from 'react';
 import { UserReview } from '../../types/reviews';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
 import { addReviewAction } from '../../store/api-actions/api-comments-actions';
 import { validateRating, validateText } from '../../utils';
@@ -13,6 +13,7 @@ const errorTextStyle: CSS.Properties = {
 
 function AddReviewForm(): JSX.Element {
   const dispatch = useAppDispatch();
+  const error = useAppSelector((state) => state.error);
 
   const {id} = useParams();
   const [formData, setFormData] = useState<UserReview>(
@@ -25,6 +26,10 @@ function AddReviewForm(): JSX.Element {
   const [isTextValid, setIsTextValid] = useState(true);
   const [isRating, setIsRating] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  if (error) {
+    setIsSubmitting(false);
+  }
 
   return (
     <form action="#" className="add-review__form"
@@ -47,7 +52,6 @@ function AddReviewForm(): JSX.Element {
           setIsRating(true);
           setIsSubmitting(true);
           dispatch(addReviewAction({id: Number(id), review: formData}));
-          setTimeout(() => setIsSubmitting(false), REQUEST_TIMEOUT);
         }
       }}
     >
