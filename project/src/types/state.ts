@@ -1,6 +1,8 @@
+import { AuthorizationStatus } from '../const';
 import { store } from '../store';
 import { FilmInfo, Films } from './films';
 import { Comments } from './reviews';
+import { UserData } from './user-data';
 
 export type CatalogProcess = {
     activeGenre: string;
@@ -13,6 +15,11 @@ export type FilmProcess = {
     film: FilmInfo | null;
     similarFilms: Films;
     comments: Comments;
+}
+
+export type UserProcess = {
+    authorizationStatus: AuthorizationStatus;
+    userData: UserData | null;
 }
 
 export type State = ReturnType<typeof store.getState>;
