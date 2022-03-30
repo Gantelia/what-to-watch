@@ -65,5 +65,5 @@ export enum NameSpace {
   catalog = 'CATALOG',
   film = 'FILM',
   user = 'USER',
-  error = 'ERROR',
+  errors = 'ERRORS',
 }
