@@ -27,16 +27,3 @@ export type ServerComment = {
 
 export type ServerComments = ServerComment[];
 
-export type AdaptingComment = {
-    author: string;
-    userId: number;
-    text: string;
-    comment?: string;
-    date: string;
-    id: number;
-    rating: string;
-    user?: {
-        id: number;
-        name: string;
-    };
-};
