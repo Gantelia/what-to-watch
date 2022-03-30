@@ -6,7 +6,7 @@ import { FilmsCount } from '../../const';
 import { useAppSelector } from '../../hooks';
 
 function MyListScreen(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
+  const {films} = useAppSelector(({CATALOG}) => CATALOG);
 
   return (
     <div className="user-page">

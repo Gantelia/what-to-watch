@@ -19,7 +19,8 @@ function MovieScreen(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const {film, similarFilms, comments, authorizationStatus} = useAppSelector((state) => state);
+  const {film, similarFilms, comments} = useAppSelector(({FILM}) => FILM);
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
 
   const [navigation, setNavigation] = useState('Overview');
   const navigate = useNavigate();

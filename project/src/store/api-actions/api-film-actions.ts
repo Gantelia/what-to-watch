@@ -3,7 +3,9 @@ import { api, store } from '..';
 import { APIRoute } from '../../const';
 import { handleError } from '../../services/handle-error';
 import { FilmInfo, Films } from '../../types/films';
-import { getFilm, getFilms, getPromo, getSimilarFilms } from '../action';
+import { getFilms, getPromo } from '../catalog-process/catalog-process';
+import { getFilm, getSimilarFilms } from '../film-process/film-process';
+
 
 export const fetchFilmsAction = createAsyncThunk(
   'data/fetchFilms',

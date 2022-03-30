@@ -13,7 +13,7 @@ const errorTextStyle: CSS.Properties = {
 
 function AddReviewForm(): JSX.Element {
   const dispatch = useAppDispatch();
-  const error = useAppSelector((state) => state.error);
+  const {error} = useAppSelector(({ERRORS}) => ERRORS);
 
   const {id} = useParams();
   const [formData, setFormData] = useState<UserReview>(

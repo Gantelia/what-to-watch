@@ -6,7 +6,7 @@ import { isAuthorized } from '../../utils';
 
 function SignInOut(): JSX.Element {
   const navigate = useNavigate();
-  const {authorizationStatus, userData} = useAppSelector((state) => state);
+  const {authorizationStatus, userData} = useAppSelector(({USER}) => USER);
   const dispatch = useAppDispatch();
 
   if (isAuthorized(authorizationStatus)) {

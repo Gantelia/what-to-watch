@@ -14,7 +14,7 @@ function AddReviewScreen(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const {film} = useAppSelector((state) => state);
+  const {film} = useAppSelector(({FILM}) => FILM);
 
   useEffect(() => {
     if (film === null || film.id !== filmId) {

@@ -3,7 +3,8 @@ import { api, store } from '..';
 import { APIRoute } from '../../const';
 import { handleError } from '../../services/handle-error';
 import { Comment, Comments, ServerComment, ServerComments, UserReview } from '../../types/reviews';
-import { getComments, redirectToRoute } from '../action';
+import { redirectToRoute } from '../action';
+import { getComments } from '../film-process/film-process';
 
 type UserComment = {
   id: number;

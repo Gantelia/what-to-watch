@@ -18,7 +18,8 @@ function SignInScreen(): JSX.Element {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
-  const {authorizationStatus, error} = useAppSelector((store) => store);
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const {error} = useAppSelector(({ERRORS}) => ERRORS);
 
   useEffect(() => {
     if (isAuthorized(authorizationStatus)) {
