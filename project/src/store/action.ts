@@ -4,10 +4,6 @@ import { FilmInfo, Films } from '../types/films';
 import { Comment, Comments } from '../types/reviews';
 import { UserData } from '../types/user-data';
 
-export const getFilms = createAction<Films>('catalog/getFilms');
-
-export const getPromo = createAction<FilmInfo>('catalog/getPromo');
-
 export const getFilm = createAction<FilmInfo>('film/getFilm');
 
 export const getSimilarFilms = createAction<Films>('film/getSimilarFilms');

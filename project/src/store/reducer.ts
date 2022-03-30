@@ -3,11 +3,9 @@ import { AuthorizationStatus } from '../const';
 import { FilmInfo, Films } from '../types/films';
 import { Comments } from '../types/reviews';
 import { UserData } from '../types/user-data';
-import { addReview, getComments, getFilm, getFilms, getPromo, getSimilarFilms, getUserData, requireAuthorization, setError } from './action';
+import { addReview, getComments, getFilm, getSimilarFilms, getUserData, requireAuthorization, setError } from './action';
 
 type InitialState = {
-  films: Films;
-  promo: FilmInfo | null;
   film: FilmInfo | null;
   similarFilms: Films;
   isDataLoaded: boolean;
@@ -18,8 +16,6 @@ type InitialState = {
 }
 
 const initialState: InitialState = {
-  films: [],
-  promo: null,
   film: null,
   similarFilms: [],
   isDataLoaded: false,
@@ -31,13 +27,6 @@ const initialState: InitialState = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(getFilms, (state, action) => {
-      state.films = action.payload;
-      state.isDataLoaded = true;
-    })
-    .addCase(getPromo, (state, action) => {
-      state.promo = action.payload;
-    })
     .addCase(getFilm, (state, action) => {
       state.film = action.payload;
     })
