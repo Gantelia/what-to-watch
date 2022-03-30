@@ -2,24 +2,19 @@ import { useState } from 'react';
 import MovieCard from '../../components/movie-card/movie-card';
 import { FilmsCount } from '../../const';
 import { Films } from '../../types/films';
-import { filterFilms } from '../../utils';
-
 
 type FilmListProps = {
     filmCards: Films;
-    activeGenre: string;
     filmsCount: FilmsCount;
 }
 
-function FilmList({filmCards, activeGenre, filmsCount}: FilmListProps): JSX.Element {
+function FilmList({filmCards, filmsCount}: FilmListProps): JSX.Element {
   const [activePlayer, setActivePlayer] = useState<null | number>(null);
-
-  const films = filterFilms(filmCards, activeGenre);
 
   return (
     <div className="catalog__films-list">
       {
-        films.slice(0, filmsCount).map((card) =>(
+        filmCards.slice(0, filmsCount).map((card) =>(
           <MovieCard
             key={card.id}
             film={card}

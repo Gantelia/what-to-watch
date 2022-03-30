@@ -132,7 +132,6 @@ function MovieScreen(): JSX.Element {
             {
               <FilmList
                 filmCards={similarFilms}
-                activeGenre={genre}
                 filmsCount={FilmsCount.MovieScreen}
               />
             }

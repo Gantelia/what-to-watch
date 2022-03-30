@@ -24,7 +24,6 @@ function MyListScreen(): JSX.Element {
           {
             <FilmList
               filmCards={films}
-              activeGenre={'All genres'}
               filmsCount={FilmsCount.MyListScreen}
             />
           }

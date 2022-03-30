@@ -88,8 +88,7 @@ function MainScreen(): JSX.Element {
           <GenreList films = {films} activeGenre = {activeGenre} handleGenreChange = {handleGenreChange}/>
           {
             <FilmList
-              filmCards={films}
-              activeGenre={activeGenre}
+              filmCards={filmsOfGenre}
               filmsCount={filmsCount}
             />
           }
