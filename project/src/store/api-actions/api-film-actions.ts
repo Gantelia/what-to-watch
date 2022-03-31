@@ -3,8 +3,9 @@ import { api, store } from '..';
 import { APIRoute } from '../../const';
 import { handleError } from '../../services/handle-error';
 import { FilmInfo, Films } from '../../types/films';
-import { getFavorite, getFilms, getPromo } from '../catalog-process/catalog-process';
+import { getFilms, getPromo } from '../catalog-process/catalog-process';
 import { getFilm, getSimilarFilms } from '../film-process/film-process';
+import { getFavorite } from './favorite-process/favorite-process';
 
 
 export const fetchFilmsAction = createAsyncThunk(
@@ -56,7 +57,7 @@ export const fetchSimilarAction = createAsyncThunk(
 );
 
 export const fetchFavoriteAction = createAsyncThunk(
-  'catalog/fetchFavoriteFilms',
+  'favorite/fetchFavoriteFilms',
   async () => {
     try {
       const {data} = await api.get<Films>(APIRoute.Favorite);

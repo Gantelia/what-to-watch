@@ -5,16 +5,16 @@ import Logo from '../../components/logo/logo';
 import SignInOut from '../../components/sign-in-out/sign-in-out';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFavoriteAction } from '../../store/api-actions/api-film-actions';
-import { getFavorite } from '../../store/catalog-process/catalog-process';
 import LoadingScreen from '../loading - screen/loading-screen';
 
 function MyListScreen(): JSX.Element {
   const dispatch = useAppDispatch();
-  const {favorite} = useAppSelector(({CATALOG}) => CATALOG);
+  const {favorite} = useAppSelector(({FAVORITE}) => FAVORITE);
 
   useEffect(() => {
     dispatch(fetchFavoriteAction());
   }, [dispatch]);
+
   if (favorite === null) {
     return <LoadingScreen />;
   }
@@ -35,7 +35,7 @@ function MyListScreen(): JSX.Element {
           {
             <FilmList
               filmCards={favorite}
-              filmsCount={getFavorite.length}
+              filmsCount={favorite.length}
             />
           }
         </div>

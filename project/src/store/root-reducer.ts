@@ -1,5 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { NameSpace } from '../const';
+import { favoriteProcess } from './api-actions/favorite-process/favorite-process';
 import { catalogProcess } from './catalog-process/catalog-process';
 import { errorsProcess } from './errors-process/errors-process';
 import { filmProcess } from './film-process/film-process';
@@ -10,4 +11,5 @@ export const rootReducer = combineReducers({
   [NameSpace.film]: filmProcess.reducer,
   [NameSpace.user]: userProcess.reducer,
   [NameSpace.errors]: errorsProcess.reducer,
+  [NameSpace.favorite]: favoriteProcess.reducer,
 });

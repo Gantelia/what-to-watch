@@ -9,7 +9,6 @@ export type CatalogProcess = {
     films: Films;
     isDataLoaded: boolean;
     promo: FilmInfo | null;
-    favorite: Films | null;
 }
 
 export type FilmProcess = {
@@ -25,6 +24,10 @@ export type UserProcess = {
 
 export type ErrorsProcess = {
     error: string;
+}
+
+export type FavoriteProcess = {
+    favorite: Films | null;
 }
 
 export type State = ReturnType<typeof store.getState>;

@@ -65,4 +65,5 @@ export enum NameSpace {
   film = 'FILM',
   user = 'USER',
   errors = 'ERRORS',
+  favorite = 'FAVORITE',
 }
