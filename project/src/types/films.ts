@@ -18,4 +18,9 @@ export type FilmInfo = {
     isFavorite: boolean;
 }
 
+export type FavoriteChange = {
+    id: number;
+    status: number;
+}
+
 export type Films = FilmInfo[];

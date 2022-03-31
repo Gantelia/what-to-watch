@@ -25,5 +25,10 @@ export type ServerComment = {
     }
 };
 
+export type UserComment = {
+    id: number;
+    review: UserReview;
+  }
+
 export type ServerComments = ServerComment[];
 

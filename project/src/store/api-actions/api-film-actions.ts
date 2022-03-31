@@ -2,10 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, store } from '..';
 import { APIRoute } from '../../const';
 import { handleError } from '../../services/handle-error';
-import { FilmInfo, Films } from '../../types/films';
+import { FavoriteChange, FilmInfo, Films } from '../../types/films';
 import { getFilms, getPromo } from '../catalog-process/catalog-process';
 import { getFilm, getSimilarFilms } from '../film-process/film-process';
-import { getFavorite } from './favorite-process/favorite-process';
+import { getCurrentFavorite, getFavorite } from './favorite-process/favorite-process';
 
 
 export const fetchFilmsAction = createAsyncThunk(
@@ -68,3 +68,14 @@ export const fetchFavoriteAction = createAsyncThunk(
   },
 );
 
+export const changeFavoriteAction = createAsyncThunk<void, FavoriteChange>(
+  'film/addReview',
+  async ({id, status}: FavoriteChange) => {
+    try {
+      const {data} = await api.post<FilmInfo>(`${APIRoute.Favorite}/${id}/${status}`);
+      store.dispatch(getCurrentFavorite(data));
+    } catch (error) {
+      handleError (error);
+    }
+  },
+);
