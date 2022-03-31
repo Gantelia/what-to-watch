@@ -9,6 +9,7 @@ export type CatalogProcess = {
     films: Films;
     isDataLoaded: boolean;
     promo: FilmInfo | null;
+    favorite: Films | null;
 }
 
 export type FilmProcess = {

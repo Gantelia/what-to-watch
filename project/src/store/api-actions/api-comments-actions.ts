@@ -23,7 +23,7 @@ const adaptToClient = (comment: ServerComment): Comment => (
 );
 
 export const fetchCommentsAction = createAsyncThunk(
-  'data/fetchComments',
+  'film/fetchComments',
   async (id: number) => {
     try {
       const {data} = await api.get<ServerComments>(`${APIRoute.Comments}/${id}`);
@@ -37,7 +37,7 @@ export const fetchCommentsAction = createAsyncThunk(
 
 
 export const addReviewAction = createAsyncThunk<void, UserComment>(
-  'data/addReview',
+  'film/addReview',
   async ({id, review: {rating, comment}}: UserComment) => {
     try {
       const {data} = await api.post<ServerComments>(`${APIRoute.Comments}/${id}`, {rating, comment});

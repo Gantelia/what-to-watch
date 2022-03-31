@@ -1,12 +1,23 @@
 
+import { useEffect } from 'react';
 import FilmList from '../../components/film-list/film-list';
 import Logo from '../../components/logo/logo';
 import SignInOut from '../../components/sign-in-out/sign-in-out';
-import { FilmsCount } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFavoriteAction } from '../../store/api-actions/api-film-actions';
+import { getFavorite } from '../../store/catalog-process/catalog-process';
+import LoadingScreen from '../loading - screen/loading-screen';
 
 function MyListScreen(): JSX.Element {
-  const {films} = useAppSelector(({CATALOG}) => CATALOG);
+  const dispatch = useAppDispatch();
+  const {favorite} = useAppSelector(({CATALOG}) => CATALOG);
+
+  useEffect(() => {
+    dispatch(fetchFavoriteAction());
+  }, [dispatch]);
+  if (favorite === null) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className="user-page">
@@ -23,8 +34,8 @@ function MyListScreen(): JSX.Element {
         <div className="catalog__films-list">
           {
             <FilmList
-              filmCards={films}
-              filmsCount={FilmsCount.MyListScreen}
+              filmCards={favorite}
+              filmsCount={getFavorite.length}
             />
           }
         </div>

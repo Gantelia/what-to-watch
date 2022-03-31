@@ -7,6 +7,7 @@ const initialState: CatalogProcess = {
   films: [],
   isDataLoaded: false,
   promo: null,
+  favorite: null,
 };
 
 export const catalogProcess = createSlice({
@@ -23,7 +24,10 @@ export const catalogProcess = createSlice({
     getPromo: (state, action) => {
       state.promo = action.payload;
     },
+    getFavorite: (state, action) => {
+      state.favorite = action.payload;
+    },
   },
 });
 
-export const {changeGenre, getFilms, getPromo} = catalogProcess.actions;
+export const {changeGenre, getFilms, getPromo, getFavorite} = catalogProcess.actions;

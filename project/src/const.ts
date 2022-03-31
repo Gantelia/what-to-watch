@@ -43,7 +43,6 @@ export enum Rating {
 export enum FilmsCount {
   MainScreen = 8,
   MovieScreen = 4,
-  MyListScreen = 4,
 }
 
 export enum APIRoute {

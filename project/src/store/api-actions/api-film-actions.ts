@@ -3,12 +3,12 @@ import { api, store } from '..';
 import { APIRoute } from '../../const';
 import { handleError } from '../../services/handle-error';
 import { FilmInfo, Films } from '../../types/films';
-import { getFilms, getPromo } from '../catalog-process/catalog-process';
+import { getFavorite, getFilms, getPromo } from '../catalog-process/catalog-process';
 import { getFilm, getSimilarFilms } from '../film-process/film-process';
 
 
 export const fetchFilmsAction = createAsyncThunk(
-  'data/fetchFilms',
+  'catalog/fetchFilms',
   async () => {
     try {
       const {data} = await api.get<Films>(APIRoute.Films);
@@ -20,7 +20,7 @@ export const fetchFilmsAction = createAsyncThunk(
 );
 
 export const fetchPromoAction = createAsyncThunk(
-  'data/fetchPromo',
+  'catalog/fetchPromo',
   async () => {
     try {
       const {data} = await api.get<FilmInfo>(APIRoute.Promo);
@@ -32,7 +32,7 @@ export const fetchPromoAction = createAsyncThunk(
 );
 
 export const fetchFilmAction = createAsyncThunk(
-  'data/fetchFilm',
+  'film/fetchFilm',
   async (id: number) => {
     try {
       const {data} = await api.get<FilmInfo>(`${APIRoute.Films}/${id}`);
@@ -44,11 +44,23 @@ export const fetchFilmAction = createAsyncThunk(
 );
 
 export const fetchSimilarAction = createAsyncThunk(
-  'data/fetchSimilarFilms',
+  'film/fetchSimilarFilms',
   async (id: number) => {
     try {
       const {data} = await api.get<Films>(`${APIRoute.Films}/${id}/similar`);
       store.dispatch(getSimilarFilms(data));
+    } catch (error) {
+      handleError(error);
+    }
+  },
+);
+
+export const fetchFavoriteAction = createAsyncThunk(
+  'catalog/fetchFavoriteFilms',
+  async () => {
+    try {
+      const {data} = await api.get<Films>(APIRoute.Favorite);
+      store.dispatch(getFavorite(data));
     } catch (error) {
       handleError(error);
     }
