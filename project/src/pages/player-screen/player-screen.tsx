@@ -1,24 +1,36 @@
-import { Navigate, useParams } from 'react-router-dom';
-import { AppRoute } from '../../const';
-import { useAppSelector } from '../../hooks';
-import { FilmInfo } from '../../types/films';
+import { useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilmAction } from '../../store/api-actions/api-film-actions';
+import LoadingScreen from '../loading - screen/loading-screen';
 
 function PlayerScreen(): JSX.Element {
+  const dispatch = useAppDispatch();
   const {id} = useParams();
-  const {films} = useAppSelector(({CATALOG}) => CATALOG);
+  const {film} = useAppSelector(({FILM}) => FILM);
 
-  const filmId = Number(id);
-  const movie = films.find((film: FilmInfo) => film.id === filmId);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  if (!movie) {
-    return <Navigate to={AppRoute.NotFound}/>;
+  useEffect (() => {
+    if (film === null || film?.id !== Number(id)) {
+      dispatch(fetchFilmAction(Number(id)));
+    }
+  }, [dispatch, film, id]);
+
+  if (!film || film?.id !== Number(id) || videoRef === null) {
+    return <LoadingScreen />;
   }
-
-  const {videoLink} = movie;
 
   return (
     <div className="player">
-      <video src={videoLink} className="player__video" poster="img/player-poster.jpg"></video>
+      <video
+        ref={videoRef}
+        src={film.videoLink}
+        className="player__video"
+        poster="img/player-poster.jpg"
+      >
+
+      </video>
 
       <button type="button" className="player__exit">Exit</button>
 

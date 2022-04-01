@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import SignInOut from '../../components/sign-in-out/sign-in-out';
 import { FilmsCount } from '../../const';
@@ -13,6 +13,7 @@ import { fetchCommentsAction } from '../../store/api-actions/api-comments-action
 import LoadingScreen from '../loading - screen/loading-screen';
 import { isAuthorized } from '../../utils';
 import MyListButton from '../../components/my-list-button/my-list-button';
+import PlayButton from '../../components/play-button/play-button';
 
 function MovieScreen(): JSX.Element {
   const {id} = useParams();
@@ -24,7 +25,6 @@ function MovieScreen(): JSX.Element {
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
 
   const [navigation, setNavigation] = useState('Overview');
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (film === null || film?.id !== filmId) {
@@ -69,16 +69,8 @@ function MovieScreen(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button"
-                  onClick={() => navigate (`/player/${filmId}`)}
-                >
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
+                <PlayButton movieToPlay={film} />
                 <MyListButton favoriteFilm={film} />
-
                 {isAuthorized(authorizationStatus) && <Link to={`/films/${filmId}/review`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>

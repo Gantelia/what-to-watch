@@ -1,5 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
-import { getMovieToPlay } from '../../store/api-actions/favorite-process/favorite-process';
+import { getFilm } from '../../store/film-process/film-process';
 import { FilmInfo } from '../../types/films';
 
 type PlayButtonProps = {
@@ -8,9 +9,11 @@ type PlayButtonProps = {
 
 function PlayButton({movieToPlay}: PlayButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handlePlayClick = () => {
-    dispatch(getMovieToPlay(movieToPlay));
+    dispatch(getFilm(movieToPlay));
+    navigate(`/player/${movieToPlay.id}`);
   };
 
   return (

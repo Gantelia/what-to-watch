@@ -5,7 +5,6 @@ import { FavoriteProcess } from '../../../types/state';
 const initialState: FavoriteProcess = {
   favorite: null,
   currentFavorite: null,
-  movieToPlay: null,
 };
 
 export const favoriteProcess = createSlice({
@@ -18,10 +17,7 @@ export const favoriteProcess = createSlice({
     getCurrentFavorite: (state, action) => {
       state.currentFavorite = action.payload;
     },
-    getMovieToPlay: (state, action) => {
-      state.movieToPlay = action.payload;
-    },
   },
 });
 
-export const {getFavoriteFilms, getCurrentFavorite, getMovieToPlay} = favoriteProcess.actions;
+export const {getFavoriteFilms, getCurrentFavorite} = favoriteProcess.actions;
