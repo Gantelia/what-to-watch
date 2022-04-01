@@ -1,5 +1,5 @@
 import { AuthorizationStatus, HOUR_IN_MINUTES, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH, Rating } from './const';
-import { Films } from './types/films';
+import { FilmInfo, Films } from './types/films';
 import { Genres } from './types/genres';
 import { ConvertRating } from './types/util-types';
 
@@ -90,3 +90,5 @@ export const validateText = (text: string): boolean => text.length >= MIN_REVIEW
 export const validateRating = (rating: number) => rating >= 1 && rating <= 10;
 
 export const isAuthorized = (authorization: AuthorizationStatus) => authorization === AuthorizationStatus.Auth;
+
+export  const isFavorite = (current: FilmInfo | null, film: FilmInfo) => current && current.id === film.id? current.isFavorite : film.isFavorite;

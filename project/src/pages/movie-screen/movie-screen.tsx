@@ -12,6 +12,7 @@ import { fetchFilmAction, fetchSimilarAction } from '../../store/api-actions/api
 import { fetchCommentsAction } from '../../store/api-actions/api-comments-actions';
 import LoadingScreen from '../loading - screen/loading-screen';
 import { isAuthorized } from '../../utils';
+import MyListButton from '../../components/my-list-button/my-list-button';
 
 function MovieScreen(): JSX.Element {
   const {id} = useParams();
@@ -76,12 +77,8 @@ function MovieScreen(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                {isAuthorized(authorizationStatus) && <MyListButton favoriteFilm={film} />}
+
                 {isAuthorized(authorizationStatus) && <Link to={`/films/${filmId}/review`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>

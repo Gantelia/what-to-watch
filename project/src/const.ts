@@ -61,9 +61,14 @@ export enum HTTP_CODE {
 }
 
 export enum NameSpace {
-  catalog = 'CATALOG',
-  film = 'FILM',
-  user = 'USER',
-  errors = 'ERRORS',
-  favorite = 'FAVORITE',
+  Catalog = 'CATALOG',
+  Film = 'FILM',
+  User = 'USER',
+  Errors = 'ERRORS',
+  Favorite = 'FAVORITE',
+}
+
+export enum FavoriteStatus {
+  Favorite = 1,
+  NotFavorite = 0,
 }

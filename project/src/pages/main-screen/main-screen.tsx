@@ -8,7 +8,8 @@ import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import { useState } from 'react';
 import { changeGenre } from '../../store/catalog-process/catalog-process';
 import LoadingScreen from '../loading - screen/loading-screen';
-import { filterFilms } from '../../utils';
+import { filterFilms, isAuthorized } from '../../utils';
+import MyListButton from '../../components/my-list-button/my-list-button';
 
 function MainScreen(): JSX.Element {
   const [filmsCount, setFilmsCount] = useState<FilmsCount | number>(FilmsCount.MainScreen);
@@ -16,6 +17,7 @@ function MainScreen(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const {activeGenre, films, promo} = useAppSelector(({CATALOG}) => CATALOG);
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
 
   if (!promo) {
     return <LoadingScreen />;
@@ -70,12 +72,8 @@ function MainScreen(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+
+                {isAuthorized(authorizationStatus) && <MyListButton favoriteFilm={promo} />}
               </div>
             </div>
           </div>
