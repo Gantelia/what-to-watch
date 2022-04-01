@@ -77,7 +77,7 @@ function MovieScreen(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                {isAuthorized(authorizationStatus) && <MyListButton favoriteFilm={film} />}
+                <MyListButton favoriteFilm={film} />
 
                 {isAuthorized(authorizationStatus) && <Link to={`/films/${filmId}/review`} className="btn film-card__button">Add review</Link>}
               </div>

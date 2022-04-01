@@ -8,7 +8,7 @@ import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import { useState } from 'react';
 import { changeGenre } from '../../store/catalog-process/catalog-process';
 import LoadingScreen from '../loading - screen/loading-screen';
-import { filterFilms, isAuthorized } from '../../utils';
+import { filterFilms } from '../../utils';
 import MyListButton from '../../components/my-list-button/my-list-button';
 
 function MainScreen(): JSX.Element {
@@ -17,7 +17,6 @@ function MainScreen(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const {activeGenre, films, promo} = useAppSelector(({CATALOG}) => CATALOG);
-  const {authorizationStatus} = useAppSelector(({USER}) => USER);
 
   if (!promo) {
     return <LoadingScreen />;
@@ -73,7 +72,7 @@ function MainScreen(): JSX.Element {
                   <span>Play</span>
                 </button>
 
-                {isAuthorized(authorizationStatus) && <MyListButton favoriteFilm={promo} />}
+                <MyListButton favoriteFilm={promo} />
               </div>
             </div>
           </div>
