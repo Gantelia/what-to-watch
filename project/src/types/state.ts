@@ -29,6 +29,7 @@ export type ErrorsProcess = {
 export type FavoriteProcess = {
     favorite: Films | null;
     currentFavorite: FilmInfo | null;
+    movieToPlay: FilmInfo | null;
 }
 
 export type State = ReturnType<typeof store.getState>;

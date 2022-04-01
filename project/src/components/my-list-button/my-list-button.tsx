@@ -15,7 +15,6 @@ function MyListButton({favoriteFilm}: MyListButtonProps): JSX.Element {
 
   const favoriteStatus = isFavorite(currentFavorite, favoriteFilm)? FavoriteStatus.NotFavorite : FavoriteStatus.Favorite;
 
-
   const handleFavoriteClick = () => {
     dispatch(changeFavoriteAction({
       id: favoriteFilm.id,

@@ -5,7 +5,7 @@ import { handleError } from '../../services/handle-error';
 import { FavoriteChange, FilmInfo, Films } from '../../types/films';
 import { getFilms, getPromo } from '../catalog-process/catalog-process';
 import { getFilm, getSimilarFilms } from '../film-process/film-process';
-import { getCurrentFavorite, getFavorite } from './favorite-process/favorite-process';
+import { getCurrentFavorite, getFavoriteFilms } from './favorite-process/favorite-process';
 
 
 export const fetchFilmsAction = createAsyncThunk(
@@ -61,7 +61,7 @@ export const fetchFavoriteAction = createAsyncThunk(
   async () => {
     try {
       const {data} = await api.get<Films>(APIRoute.Favorite);
-      store.dispatch(getFavorite(data));
+      store.dispatch(getFavoriteFilms(data));
     } catch (error) {
       handleError(error);
     }
