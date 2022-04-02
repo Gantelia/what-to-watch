@@ -1,10 +1,10 @@
-import {RATINGS, REQUEST_TIMEOUT} from '../../const';
+import {RATINGS} from '../../const';
 import React, {useState, ChangeEvent, FormEvent} from 'react';
 import { UserReview } from '../../types/reviews';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
 import { addReviewAction } from '../../store/api-actions/api-comments-actions';
-import { validateText } from '../../utils';
+import { validateRating, validateText } from '../../utils';
 import CSS from 'csstype';
 
 const errorTextStyle: CSS.Properties = {
@@ -13,6 +13,7 @@ const errorTextStyle: CSS.Properties = {
 
 function AddReviewForm(): JSX.Element {
   const dispatch = useAppDispatch();
+  const {error} = useAppSelector(({ERRORS}) => ERRORS);
 
   const {id} = useParams();
   const [formData, setFormData] = useState<UserReview>(
@@ -26,24 +27,32 @@ function AddReviewForm(): JSX.Element {
   const [isRating, setIsRating] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  if (error) {
+    setIsSubmitting(false);
+  }
+
   return (
     <form action="#" className="add-review__form"
       onSubmit={(evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
-        if (formData.rating < 1) {
+        const isRatingValid = validateRating(formData.rating);
+        const isCommentValid = validateText(formData.comment);
+        if (!isRatingValid) {
           setIsRating(false);
           setIsTextValid(true);
           return;
-        } else if (!validateText(formData.comment)) {
+        }
+        if (!isCommentValid) {
           setIsRating(true);
           setIsTextValid(false);
           return;
         }
-        setIsTextValid(true);
-        setIsRating(true);
-        setIsSubmitting(true);
-        dispatch(addReviewAction({id: Number(id), review: formData}));
-        setTimeout(() => setIsSubmitting(false), REQUEST_TIMEOUT);
+        if (isRatingValid && isCommentValid) {
+          setIsTextValid(true);
+          setIsRating(true);
+          setIsSubmitting(true);
+          dispatch(addReviewAction({id: Number(id), review: formData}));
+        }
       }}
     >
       <div className="rating">
@@ -57,7 +66,7 @@ function AddReviewForm(): JSX.Element {
                   name="rating"
                   value={rating}
                   checked={formData.rating === rating}
-                  onChange={({target}: ChangeEvent<HTMLInputElement>) => setFormData({...formData, rating: +target.value})}
+                  onChange={({target}: ChangeEvent<HTMLInputElement>) => setFormData({...formData, rating: Number(target.value)})}
                   disabled={isSubmitting}
                 />
                 <label className="rating__label" htmlFor={`star-${rating}`}>Rating {rating}</label>

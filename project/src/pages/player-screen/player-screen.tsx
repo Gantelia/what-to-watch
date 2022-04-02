@@ -5,7 +5,7 @@ import { FilmInfo } from '../../types/films';
 
 function PlayerScreen(): JSX.Element {
   const {id} = useParams();
-  const films = useAppSelector((state) => state.films);
+  const {films} = useAppSelector(({CATALOG}) => CATALOG);
 
   const filmId = Number(id);
   const movie = films.find((film: FilmInfo) => film.id === filmId);

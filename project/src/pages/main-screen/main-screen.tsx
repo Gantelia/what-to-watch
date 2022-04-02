@@ -6,7 +6,7 @@ import GenreList from '../../components/genre-list/genre-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import { useState } from 'react';
-import { changeGenre } from '../../store/action';
+import { changeGenre } from '../../store/catalog-process/catalog-process';
 import LoadingScreen from '../loading - screen/loading-screen';
 import { filterFilms } from '../../utils';
 
@@ -15,7 +15,7 @@ function MainScreen(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const {activeGenre, films, promo} = useAppSelector((state) => state);
+  const {activeGenre, films, promo} = useAppSelector(({CATALOG}) => CATALOG);
 
   if (!promo) {
     return <LoadingScreen />;
@@ -88,8 +88,7 @@ function MainScreen(): JSX.Element {
           <GenreList films = {films} activeGenre = {activeGenre} handleGenreChange = {handleGenreChange}/>
           {
             <FilmList
-              filmCards={films}
-              activeGenre={activeGenre}
+              filmCards={filmsOfGenre}
               filmsCount={filmsCount}
             />
           }

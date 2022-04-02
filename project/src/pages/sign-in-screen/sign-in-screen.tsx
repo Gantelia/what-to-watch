@@ -3,41 +3,53 @@ import { useNavigate } from 'react-router-dom';
 import InvalidLogin from '../../components/invalid-login/invalid-login';
 import Logo from '../../components/logo/logo';
 import SignInError from '../../components/sign-in-error/sign-in-error';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions/api-auth-actions';
-import { validateLogin, validatePassword } from '../../utils';
+import { isAuthorized, validateLogin, validatePassword } from '../../utils';
 
 function SignInScreen(): JSX.Element {
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [loginMessage, setLoginMessage] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
-  const authorization = useAppSelector((store) => store.authorizationStatus);
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const {error} = useAppSelector(({ERRORS}) => ERRORS);
 
   useEffect(() => {
-    if (authorization === AuthorizationStatus.Auth) {
+    if (isAuthorized(authorizationStatus)) {
       navigate(AppRoute.Main);
     }
-  },[authorization, navigate]);
+  },[authorizationStatus, navigate]);
 
   const handleSubmit = (evt: FormEvent<HTMLButtonElement>): void => {
     evt.preventDefault();
-    const loginValidation = validateLogin(login);
-    const passValidation = validatePassword(password);
-    if (!loginValidation) {
+    const isLoginValid = validateLogin(login);
+    const isPasswordValid = validatePassword(password);
+    if (!isLoginValid) {
       setLoginMessage(true);
       setPasswordMessage(false);
       return;
-    } else if (loginValidation && !passValidation) {
+    }
+    if (isLoginValid && !isPasswordValid) {
       setLoginMessage(false);
       setPasswordMessage(true);
       return;
     }
-    dispatch(loginAction({login: login, password: password}));
+    if (isLoginValid && isPasswordValid) {
+      dispatch(loginAction({login: login, password: password}));
+      setIsSubmitting(true);
+    }
   };
+
+  if (error) {
+    setIsSubmitting(false);
+  }
 
   return (
     <div className="user-page">
@@ -62,6 +74,7 @@ function SignInScreen(): JSX.Element {
                 name="user-email"
                 id="user-email"
                 value={login}
+                disabled={isSubmitting}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
@@ -76,6 +89,7 @@ function SignInScreen(): JSX.Element {
                 name="user-password"
                 id="user-password"
                 value={password}
+                disabled={isSubmitting}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>

@@ -2,7 +2,8 @@ import request from 'axios';
 import { toast } from 'react-toastify';
 import { AppRoute, AuthorizationStatus, HTTP_CODE } from '../const';
 import { store } from '../store';
-import { redirectToRoute, requireAuthorization } from '../store/action';
+import { redirectToRoute } from '../store/action';
+import { requireAuthorization } from '../store/user-process/user-process';
 import { ErrorType } from '../types/error';
 
 export const handleError = (error: ErrorType): void => {

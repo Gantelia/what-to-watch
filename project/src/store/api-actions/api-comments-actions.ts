@@ -2,27 +2,25 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, store } from '..';
 import { APIRoute } from '../../const';
 import { handleError } from '../../services/handle-error';
-import { AdaptingComment, Comment, Comments, ServerComment, ServerComments, UserReview } from '../../types/reviews';
-import { getComments, redirectToRoute } from '../action';
+import { Comment, Comments, ServerComment, ServerComments, UserReview } from '../../types/reviews';
+import { redirectToRoute } from '../action';
+import { getComments } from '../film-process/film-process';
 
 type UserComment = {
   id: number;
   review: UserReview;
 }
 
-const adaptToClient = (comment: ServerComment): Comment => {
-  const adaptedComment: AdaptingComment = {
-    ...comment,
-    author: comment['user']['name'],
-    userId: comment['user']['id'],
-    text: comment['comment'],
-    rating: comment['rating'].toString(),
-  };
-  delete adaptedComment['comment'];
-  delete adaptedComment['user'];
-
-  return adaptedComment;
-};
+const adaptToClient = (comment: ServerComment): Comment => (
+  {
+    id: comment.id,
+    author: comment.user.name,
+    date: comment.date,
+    rating: comment.rating.toString(),
+    text: comment.comment,
+    userId: comment.user.id,
+  }
+);
 
 export const fetchCommentsAction = createAsyncThunk(
   'data/fetchComments',

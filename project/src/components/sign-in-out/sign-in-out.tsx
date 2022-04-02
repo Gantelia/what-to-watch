@@ -1,14 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus} from '../../const';
+import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions/api-auth-actions';
+import { isAuthorized } from '../../utils';
 
 function SignInOut(): JSX.Element {
   const navigate = useNavigate();
-  const {authorizationStatus, userData} = useAppSelector((state) => state);
+  const {authorizationStatus, userData} = useAppSelector(({USER}) => USER);
   const dispatch = useAppDispatch();
 
-  if (authorizationStatus === AuthorizationStatus.Auth) {
+  if (isAuthorized(authorizationStatus)) {
     return (
       <ul className="user-block">
         <li className="user-block__item">

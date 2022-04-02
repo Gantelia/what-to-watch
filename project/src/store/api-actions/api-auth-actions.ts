@@ -5,7 +5,7 @@ import { handleError } from '../../services/handle-error';
 import { dropToken, saveToken } from '../../services/token';
 import { AuthData } from '../../types/auth-data';
 import { UserData } from '../../types/user-data';
-import { getUserData, requireAuthorization } from '../action';
+import { getUserData, requireAuthorization } from '../../store/user-process/user-process';
 
 export const checkAuthAction = createAsyncThunk(
   'user/checkAuth',
