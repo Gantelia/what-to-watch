@@ -11,6 +11,7 @@ type FilmListProps = {
 function FilmList({filmCards, filmsCount}: FilmListProps): JSX.Element {
   const [activePlayer, setActivePlayer] = useState<null | number>(null);
 
+
   return (
     <div className="catalog__films-list">
       {

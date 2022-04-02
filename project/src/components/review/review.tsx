@@ -9,6 +9,8 @@ function Review ({review}: ReviewProps): JSX.Element {
   const { text, author, date, rating } = review;
   const commentDate = dayjs(date).format('MMMM DD, YYYY');
   const dateTime = dayjs(date).format('YYYY-MM-DD');
+
+
   return (
     <div className="review">
       <blockquote className="review__quote">

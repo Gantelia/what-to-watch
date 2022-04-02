@@ -2,6 +2,10 @@ import { AuthorizationStatus, HOUR_IN_MINUTES, MAX_REVIEW_LENGTH, MIN_REVIEW_LEN
 import { FilmInfo, Films } from './types/films';
 import { Genres } from './types/genres';
 import { ConvertRating } from './types/util-types';
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+
+dayjs.extend(duration);
 
 export   const convertMinutes = (num: number) => {
   const hours = Math.floor(num / HOUR_IN_MINUTES);
@@ -98,3 +102,12 @@ export const isAuthorized = (authorization: AuthorizationStatus) =>
 
 export  const isFavorite = (current: FilmInfo | null, film: FilmInfo) =>
   current && current.id === film.id? current.isFavorite : film.isFavorite;
+
+export const getFormattedTimeLeft = (seconds: number) => {
+  const secondsLeft = dayjs.duration(seconds, 'seconds');
+
+  if (secondsLeft.asHours() >= 1) {
+    return secondsLeft.format('-HH:mm:ss');
+  }
+  return secondsLeft.format('-mm:ss');
+};

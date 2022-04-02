@@ -16,6 +16,7 @@ function PlayButton({movieToPlay}: PlayButtonProps): JSX.Element {
     navigate(`/player/${movieToPlay.id}`);
   };
 
+
   return (
     <button className="btn btn--play film-card__button" type="button"
       onClick={handlePlayClick}

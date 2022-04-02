@@ -20,6 +20,7 @@ function HistoryRouter({
 
   useLayoutEffect(() => history.listen(setState), [history]);
 
+
   return (
     <Router
       basename={basename}

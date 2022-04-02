@@ -9,6 +9,7 @@ function SignInOut(): JSX.Element {
   const {authorizationStatus, userData} = useAppSelector(({USER}) => USER);
   const dispatch = useAppDispatch();
 
+
   if (isAuthorized(authorizationStatus)) {
     return (
       <ul className="user-block">
@@ -30,6 +31,8 @@ function SignInOut(): JSX.Element {
       </ul>
     );
   }
+
+
   return (
     <div className="user-block">
       <Link to={AppRoute.SignIn} className="user-block__link">Sign in</Link>

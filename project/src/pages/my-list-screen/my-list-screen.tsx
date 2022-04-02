@@ -19,6 +19,7 @@ function MyListScreen(): JSX.Element {
     return <LoadingScreen />;
   }
 
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

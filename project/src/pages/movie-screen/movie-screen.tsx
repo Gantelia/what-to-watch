@@ -44,6 +44,7 @@ function MovieScreen(): JSX.Element {
 
   const {backgroundImage, name, genre, released, posterImage} = film;
 
+
   return (
     <>
       <section className="film-card film-card--full">

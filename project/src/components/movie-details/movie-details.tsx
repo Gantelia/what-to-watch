@@ -8,6 +8,8 @@ type MovieDetailsProps = {
 
 function MovieDetails ({film}: MovieDetailsProps): JSX.Element {
   const {director, starring, runTime, genre, released} = film;
+
+
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
