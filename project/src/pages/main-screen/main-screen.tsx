@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import { useState } from 'react';
 import { changeGenre } from '../../store/catalog-process/catalog-process';
-import LoadingScreen from '../loading - screen/loading-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 import { filterFilms } from '../../utils';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import PlayButton from '../../components/play-button/play-button';

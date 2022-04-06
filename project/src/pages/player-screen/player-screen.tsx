@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction } from '../../store/api-actions/api-film-actions/api-film-actions';
 import { getFormattedTimeLeft } from '../../utils';
-import LoadingScreen from '../loading - screen/loading-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function PlayerScreen(): JSX.Element {
   const dispatch = useAppDispatch();

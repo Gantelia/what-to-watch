@@ -9,7 +9,7 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../privateRoute/private-route';
 import { useAppSelector } from '../../hooks';
-import LoadingScreen from '../../pages/loading - screen/loading-screen';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import { isCheckedAuth } from '../../utils';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
