@@ -27,11 +27,11 @@ function MainScreen(): JSX.Element {
 
   const filmsOfGenre = filterFilms(films, activeGenre);
 
-  const handleButtonClick = () => {
+  const onButtonClick = () => {
     setFilmsCount(filmsCount + Math.min(FILMS_RENDER_STEP, filmsOfGenre.length));
   };
 
-  const handleGenreChange = (chosenGenre: string) => {
+  const onGenreChange = (chosenGenre: string) => {
     dispatch(changeGenre(chosenGenre));
     setFilmsCount(FilmsCount.MainScreen);
   };
@@ -78,14 +78,14 @@ function MainScreen(): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList films = {films} activeGenre = {activeGenre} handleGenreChange = {handleGenreChange}/>
+          <GenreList films = {films} activeGenre = {activeGenre} handleGenreChange = {onGenreChange}/>
           {
             <FilmList
               filmCards={filmsOfGenre}
               filmsCount={filmsCount}
             />
           }
-          {filmsOfGenre.length > filmsCount ? <ShowMoreButton handleButtonClick={handleButtonClick} /> : ''}
+          {filmsOfGenre.length > filmsCount ? <ShowMoreButton onButtonClick={onButtonClick} /> : ''}
         </section>
 
         <footer className="page-footer">
