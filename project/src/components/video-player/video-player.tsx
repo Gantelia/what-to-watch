@@ -20,6 +20,7 @@ function VideoPlayer({film, activePlayer, onMouseEnter, onMouseLeave}: VideoPlay
     if (videoRef.current === null) {
       setIsLoading(true);
     }
+
     if (videoRef.current !== null) {
       videoRef.current.onloadeddata = () => setIsLoading(false);
     }
@@ -56,6 +57,7 @@ function VideoPlayer({film, activePlayer, onMouseEnter, onMouseLeave}: VideoPlay
   if (isLoading) {
     return <div>Loading</div>;
   }
+
 
   return (
     <>

@@ -1,3 +1,5 @@
+import { FavoriteStatus } from '../const';
+
 export type FilmInfo = {
     id: number;
     name: string;
@@ -16,6 +18,11 @@ export type FilmInfo = {
     genre: string;
     released: number;
     isFavorite: boolean;
+}
+
+export type FavoriteChange = {
+    id: number;
+    status: FavoriteStatus;
 }
 
 export type Films = FilmInfo[];

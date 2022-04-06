@@ -28,6 +28,7 @@ function AddReviewScreen(): JSX.Element {
 
   const {backgroundImage, name, posterImage} = film;
 
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">

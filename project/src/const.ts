@@ -43,7 +43,6 @@ export enum Rating {
 export enum FilmsCount {
   MainScreen = 8,
   MovieScreen = 4,
-  MyListScreen = 4,
 }
 
 export enum APIRoute {
@@ -62,8 +61,14 @@ export enum HTTP_CODE {
 }
 
 export enum NameSpace {
-  catalog = 'CATALOG',
-  film = 'FILM',
-  user = 'USER',
-  errors = 'ERRORS',
+  Catalog = 'CATALOG',
+  Film = 'FILM',
+  User = 'USER',
+  Errors = 'ERRORS',
+  Favorite = 'FAVORITE',
+}
+
+export enum FavoriteStatus {
+  Favorite = 1,
+  NotFavorite = 0,
 }

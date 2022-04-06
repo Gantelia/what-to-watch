@@ -11,6 +11,7 @@ function MovieReviews ({reviews}: MovieReviewsProps): JSX.Element {
 
   let renderedReviewsCount = 0;
 
+
   return (
     <div className="film-card__reviews film-card__row">
       { reviewBlocks.map(() =>(

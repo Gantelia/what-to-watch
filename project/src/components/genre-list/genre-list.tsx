@@ -12,6 +12,7 @@ type GenreListProps = {
 function GenreList({films, activeGenre, handleGenreChange}: GenreListProps): JSX.Element {
   const catalogGenres = getGenreList(films);
 
+
   return (
     <ul className="catalog__genres-list">
       {

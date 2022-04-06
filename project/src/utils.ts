@@ -1,7 +1,11 @@
 import { AuthorizationStatus, HOUR_IN_MINUTES, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH, Rating } from './const';
-import { Films } from './types/films';
+import { FilmInfo, Films } from './types/films';
 import { Genres } from './types/genres';
 import { ConvertRating } from './types/util-types';
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+
+dayjs.extend(duration);
 
 export   const convertMinutes = (num: number) => {
   const hours = Math.floor(num / HOUR_IN_MINUTES);
@@ -71,7 +75,8 @@ export const getFormattedRating = (rating: number) => {
 };
 
 export const filterFilms = (filmCards: Films, activeGenre: string) => {
-  const filteredFilms = filmCards.filter((film) => film.genre === getActiveGenre(activeGenre));
+  const filteredFilms = filmCards.filter((film) =>
+    film.genre === getActiveGenre(activeGenre));
 
   return activeGenre === 'All genres'? filmCards : filteredFilms;
 };
@@ -80,13 +85,29 @@ export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean
   authorizationStatus === AuthorizationStatus.Unknown;
 
 export const validateLogin = (loginData: string): boolean =>
-  !!loginData.trim().length && !!loginData.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+  !!loginData.trim().length
+    && !!loginData.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
 
 export const validatePassword = (passwordData: string): boolean =>
-  !!passwordData.trim().length && !!passwordData.match(/^(?:[0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*$/i);
+  !!passwordData.trim().length
+    && !!passwordData.match(/^(?:[0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*$/i);
 
-export const validateText = (text: string): boolean => text.length >= MIN_REVIEW_LENGTH && text.length <= MAX_REVIEW_LENGTH;
+export const validateText = (text: string): boolean =>
+  text.length >= MIN_REVIEW_LENGTH && text.length <= MAX_REVIEW_LENGTH;
 
 export const validateRating = (rating: number) => rating >= 1 && rating <= 10;
 
-export const isAuthorized = (authorization: AuthorizationStatus) => authorization === AuthorizationStatus.Auth;
+export const isAuthorized = (authorization: AuthorizationStatus) =>
+  authorization === AuthorizationStatus.Auth;
+
+export  const isFavorite = (current: FilmInfo | null, film: FilmInfo) =>
+  current && current.id === film.id? current.isFavorite : film.isFavorite;
+
+export const getFormattedTimeLeft = (seconds: number) => {
+  const secondsLeft = dayjs.duration(seconds, 'seconds');
+
+  if (secondsLeft.asHours() >= 1) {
+    return secondsLeft.format('-HH:mm:ss');
+  }
+  return secondsLeft.format('-mm:ss');
+};

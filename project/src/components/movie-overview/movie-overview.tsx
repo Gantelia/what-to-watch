@@ -8,6 +8,7 @@ type MovieOverviewProps = {
 function MovieOverview ({film}: MovieOverviewProps): JSX.Element {
   const {rating, scoresCount, description, director, starring} = film;
 
+
   return (
     <>
       <div className="film-rating">

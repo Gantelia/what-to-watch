@@ -7,7 +7,7 @@ const initialState: ErrorsProcess = {
 };
 
 export const errorsProcess = createSlice({
-  name: NameSpace.errors,
+  name: NameSpace.Errors,
   initialState,
   reducers: {
     setError: (state, action) => {

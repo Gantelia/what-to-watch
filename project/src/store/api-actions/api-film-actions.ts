@@ -2,13 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, store } from '..';
 import { APIRoute } from '../../const';
 import { handleError } from '../../services/handle-error';
-import { FilmInfo, Films } from '../../types/films';
+import { FavoriteChange, FilmInfo, Films } from '../../types/films';
 import { getFilms, getPromo } from '../catalog-process/catalog-process';
 import { getFilm, getSimilarFilms } from '../film-process/film-process';
+import { getCurrentFavorite, getFavoriteFilms } from './favorite-process/favorite-process';
 
 
 export const fetchFilmsAction = createAsyncThunk(
-  'data/fetchFilms',
+  'catalog/fetchFilms',
   async () => {
     try {
       const {data} = await api.get<Films>(APIRoute.Films);
@@ -20,7 +21,7 @@ export const fetchFilmsAction = createAsyncThunk(
 );
 
 export const fetchPromoAction = createAsyncThunk(
-  'data/fetchPromo',
+  'catalog/fetchPromo',
   async () => {
     try {
       const {data} = await api.get<FilmInfo>(APIRoute.Promo);
@@ -32,7 +33,7 @@ export const fetchPromoAction = createAsyncThunk(
 );
 
 export const fetchFilmAction = createAsyncThunk(
-  'data/fetchFilm',
+  'film/fetchFilm',
   async (id: number) => {
     try {
       const {data} = await api.get<FilmInfo>(`${APIRoute.Films}/${id}`);
@@ -44,7 +45,7 @@ export const fetchFilmAction = createAsyncThunk(
 );
 
 export const fetchSimilarAction = createAsyncThunk(
-  'data/fetchSimilarFilms',
+  'film/fetchSimilarFilms',
   async (id: number) => {
     try {
       const {data} = await api.get<Films>(`${APIRoute.Films}/${id}/similar`);
@@ -55,3 +56,26 @@ export const fetchSimilarAction = createAsyncThunk(
   },
 );
 
+export const fetchFavoriteAction = createAsyncThunk(
+  'favorite/fetchFavoriteFilms',
+  async () => {
+    try {
+      const {data} = await api.get<Films>(APIRoute.Favorite);
+      store.dispatch(getFavoriteFilms(data));
+    } catch (error) {
+      handleError(error);
+    }
+  },
+);
+
+export const changeFavoriteAction = createAsyncThunk<void, FavoriteChange>(
+  'film/addReview',
+  async ({id, status}: FavoriteChange) => {
+    try {
+      const {data} = await api.post<FilmInfo>(`${APIRoute.Favorite}/${id}/${status}`);
+      store.dispatch(getCurrentFavorite(data));
+    } catch (error) {
+      handleError (error);
+    }
+  },
+);
