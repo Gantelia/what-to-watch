@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { api, store } from '..';
+import { AxiosInstance } from 'axios';
 import { APIRoute } from '../../const';
 import { handleError } from '../../services/handle-error';
 import { Comment, Comments, ServerComment, ServerComments, UserComment } from '../../types/reviews';
+import { AppDispatch, State } from '../../types/state';
 import { redirectToRoute } from '../action';
 import { getComments } from '../film-process/film-process';
 
@@ -17,13 +18,17 @@ const adaptToClient = (comment: ServerComment): Comment => (
   }
 );
 
-export const fetchCommentsAction = createAsyncThunk(
+export const fetchCommentsAction = createAsyncThunk<void, number, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
   'film/fetchComments',
-  async (id: number) => {
+  async (id, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<ServerComments>(`${APIRoute.Comments}/${id}`);
       const adaptedComments: Comments = data.map((comment: ServerComment) => adaptToClient(comment));
-      store.dispatch(getComments(adaptedComments));
+      dispatch(getComments(adaptedComments));
     } catch (error) {
       handleError (error);
     }
@@ -31,14 +36,18 @@ export const fetchCommentsAction = createAsyncThunk(
 );
 
 
-export const addReviewAction = createAsyncThunk<void, UserComment>(
+export const addReviewAction = createAsyncThunk<void, UserComment, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
   'film/addReview',
-  async ({id, review: {rating, comment}}: UserComment) => {
+  async ({id, review: {rating, comment}}, {dispatch, extra: api}) => {
     try {
       const {data} = await api.post<ServerComments>(`${APIRoute.Comments}/${id}`, {rating, comment});
       const adaptedComments: Comments = data.map((review: ServerComment) => adaptToClient(review));
-      store.dispatch(getComments(adaptedComments));
-      store.dispatch(redirectToRoute(`/films/${id}`));
+      dispatch(getComments(adaptedComments));
+      dispatch(redirectToRoute(`/films/${id}`));
     } catch (error) {
       handleError (error);
     }

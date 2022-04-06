@@ -1,78 +1,103 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { api, store } from '..';
+import { AxiosInstance } from 'axios';
 import { APIRoute } from '../../const';
 import { handleError } from '../../services/handle-error';
 import { FavoriteChange, FilmInfo, Films } from '../../types/films';
+import { AppDispatch, State } from '../../types/state';
 import { getFilms, getPromo } from '../catalog-process/catalog-process';
 import { getCurrentFavorite, getFavoriteFilms } from '../favorite-process/favorite-process';
 import { getFilm, getSimilarFilms } from '../film-process/film-process';
 
-export const fetchFilmsAction = createAsyncThunk(
+export const fetchFilmsAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch,
+  store: State,
+  extra: AxiosInstance
+}>(
   'catalog/fetchFilms',
-  async () => {
+  async (_args, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<Films>(APIRoute.Films);
-      store.dispatch(getFilms(data));
+      dispatch(getFilms(data));
     } catch (error) {
       handleError(error);
     }
   },
 );
 
-export const fetchPromoAction = createAsyncThunk(
+export const fetchPromoAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch,
+  store: State,
+  extra: AxiosInstance
+}>(
   'catalog/fetchPromo',
-  async () => {
+  async (_args, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<FilmInfo>(APIRoute.Promo);
-      store.dispatch(getPromo(data));
+      dispatch(getPromo(data));
     } catch (error) {
       handleError(error);
     }
   },
 );
 
-export const fetchFilmAction = createAsyncThunk(
+export const fetchFilmAction = createAsyncThunk<void, number, {
+  dispatch: AppDispatch,
+  store: State,
+  extra: AxiosInstance
+}>(
   'film/fetchFilm',
-  async (id: number) => {
+  async (id, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<FilmInfo>(`${APIRoute.Films}/${id}`);
-      store.dispatch(getFilm(data));
+      dispatch(getFilm(data));
     } catch (error) {
       handleError (error);
     }
   },
 );
 
-export const fetchSimilarAction = createAsyncThunk(
+export const fetchSimilarAction = createAsyncThunk<void, number, {
+  dispatch: AppDispatch,
+  store: State,
+  extra: AxiosInstance
+}>(
   'film/fetchSimilarFilms',
-  async (id: number) => {
+  async (id, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<Films>(`${APIRoute.Films}/${id}/similar`);
-      store.dispatch(getSimilarFilms(data));
+      dispatch(getSimilarFilms(data));
     } catch (error) {
       handleError(error);
     }
   },
 );
 
-export const fetchFavoriteAction = createAsyncThunk(
+export const fetchFavoriteAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch,
+  store: State,
+  extra: AxiosInstance
+}>(
   'favorite/fetchFavoriteFilms',
-  async () => {
+  async (_args, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<Films>(APIRoute.Favorite);
-      store.dispatch(getFavoriteFilms(data));
+      dispatch(getFavoriteFilms(data));
     } catch (error) {
       handleError(error);
     }
   },
 );
 
-export const changeFavoriteAction = createAsyncThunk<void, FavoriteChange>(
+export const changeFavoriteAction = createAsyncThunk<void, FavoriteChange, {
+  dispatch: AppDispatch,
+  store: State,
+  extra: AxiosInstance
+}>(
   'film/addReview',
-  async ({id, status}: FavoriteChange) => {
+  async ({id, status}, {dispatch, extra: api}) => {
     try {
       const {data} = await api.post<FilmInfo>(`${APIRoute.Favorite}/${id}/${status}`);
-      store.dispatch(getCurrentFavorite(data));
+      dispatch(getCurrentFavorite(data));
     } catch (error) {
       handleError (error);
     }
