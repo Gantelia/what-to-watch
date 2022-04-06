@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
-import { datatype, internet, lorem, music, name, random, system, date, image } from 'faker';
+import { datatype, internet, lorem, music, name, system, date, image } from 'faker';
 import { FilmInfo } from '../types/films';
-import { Comment } from '../types/reviews';
+import { Comment, UserReview } from '../types/reviews';
 import { UserData } from '../types/user-data';
 
 export const makeFakeFilm = (): FilmInfo => ({
@@ -21,7 +21,7 @@ export const makeFakeFilm = (): FilmInfo => ({
   runTime: datatype.number(),
   genre: music.genre(),
   released: datatype.number({ min: 1930, max: 2022}),
-  isFavorite: random.boolean(),
+  isFavorite: datatype.boolean(),
 });
 
 export const makeFakeFilms = (): FilmInfo[] => new Array(5).fill(makeFakeFilm());
@@ -31,7 +31,7 @@ export const makeFakeComments = (): Comment[] => (
     id: datatype.number(),
     author: `${name.firstName()} ${name.lastName()}`,
     date: dayjs(date.between('1980-01-01T00:00:00.000Z', '2030-01-01T00:00:00.000Z')).format('MMMM DD, YYYY'),
-    rating: random.number({ min: 1, max: 10, precision: 0.1 }).toString().replace('.', ','),
+    rating: datatype.number({ min: 1, max: 10, precision: 0.1 }).toString().replace('.', ','),
     text: lorem.paragraph(),
     userId: datatype.number(),
   }));
@@ -42,4 +42,9 @@ export const makeFakeUserData = (): UserData => ({
   id: datatype.number(),
   name: `${name.firstName()} ${name.lastName()}`,
   token: datatype.uuid(),
+});
+
+export const makeFakeUserReview = ():UserReview => ({
+  rating: datatype.number({ min: 1, max: 10}),
+  comment: lorem.paragraph(),
 });

@@ -36,7 +36,7 @@ describe('Async auth actions', () => {
     expect(actions).toContain(getUserData.toString());
   });
 
-  it('should dispatch RequireAuthorization and GetUserData when POST/login', async () => {
+  it('should dispatch RequireAuthorization and GetUserData when POST /login', async () => {
     const fakeUser: AuthData = {login: 'test@test.ru', password: 'dfg'};
 
     mockAPI
@@ -60,7 +60,7 @@ describe('Async auth actions', () => {
     expect(Storage.prototype.setItem).toBeCalledWith('wtw-token', 'secret');
   });
 
-  it('should dispatch RequireAuthorization when DELETE/logout', async () => {
+  it('should dispatch RequireAuthorization when DELETE /logout', async () => {
     mockAPI
       .onDelete(APIRoute.Logout)
       .reply(204);
@@ -77,6 +77,4 @@ describe('Async auth actions', () => {
     expect(Storage.prototype.removeItem).toBeCalledTimes(1);
     expect(Storage.prototype.removeItem).toBeCalledWith('wtw-token');
   });
-
-
 });
