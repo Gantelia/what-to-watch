@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFilmAction } from '../../store/api-actions/api-film-actions';
+import { fetchFilmAction } from '../../store/api-actions/api-film-actions/api-film-actions';
 import { getFormattedTimeLeft } from '../../utils';
 import LoadingScreen from '../loading - screen/loading-screen';
 

@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { APIRoute } from '../../const';
-import { handleError } from '../../services/handle-error';
-import { Comment, Comments, ServerComment, ServerComments, UserComment } from '../../types/reviews';
-import { AppDispatch, State } from '../../types/state';
-import { redirectToRoute } from '../action';
-import { getComments } from '../film-process/film-process';
+import { APIRoute } from '../../../const';
+import { handleError } from '../../../services/handle-error';
+import { Comment, Comments, ServerComment, ServerComments, UserComment } from '../../../types/reviews';
+import { AppDispatch, State } from '../../../types/state';
+import { redirectToRoute } from '../../action';
+import { getComments } from '../../film-process/film-process';
 
 const adaptToClient = (comment: ServerComment): Comment => (
   {

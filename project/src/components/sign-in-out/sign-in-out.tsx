@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { logoutAction } from '../../store/api-actions/api-auth-actions';
+import { logoutAction } from '../../store/api-actions/api-auth-actions/api-auth-actions';
 import { isAuthorized } from '../../utils';
 
 function SignInOut(): JSX.Element {

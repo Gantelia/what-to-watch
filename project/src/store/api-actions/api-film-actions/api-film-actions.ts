@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { APIRoute } from '../../const';
-import { handleError } from '../../services/handle-error';
-import { FavoriteChange, FilmInfo, Films } from '../../types/films';
-import { AppDispatch, State } from '../../types/state';
-import { getFilms, getPromo } from '../catalog-process/catalog-process';
-import { getCurrentFavorite, getFavoriteFilms } from '../favorite-process/favorite-process';
-import { getFilm, getSimilarFilms } from '../film-process/film-process';
+import { APIRoute } from '../../../const';
+import { handleError } from '../../../services/handle-error';
+import { FavoriteChange, FilmInfo, Films } from '../../../types/films';
+import { AppDispatch, State } from '../../../types/state';
+import { getFilms, getPromo } from '../../catalog-process/catalog-process';
+import { getCurrentFavorite, getFavoriteFilms } from '../../favorite-process/favorite-process';
+import { getFilm, getSimilarFilms } from '../../film-process/film-process';
 
 export const fetchFilmsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,

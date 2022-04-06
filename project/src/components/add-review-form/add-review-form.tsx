@@ -3,7 +3,7 @@ import React, {useState, ChangeEvent, FormEvent} from 'react';
 import { UserReview } from '../../types/reviews';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
-import { addReviewAction } from '../../store/api-actions/api-comments-actions';
+import { addReviewAction } from '../../store/api-actions/api-comments-actions/api-comments-actions';
 import { validateRating, validateText } from '../../utils';
 import CSS from 'csstype';
 

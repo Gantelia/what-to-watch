@@ -5,7 +5,7 @@ import Logo from '../../components/logo/logo';
 import SignInError from '../../components/sign-in-error/sign-in-error';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { loginAction } from '../../store/api-actions/api-auth-actions';
+import { loginAction } from '../../store/api-actions/api-auth-actions/api-auth-actions';
 import { isAuthorized, validateLogin, validatePassword } from '../../utils';
 
 function SignInScreen(): JSX.Element {
