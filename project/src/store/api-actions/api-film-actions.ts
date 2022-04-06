@@ -4,9 +4,8 @@ import { APIRoute } from '../../const';
 import { handleError } from '../../services/handle-error';
 import { FavoriteChange, FilmInfo, Films } from '../../types/films';
 import { getFilms, getPromo } from '../catalog-process/catalog-process';
+import { getCurrentFavorite, getFavoriteFilms } from '../favorite-process/favorite-process';
 import { getFilm, getSimilarFilms } from '../film-process/film-process';
-import { getCurrentFavorite, getFavoriteFilms } from './favorite-process/favorite-process';
-
 
 export const fetchFilmsAction = createAsyncThunk(
   'catalog/fetchFilms',
