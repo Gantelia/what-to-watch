@@ -6,5 +6,6 @@ describe('Component: ShowMoreButton', () => {
     render(<ShowMoreButton onButtonClick={jest.fn()}/>);
 
     expect(screen.getByText(/Show more/i)).toBeInTheDocument();
+    expect(screen.getByRole('button')).toBeInTheDocument();
   });
 });
