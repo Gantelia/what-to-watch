@@ -7,7 +7,7 @@ type MovieReviewsProps = {
     reviews: Comments;
 }
 function MovieReviews ({reviews}: MovieReviewsProps): JSX.Element {
-  const reviewBlocks = Array(Math.ceil(reviews.length/REVIEWS_RENDER_STEP)).fill('review');
+  const reviewBlocks = Array(Math.ceil(reviews.length/REVIEWS_RENDER_STEP)).fill(null);
 
   let renderedReviewsCount = 0;
 

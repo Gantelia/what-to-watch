@@ -10,6 +10,6 @@ describe('Component: MovieReviews', () => {
 
     expect(screen.getByTestId('film-card__row')).toBeInTheDocument();
     // expect(screen.getByTestId('reviews-col')).toBeInTheDocument();
-    // expect(screen.getAllByTestId('review')).toBeInTheDocument();
+    // expect(screen.getAllByTestId('review-text')).toBeInTheDocument();
   });
 });
