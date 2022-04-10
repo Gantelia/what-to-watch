@@ -1,6 +1,6 @@
 import React from 'react';
 import { FilmInfo } from '../../types/films';
-import { convertMinutes } from '../../utils';
+import { convertMinutes } from '../../utils/utils';
 
 type MovieDetailsProps = {
     film: FilmInfo;

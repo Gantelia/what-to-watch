@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { isAuthorized, validateLogin, validatePassword } from '../../utils';
+import { isAuthorized, validateLogin, validatePassword } from '../../utils/utils';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { AppRoute } from '../../const';

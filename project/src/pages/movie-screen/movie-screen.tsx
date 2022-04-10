@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction, fetchSimilarAction } from '../../store/api-actions/api-film-actions/api-film-actions';
 import { fetchCommentsAction } from '../../store/api-actions/api-comments-actions/api-comments-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
-import { isAuthorized } from '../../utils';
+import { isAuthorized } from '../../utils/utils';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import PlayButton from '../../components/play-button/play-button';
 

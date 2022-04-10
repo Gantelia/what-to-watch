@@ -12,7 +12,7 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import PrivateRoute from '../privateRoute/private-route';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import browserHistory from '../../browser-history';
-import { isCheckedAuth } from '../../utils';
+import { isCheckedAuth } from '../../utils/utils';
 import { useAppSelector } from '../../hooks';
 
 function App(): JSX.Element {

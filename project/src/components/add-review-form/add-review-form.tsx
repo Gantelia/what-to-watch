@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { validateRating, validateText } from '../../utils';
+import { validateRating, validateText } from '../../utils/utils';
 
 import CSS from 'csstype';
 import { RATINGS } from '../../const';
