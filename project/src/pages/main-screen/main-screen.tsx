@@ -10,7 +10,7 @@ import PlayButton from '../../components/play-button/play-button';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import SignInOut from '../../components/sign-in-out/sign-in-out';
 import { changeGenre } from '../../store/catalog-process/catalog-process';
-import { filterFilms } from '../../utils';
+import { filterFilms } from '../../utils/utils';
 import { useState } from 'react';
 
 function MainScreen(): JSX.Element {

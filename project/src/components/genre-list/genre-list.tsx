@@ -1,7 +1,7 @@
 import { AppRoute } from '../../const';
 import { Films } from '../../types/films';
 import { Link } from 'react-router-dom';
-import { getGenreList } from '../../utils';
+import { getGenreList } from '../../utils/utils';
 
 type GenreListProps = {
     films: Films;
