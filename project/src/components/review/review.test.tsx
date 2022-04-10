@@ -12,6 +12,6 @@ describe('Component: Review', () => {
     expect(screen.getByTestId('review-details')).toBeInTheDocument();
     expect(screen.getByTestId('review-author')).toBeInTheDocument();
     expect(screen.getByTestId('review-date')).toBeInTheDocument();
-    // expect(screen.getByTestId('review-rating')).toBeInTheDocument();
+    expect(screen.getByTestId('review-rating')).toBeInTheDocument();
   });
 });

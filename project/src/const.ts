@@ -10,7 +10,7 @@ export const MIN_REVIEW_LENGTH = 50;
 
 export const MAX_REVIEW_LENGTH = 400;
 
-export const HEX_COLOR = '#d96666';
+export const RED = '#d96666';
 
 export const BACKEND_URL = 'https://9.react.pages.academy/wtw';
 
@@ -72,4 +72,3 @@ export enum FavoriteStatus {
   Favorite = 1,
   NotFavorite = 0,
 }
-
