@@ -1,12 +1,13 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { isAuthorized, validateLogin, validatePassword } from '../../utils';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+
+import { AppRoute } from '../../const';
 import InvalidLogin from '../../components/invalid-login/invalid-login';
 import Logo from '../../components/logo/logo';
 import SignInError from '../../components/sign-in-error/sign-in-error';
-import { AppRoute } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions/api-auth-actions/api-auth-actions';
-import { isAuthorized, validateLogin, validatePassword } from '../../utils';
+import { useNavigate } from 'react-router-dom';
 
 function SignInScreen(): JSX.Element {
   const [login, setLogin] = useState<string>('');
@@ -100,6 +101,7 @@ function SignInScreen(): JSX.Element {
               onClick={handleSubmit}
               className="sign-in__btn"
               type="submit"
+              disabled={isSubmitting}
             >Sign in
             </button>
           </div>

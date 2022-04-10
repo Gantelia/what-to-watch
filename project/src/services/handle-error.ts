@@ -1,10 +1,11 @@
-import request from 'axios';
-import { toast } from 'react-toastify';
 import { AppRoute, AuthorizationStatus, HTTP_CODE } from '../const';
-import { store } from '../store';
-import { redirectToRoute } from '../store/action';
-import { requireAuthorization } from '../store/user-process/user-process';
+
 import { ErrorType } from '../types/error';
+import { redirectToRoute } from '../store/action';
+import request from 'axios';
+import { requireAuthorization } from '../store/user-process/user-process';
+import { store } from '../store';
+import { toast } from 'react-toastify';
 
 export const handleError = (error: ErrorType): void => {
   if (!request.isAxiosError(error)) {

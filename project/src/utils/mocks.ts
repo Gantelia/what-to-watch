@@ -1,8 +1,9 @@
-import dayjs from 'dayjs';
-import { datatype, internet, lorem, music, name, system, date, image } from 'faker';
-import { FilmInfo } from '../types/films';
 import { Comment, UserReview } from '../types/reviews';
+import { datatype, date, image, internet, lorem, music, name, system } from 'faker';
+
+import { FilmInfo } from '../types/films';
 import { UserData } from '../types/user-data';
+import dayjs from 'dayjs';
 
 export const makeFakeFilm = (): FilmInfo => ({
   id: datatype.number(),

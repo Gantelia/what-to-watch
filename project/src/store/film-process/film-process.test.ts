@@ -1,13 +1,13 @@
-import { FilmProcess } from '../../types/state';
-import { makeFakeFilms, makeFakeFilm, makeFakeComments } from '../../utils/mocks';
 import { filmProcess, getComments, getFilm, getSimilarFilms } from '../film-process/film-process';
+import { makeFakeComments, makeFakeFilm, makeFakeFilms } from '../../utils/mocks';
+
+import { FilmProcess } from '../../types/state';
 
 const state: FilmProcess = {
   film: null,
   similarFilms: [],
   comments: [],
 };
-
 
 describe('Reducer: filmProcess', () => {
   it('should return initial state without additional parameters', () => {

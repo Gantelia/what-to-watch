@@ -1,18 +1,19 @@
-import MainScreen from '../../pages/main-screen/main-screen';
 import {Route, Routes} from 'react-router-dom';
-import {AppRoute} from '../../const';
-import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
-import MyListScreen from '../../pages/my-list-screen/my-list-screen';
-import MovieScreen from '../../pages/movie-screen/movie-screen';
+
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
-import PlayerScreen from '../../pages/player-screen/player-screen';
-import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
-import PrivateRoute from '../privateRoute/private-route';
-import { useAppSelector } from '../../hooks';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
-import { isCheckedAuth } from '../../utils';
+import { AppRoute } from '../../const';
 import HistoryRouter from '../history-route/history-route';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import MainScreen from '../../pages/main-screen/main-screen';
+import MovieScreen from '../../pages/movie-screen/movie-screen';
+import MyListScreen from '../../pages/my-list-screen/my-list-screen';
+import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
+import PlayerScreen from '../../pages/player-screen/player-screen';
+import PrivateRoute from '../privateRoute/private-route';
+import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import browserHistory from '../../browser-history';
+import { isCheckedAuth } from '../../utils';
+import { useAppSelector } from '../../hooks';
 
 function App(): JSX.Element {
   const {isDataLoaded, promo} = useAppSelector(({CATALOG}) => CATALOG);

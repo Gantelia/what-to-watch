@@ -1,6 +1,5 @@
-
-import { REVIEWS_RENDER_STEP } from '../../const';
 import { Comments } from '../../types/reviews';
+import { REVIEWS_RENDER_STEP } from '../../const';
 import Review from '../review/review';
 
 type MovieReviewsProps = {
@@ -20,7 +19,6 @@ function MovieReviews ({reviews}: MovieReviewsProps): JSX.Element {
             renderedReviewsCount += 1;
             return (
               <Review
-                data-testid="review"
                 key = {review.id}
                 review = {review}
               />);})}
