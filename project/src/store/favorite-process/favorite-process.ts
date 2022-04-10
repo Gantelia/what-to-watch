@@ -1,6 +1,6 @@
+import { FavoriteProcess } from '../../types/state';
+import { NameSpace } from '../../const';
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../../const';
-import { FavoriteProcess } from '../../../types/state';
 
 const initialState: FavoriteProcess = {
   favorite: null,

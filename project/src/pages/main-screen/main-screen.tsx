@@ -1,16 +1,17 @@
-import Logo from '../../components/logo/logo';
-import SignInOut from '../../components/sign-in-out/sign-in-out';
-import FilmList from '../../components/film-list/film-list';
-import { FilmsCount, FILMS_RENDER_STEP } from '../../const';
-import GenreList from '../../components/genre-list/genre-list';
+import { FILMS_RENDER_STEP, FilmsCount } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import ShowMoreButton from '../../components/show-more-button/show-more-button';
-import { useState } from 'react';
-import { changeGenre } from '../../store/catalog-process/catalog-process';
-import LoadingScreen from '../loading - screen/loading-screen';
-import { filterFilms } from '../../utils';
+
+import FilmList from '../../components/film-list/film-list';
+import GenreList from '../../components/genre-list/genre-list';
+import LoadingScreen from '../loading-screen/loading-screen';
+import Logo from '../../components/logo/logo';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import PlayButton from '../../components/play-button/play-button';
+import ShowMoreButton from '../../components/show-more-button/show-more-button';
+import SignInOut from '../../components/sign-in-out/sign-in-out';
+import { changeGenre } from '../../store/catalog-process/catalog-process';
+import { filterFilms } from '../../utils';
+import { useState } from 'react';
 
 function MainScreen(): JSX.Element {
   const [filmsCount, setFilmsCount] = useState<FilmsCount | number>(FilmsCount.MainScreen);
@@ -23,15 +24,15 @@ function MainScreen(): JSX.Element {
     return <LoadingScreen />;
   }
 
-  const {name, genre, released} = promo;
+  const {name, genre, released, posterImage, backgroundImage} = promo;
 
   const filmsOfGenre = filterFilms(films, activeGenre);
 
-  const handleButtonClick = () => {
+  const onButtonClick = () => {
     setFilmsCount(filmsCount + Math.min(FILMS_RENDER_STEP, filmsOfGenre.length));
   };
 
-  const handleGenreChange = (chosenGenre: string) => {
+  const onGenreChange = (chosenGenre: string) => {
     dispatch(changeGenre(chosenGenre));
     setFilmsCount(FilmsCount.MainScreen);
   };
@@ -41,7 +42,7 @@ function MainScreen(): JSX.Element {
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -55,7 +56,7 @@ function MainScreen(): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -78,14 +79,14 @@ function MainScreen(): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList films = {films} activeGenre = {activeGenre} handleGenreChange = {handleGenreChange}/>
+          <GenreList films = {films} activeGenre = {activeGenre} onGenreChange = {onGenreChange}/>
           {
             <FilmList
               filmCards={filmsOfGenre}
               filmsCount={filmsCount}
             />
           }
-          {filmsOfGenre.length > filmsCount ? <ShowMoreButton handleButtonClick={handleButtonClick} /> : ''}
+          {filmsOfGenre.length > filmsCount ? <ShowMoreButton onButtonClick={onButtonClick} /> : ''}
         </section>
 
         <footer className="page-footer">

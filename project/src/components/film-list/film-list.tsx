@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import MovieCard from '../../components/movie-card/movie-card';
-import { FilmsCount } from '../../const';
 import { Films } from '../../types/films';
+import { FilmsCount } from '../../const';
+import MovieCard from '../../components/movie-card/movie-card';
+import { useState } from 'react';
 
 type FilmListProps = {
     filmCards: Films;

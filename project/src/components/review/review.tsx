@@ -12,17 +12,17 @@ function Review ({review}: ReviewProps): JSX.Element {
 
 
   return (
-    <div className="review">
+    <div className="review" data-testid="review">
       <blockquote className="review__quote">
-        <p className="review__text">{text}</p>
+        <p className="review__text" data-testid="review-text">{text}</p>
 
-        <footer className="review__details">
-          <cite className="review__author">{author}</cite>
-          <time className="review__date" dateTime={dateTime}>{commentDate}</time>
+        <footer className="review__details" data-testid="review-details">
+          <cite className="review__author" data-testid="review-author">{author}</cite>
+          <time className="review__date" dateTime={dateTime} data-testid="review-date">{commentDate}</time>
         </footer>
       </blockquote>
 
-      <div className="review__rating">{rating.replace('.', ',')}</div>
+      <div className="review__rating" data-testid="review-rating">{rating.replace('.', ',')}</div>
     </div>
   );
 }

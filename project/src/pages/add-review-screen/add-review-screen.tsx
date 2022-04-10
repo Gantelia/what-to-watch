@@ -4,9 +4,9 @@ import AddReviewForm from '../../components/add-review-form/add-review-form';
 import Logo from '../../components/logo/logo';
 import SignInOut from '../../components/sign-in-out/sign-in-out';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFilmAction } from '../../store/api-actions/api-film-actions';
+import { fetchFilmAction } from '../../store/api-actions/api-film-actions/api-film-actions';
 
-import LoadingScreen from '../loading - screen/loading-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function AddReviewScreen(): JSX.Element {
   const {id} = useParams();

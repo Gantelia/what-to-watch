@@ -4,8 +4,8 @@ import FilmList from '../../components/film-list/film-list';
 import Logo from '../../components/logo/logo';
 import SignInOut from '../../components/sign-in-out/sign-in-out';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFavoriteAction } from '../../store/api-actions/api-film-actions';
-import LoadingScreen from '../loading - screen/loading-screen';
+import { fetchFavoriteAction } from '../../store/api-actions/api-film-actions/api-film-actions';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function MyListScreen(): JSX.Element {
   const dispatch = useAppDispatch();

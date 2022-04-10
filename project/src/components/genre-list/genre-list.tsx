@@ -1,15 +1,15 @@
-import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Films } from '../../types/films';
+import { Link } from 'react-router-dom';
 import { getGenreList } from '../../utils';
 
 type GenreListProps = {
     films: Films;
     activeGenre: string;
-    handleGenreChange: (chosenGenre: string) => void;
+    onGenreChange: (chosenGenre: string) => void;
 }
 
-function GenreList({films, activeGenre, handleGenreChange}: GenreListProps): JSX.Element {
+function GenreList({films, activeGenre, onGenreChange}: GenreListProps): JSX.Element {
   const catalogGenres = getGenreList(films);
 
 
@@ -19,7 +19,7 @@ function GenreList({films, activeGenre, handleGenreChange}: GenreListProps): JSX
         catalogGenres.map((catalogGenre) =>(
           <li key={catalogGenre.name} className={`catalog__genres-item ${catalogGenre.name === activeGenre ? 'catalog__genres-item--active': ''}`}>
             <Link to={AppRoute.Main} className="catalog__genres-link"
-              onClick={() => handleGenreChange(catalogGenre.name)}
+              onClick={() => onGenreChange(catalogGenre.name)}
             >{catalogGenre.name}
             </Link>
           </li>),

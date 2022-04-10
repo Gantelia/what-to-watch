@@ -1,11 +1,12 @@
-import {RATINGS} from '../../const';
-import React, {useState, ChangeEvent, FormEvent} from 'react';
-import { UserReview } from '../../types/reviews';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { useParams } from 'react-router-dom';
-import { addReviewAction } from '../../store/api-actions/api-comments-actions';
 import { validateRating, validateText } from '../../utils';
+
 import CSS from 'csstype';
+import { RATINGS } from '../../const';
+import { UserReview } from '../../types/reviews';
+import { addReviewAction } from '../../store/api-actions/api-comments-actions/api-comments-actions';
+import { useParams } from 'react-router-dom';
 
 const errorTextStyle: CSS.Properties = {
   color: 'darkred',

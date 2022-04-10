@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { AppRoute, FavoriteStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeFavoriteAction } from '../../store/api-actions/api-film-actions';
+import { changeFavoriteAction } from '../../store/api-actions/api-film-actions/api-film-actions';
 import { FilmInfo } from '../../types/films';
 import { isAuthorized, isFavorite } from '../../utils';
 

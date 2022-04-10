@@ -1,6 +1,6 @@
+import CSS from 'csstype';
 import { FilmInfo } from '../../types/films';
 import VideoPlayer from '../video-player/video-player';
-import CSS from 'csstype';
 
 const style: CSS.Properties = {
   width: 'auto',

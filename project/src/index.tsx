@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { fetchFilmsAction, fetchPromoAction } from './store/api-actions/api-film-actions';
-import { checkAuthAction } from './store/api-actions/api-auth-actions';
+import { fetchFilmsAction, fetchPromoAction } from './store/api-actions/api-film-actions/api-film-actions';
+import { checkAuthAction } from './store/api-actions/api-auth-actions/api-auth-actions';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

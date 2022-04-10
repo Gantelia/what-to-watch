@@ -1,9 +1,10 @@
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFilmAction } from '../../store/api-actions/api-film-actions';
+
+import LoadingScreen from '../loading-screen/loading-screen';
+import { fetchFilmAction } from '../../store/api-actions/api-film-actions/api-film-actions';
 import { getFormattedTimeLeft } from '../../utils';
-import LoadingScreen from '../loading - screen/loading-screen';
 
 function PlayerScreen(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -46,7 +47,7 @@ function PlayerScreen(): JSX.Element {
     return <LoadingScreen />;
   }
 
-  const {videoLink, backgroundImage} = film;
+  const {videoLink, backgroundImage, name} = film;
 
   const handleFullScreenClick = () => {
     if (!videoRef.current) {
@@ -114,7 +115,7 @@ function PlayerScreen(): JSX.Element {
             </svg>
             <span >{isPlaying ? 'Pause' : 'Play'}</span>
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{name}</div>
 
           <button type="button"
             className="player__full-screen"
