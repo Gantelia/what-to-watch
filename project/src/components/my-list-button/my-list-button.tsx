@@ -16,7 +16,7 @@ function MyListButton({favoriteFilm}: MyListButtonProps): JSX.Element {
   const {currentFavorite} = useAppSelector(({FAVORITE}) => FAVORITE);
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
 
-  const favoriteStatus = isFavorite(currentFavorite, favoriteFilm)? FavoriteStatus.NotFavorite : FavoriteStatus.Favorite;
+  const favoriteStatus = isFavorite(currentFavorite, favoriteFilm) ? FavoriteStatus.NotFavorite : FavoriteStatus.Favorite;
 
   const handleFavoriteClick = () => {
     if (!isAuthorized(authorizationStatus)) {
@@ -34,7 +34,7 @@ function MyListButton({favoriteFilm}: MyListButtonProps): JSX.Element {
       onClick={handleFavoriteClick}
     >
       <svg viewBox="0 0 19 20" width="19" height="20">
-        <use xlinkHref={`${isFavorite(currentFavorite, favoriteFilm)? '#in-list' : '#add'}`}></use>
+        <use xlinkHref={`${isFavorite(currentFavorite, favoriteFilm) && isAuthorized(authorizationStatus) ? '#in-list' : '#add'}`}></use>
       </svg>
       <span>My list</span>
     </button>

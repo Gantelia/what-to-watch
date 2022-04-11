@@ -1,4 +1,4 @@
-import { AppRoute, AuthorizationStatus, HTTP_CODE } from '../const';
+import { AppRoute, AuthorizationStatus, HttpCode } from '../const';
 
 import { ErrorType } from '../types/error';
 import { redirectToRoute } from '../store/action';
@@ -16,14 +16,14 @@ export const handleError = (error: ErrorType): void => {
 
   if (response) {
     switch (response.status) {
-      case HTTP_CODE.BAD_REQUEST:
+      case HttpCode.BAD_REQUEST:
         toast.info(response.data.error);
         break;
-      case HTTP_CODE.UNAUTHORIZED:
+      case HttpCode.UNAUTHORIZED:
         toast.info(response.data.error);
         store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
         break;
-      case HTTP_CODE.NOT_FOUND:
+      case HttpCode.NOT_FOUND:
         toast.info(response.data.error);
         store.dispatch(redirectToRoute(AppRoute.NotFound));
         break;

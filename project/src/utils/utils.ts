@@ -101,7 +101,7 @@ export const isAuthorized = (authorization: AuthorizationStatus) =>
   authorization === AuthorizationStatus.Auth;
 
 export  const isFavorite = (current: FilmInfo | null, film: FilmInfo) =>
-  current && current.id === film.id? current.isFavorite : film.isFavorite;
+  current && current.id === film.id ? current.isFavorite : film.isFavorite;
 
 export const getFormattedTimeLeft = (seconds: number) => {
   const secondsLeft = dayjs.duration(seconds, 'seconds');
