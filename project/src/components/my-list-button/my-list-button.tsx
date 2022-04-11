@@ -3,7 +3,7 @@ import { AppRoute, FavoriteStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeFavoriteAction } from '../../store/api-actions/api-film-actions/api-film-actions';
 import { FilmInfo } from '../../types/films';
-import { isAuthorized, isFavorite } from '../../utils';
+import { isAuthorized, isFavorite } from '../../utils/utils';
 
 type MyListButtonProps = {
     favoriteFilm: FilmInfo;

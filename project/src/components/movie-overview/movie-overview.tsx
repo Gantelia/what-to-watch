@@ -1,5 +1,5 @@
 import { FilmInfo } from '../../types/films';
-import { convertRating, getFormattedRating } from '../../utils';
+import { convertRating, getFormattedRating } from '../../utils/utils';
 
 type MovieOverviewProps = {
   film: FilmInfo;

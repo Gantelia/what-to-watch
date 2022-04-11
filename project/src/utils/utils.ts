@@ -1,7 +1,7 @@
-import { AuthorizationStatus, HOUR_IN_MINUTES, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH, Rating } from './const';
-import { FilmInfo, Films } from './types/films';
-import { Genres } from './types/genres';
-import { ConvertRating } from './types/util-types';
+import { AuthorizationStatus, HOUR_IN_MINUTES, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH, Rating } from '../const';
+import { FilmInfo, Films } from '../types/films';
+import { Genres } from '../types/genres';
+import { ConvertRating } from '../types/util-types';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 
