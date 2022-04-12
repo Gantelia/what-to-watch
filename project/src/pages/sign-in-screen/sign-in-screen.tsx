@@ -47,7 +47,7 @@ function SignInScreen(): JSX.Element {
     }
   };
 
-  if (error) {
+  if (error && isSubmitting) {
     setIsSubmitting(false);
   }
 
