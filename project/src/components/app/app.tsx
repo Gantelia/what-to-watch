@@ -1,4 +1,4 @@
-import {Route, Routes} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import { AppRoute } from '../../const';
 import HistoryRouter from '../history-route/history-route';

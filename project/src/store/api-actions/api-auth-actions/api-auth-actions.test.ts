@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { State } from '../../../types/state';
 import thunk from 'redux-thunk';
 import { Action, ThunkDispatch } from '@reduxjs/toolkit';
-import {configureMockStore} from '@jedmao/redux-mock-store';
+import { configureMockStore } from '@jedmao/redux-mock-store';
 import { checkAuthAction, loginAction, logoutAction } from './api-auth-actions';
 import { APIRoute } from '../../../const';
 import { getUserData, requireAuthorization } from '../../user-process/user-process';

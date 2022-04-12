@@ -1,4 +1,4 @@
-import {render, screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import ShowMoreButton from './show-more-button';
 
 describe('Component: ShowMoreButton', () => {
