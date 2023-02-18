@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom';
 import { FilmInfo } from '../../types/films';
 
 type VideoPlayerProps = {
-    film: FilmInfo
-    activePlayer: number | null;
-    onMouseEnter: () => void;
-    onMouseLeave: () => void;
+  film: FilmInfo
+  activePlayer: number | null;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
 }
 
-function VideoPlayer({film, activePlayer, onMouseEnter, onMouseLeave}: VideoPlayerProps): JSX.Element {
+function VideoPlayer({ film, activePlayer, onMouseEnter, onMouseLeave }: VideoPlayerProps): JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const {previewVideoLink, previewImage, id, name} = film;
+  const { previewVideoLink, previewImage, id, name } = film;
 
   useEffect(() => {
     if (videoRef.current === null) {
@@ -52,7 +52,7 @@ function VideoPlayer({film, activePlayer, onMouseEnter, onMouseLeave}: VideoPlay
     return () => {
       videoTimer && clearTimeout(videoTimer);
     };
-  },[id, activePlayer]);
+  }, [id, activePlayer]);
 
   if (isLoading) {
     return <div>Loading</div>;
